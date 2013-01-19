@@ -1,0 +1,3 @@
+path/to/php /wwwroot/yii/framework/yiic.php webapp /wwwroot/blog
+
+D:/wamp/bin/php/php5.3.8/php.exe D:/wamp/www/Yii/framework/yiic.php webapp D:/wamp/www/BoneShaker_Yii

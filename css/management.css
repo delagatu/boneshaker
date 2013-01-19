@@ -1,0 +1,7 @@
+ul li{list-style:none;}
+.categoryHeader{text-align:center;}
+.account{color:#000000;text-decoration:none;font-weight:bold;}
+.long-input{width:150px;}
+.styled-button:hover{background-color:#99DB13;}
+.description{width:300px;height:100px;}
+.flash-notification{-moz-border-radiust:5px;-webkit-border-radius:5px;border-radius:5px;background-color:#dedede;padding:10px;border:1px solid;}
