@@ -82,7 +82,7 @@ class BicycleDescriptionBase extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product_id, frame_id, size_id, speed_id, color_id, fork_id, derailleur_front_id, derailleur_rear_id, shifter_id, brake_lever_id, brake_system_id, chain_wheel_id, chain_id, front_hub_id, rear_hub_id, rim_id, front_rim_id, rear_rim_id', 'required'),
+			array('product_id', 'required'),
 			array('product_id, frame_id, size_id, speed_id, color_id, fork_id, derailleur_front_id, derailleur_rear_id, shifter_id, brake_lever_id, brake_system_id, chain_wheel_id, bb_set_id, chain_id, front_hub_id, rear_hub_id, rim_id, front_rim_id, rear_rim_id', 'numerical', 'integerOnly'=>true),
 			array('freewheel, spokes, tires, handlebar, stem, headset, seatpost, saddle, pedals', 'length', 'max'=>200),
 			// The following rule is used by search().

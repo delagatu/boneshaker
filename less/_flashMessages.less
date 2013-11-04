@@ -1,0 +1,23 @@
+.rounded-corner(@round, @bgcolor)
+{
+  -moz-border-radiust: @round;
+  -webkit-border-radius: @round;
+  border-radius: @round;
+  background-color: @bgcolor;
+}
+
+._flash_success
+{
+  .rounded-corner(5px, #A8E617);
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+._flash_error
+{
+  .rounded-corner(5px, #FE0000);
+  padding: 10px;
+  font-weight: bold;
+  color: #ffffff;
+}

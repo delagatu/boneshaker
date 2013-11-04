@@ -11,6 +11,7 @@ class AddMakerForm extends CFormModel
 
     public $name;
     public $item_type_id;
+    public $valid;
 
 
     public function rules()
@@ -21,6 +22,7 @@ class AddMakerForm extends CFormModel
 
             // maker type required, custom message
             array('item_type_id', 'required', 'message' => 'Tipul de producator neselectat!'),
+            array('valid', 'safe'),
         );
     }
 
@@ -28,7 +30,8 @@ class AddMakerForm extends CFormModel
     {
         return array(
             'name' => 'Nume producator',
-            'item_type_id' => 'Tipul'
+            'item_type_id' => 'Tipul',
+            'valid' => 'Valid',
         );
     }
 
@@ -37,7 +40,7 @@ class AddMakerForm extends CFormModel
         $maker = new Maker();
         $maker->name = $this->name;
         $maker->item_type_id = $this->item_type_id;
-        $maker->available = 1;
+        $maker->available = $this->valid;
         $maker->save();
     }
 

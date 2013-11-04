@@ -1,33 +1,6 @@
-.browntable
-{
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid #975D33;
-}
-
-.browntable th
-{
-    background-color: #975D33;
-}
-
-.browntable th a:link, .browntable th a:visited, .browntable td a:link, .browntable td a:visited
-{
-    text-decoration: none;
-    color: #FFFFFF;
-}
-
-.browntable th a:hover, .browntable td a:hover
-{
-    text-decoration: underline;
-}
-
-.o
-{
-    background-color: #C99660;
-}
-
-.e
-{
-    background-color: #A96A3A;
-}
+.browntable{-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;border:1px solid #975D33;}
+.browntable th{background-color:#975D33;}
+.browntable th a:link,.browntable th a:visited,.browntable td a:link,.browntable td a:visited{text-decoration:none;color:#FFFFFF;}
+.browntable th a:hover,.browntable td a:hover{text-decoration:underline;}
+.odd{background-color:#C99660;}
+.even{background-color:#A96A3A;}

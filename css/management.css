@@ -3,5 +3,9 @@ ul li{list-style:none;}
 .account{color:#000000;text-decoration:none;font-weight:bold;}
 .long-input{width:150px;}
 .styled-button:hover{background-color:#99DB13;}
-.description{width:300px;height:100px;}
+.description{width:300px;height:100px;border:1px solid;}
 .flash-notification{-moz-border-radiust:5px;-webkit-border-radius:5px;border-radius:5px;background-color:#dedede;padding:10px;border:1px solid;}
+.hidden{display:none;}
+.validate-msg{-moz-border-radiust:5px;-webkit-border-radius:5px;border-radius:5px;background-color:#dedede;padding:10px;border:1px solid;display:none;}
+.middle-align{vertical-align:middle;}
+#display-photos{display:none;}

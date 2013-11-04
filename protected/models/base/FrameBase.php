@@ -10,6 +10,7 @@
  * @property integer $valid
  *
  * The followings are the available model relations:
+ * @property BicycleDescription[] $bicycleDescriptions
  * @property Maker $maker
  */
 class FrameBase extends CActiveRecord
@@ -40,7 +41,6 @@ class FrameBase extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('maker_id', 'required'),
 			array('maker_id, valid', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>100),
 			// The following rule is used by search().
@@ -57,6 +57,7 @@ class FrameBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'bicycleDescriptions' => array(self::HAS_MANY, 'BicycleDescription', 'frame_id'),
 			'maker' => array(self::BELONGS_TO, 'Maker', 'maker_id'),
 		);
 	}

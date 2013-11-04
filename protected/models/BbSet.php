@@ -30,8 +30,31 @@ class BbSet extends BbSetBase
         );
     }
 
+    public function saveThrowEx()
+    {
+        if (!$this->save())
+        {
+            Throw new Exception('Can not save bb set: ' . var_export($this->getErrors(), 1));
+        }
+    }
+
     public function getMakerAndProduct()
     {
-        return $this->maker->name . ' ' . $this->name;
+        if ($this->maker instanceof Maker)
+        {
+            return $this->maker->name . ' ' . $this->name;
+        }
+
+        return $this->name;
+    }
+
+    public static function getById($id)
+    {
+        return self::model()->findByPk($id);
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

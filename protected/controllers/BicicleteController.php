@@ -2,71 +2,49 @@
 
 class BicicleteController extends BaseController
 {
-	public function actionError()
-	{
-		$this->render('error');
-	}
 
-	public function actionIndex()
-	{
-        $id = Yii::app()->request->getQuery('id', null);
+    public function actionError()
+    {
+        $this->render('error');
+    }
 
-        $product = new Product();
-
-        $criteria = new CDbCriteria;
-        $criteria->order = 'created_at DESC';
-        $criteria->compare('maker_id', $id);
-        $total = $product->count($criteria);
-
-        $pages=new CPagination($total);
-        $pages->pageSize = BaseController::BICYCLES_PAGE_SIZE;
-        $pages->applyLimit($criteria);
-
-        if (!is_null($id))
-        {
-            $bicycle = $product->getProductByMaker($pages->offset, $pages->limit, $id);
-        } else {
-            $bicycle = $product->getProduct($pages->offset, $pages->limit);
-        }
+    public function actionIndex()
+    {
+        $makerName = $this->readSafeName(Yii::app()->request->getQuery('makerName', null));
+        $subProduct = $this->readSafeName(Yii::app()->request->getQuery('subProduct', null));
 
         $indexParams = array(
-            'bicycle' => $bicycle,
-            'pages' => $pages
+            'makerName' => $makerName,
+            'subProduct' => $subProduct
         );
 
-		$this->render(ControllerPagePartial::PAGE_BICYCLE_INDEX, $indexParams);
-	}
+        $this->render(ControllerPagePartial::PAGE_BICYCLE_INDEX, $indexParams);
+    }
 
-	public function actionProducator()
-	{
-		$this->render('producator');
-	}
-
-    private function checkProduct()
+    public function actionProducator()
     {
-        $id = Yii::app()->request->getQuery('id',null);
-
-        if (is_null($id))
-        {
-            $this->leave();
-        }
-
-        $available = Product::isProductAvailable($id);
-
-        if (!$available)
-        {
-            $this->leave();
-        }
-
-        return Product::getProductById($id);
-
+        $this->render('producator');
     }
 
     public function actionDetalii()
     {
-       $product = $this->checkProduct();
+        $id = $this->readProductId();
 
-       $this->render(ControllerPagePartial::PARTIAL_BICYCLE_DETAIL);
+        $product = Product::getProductById($id);
+
+        if (is_null($product) || !$product->isBicycle())
+        {
+            $this->redirect(Yii::app()->request->getUrlReferrer());
+        }
+
+        $bicycleDescription = BicycleDescription::getByProductId($id);
+
+        $params = array(
+            'product' => $product,
+            'bicycleDescription' => $bicycleDescription
+        );
+
+        $this->render(ControllerPagePartial::PARTIAL_BICYCLE_DETAIL, $params);
     }
 
 }

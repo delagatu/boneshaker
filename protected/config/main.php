@@ -21,6 +21,7 @@ return array(
 		'application.controllers.*',
         'application.modules.srbac.controllers.SBaseController',
         'application.extensions.chosen.*',
+        'application.extensions.YiiMail.YiiMailMessage',
         'system.base',
         'application.helpers.*',
 	),
@@ -71,6 +72,22 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		
+		'mail' => array(
+ 			'class' => 'application.extensions.YiiMail.YiiMail',
+            'transportType' => 'smtp',
+            'transportOptions' => array(
+                'host' => 'mail.boneshaker.ro',
+                'username' => 'info@boneshaker.ro',
+                'password' => 'b0n3_2013',
+                'port' => '465',
+                'encryption'=>'ssl',
+            ),
+ 			'viewPath' => 'application.views.mail',
+			'logging' => true,
+ 			'dryRun' => false
+     		),
+		
         'authManager' => array(
             // Path to SDbAuthManager in srbac module if you want to use case insensitive
             //access checking (or CDbAuthManager for case sensitive access checking)
@@ -90,10 +107,15 @@ return array(
             'showScriptName'=>false,
             'caseSensitive'=>false,
             'rules'=>array(
+                '' => 'site/index',
                 'pages/<view:.*>'=>'site/page',
+                'cauta/<keywords:.*>'=>'site/cauta',
                 '<action>/<id:\d+>' => 'site/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerName:\w+>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerAndProduct:.*>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
             ),
         ),
@@ -122,6 +144,7 @@ return array(
 			'username' => 'boneshaker',
 			'password' => 'bone2012',
 			'charset' => 'utf8',
+			'enableProfiling' =>true,
 		),		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -149,8 +172,12 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'info@boneshaker.ro',
+		'webmasterEmail' => 'laci22002@gmail.com',
         'buyAvailable' => true,
         'biciclesDir' =>'images/products/bicycle',
+        'accessoryDir' =>'images/products/accessory',
+        'equipmentsDir' =>'images/products/equipment',
+        'defaultDir' =>'images/products/default',
         'webShopAvailable' => false,
 	),
 );

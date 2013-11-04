@@ -18,6 +18,14 @@ class Frame extends FrameBase
         return parent::model($className);
     }
 
+    public function saveThrowEx()
+    {
+        if (!$this->save())
+        {
+            throw New Exception('Can not save frame: ' . var_export($this->getErros(), 1));
+        }
+    }
+
     public static function getFrames()
     {
         return self::model()->findAll(
@@ -29,7 +37,26 @@ class Frame extends FrameBase
             )
         );
 
+    }
 
+    public function getMakerAndProduct()
+    {
+        if ($this->maker instanceof Maker)
+        {
+            return $this->maker->name . ' ' . $this->name;
+        }
+
+        return $this->name;
+    }
+
+    public static function getById($id)
+    {
+        return self::model()->findByPk($id);
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
 }

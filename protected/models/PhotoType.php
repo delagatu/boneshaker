@@ -17,4 +17,29 @@ class PhotoType extends PhotoTypeBase
     const PHOTO_TYPE_MEDIUM_ID = 2;
     const PHOTO_TYPE_THUMB_ID = 3;
     const PHOTO_TYPE_GENERAL_DISPLAY_ID = 4;
+
+    /**
+     * @param string $className
+     * @return PhotoTypeBase
+     */
+    public static function model($className=__CLASS__)
+    {
+        return parent::model($className);
+    }
+
+    public static function getByTypeId($typeId)
+    {
+        return self::model()->findByPk($typeId);
+    }
+
+    public static function getAll()
+    {
+        return self::model()->findAll();
+    }
+
+    public function getWidthAndHeight()
+    {
+        return $this->photo_width . 'x' . $this->photo_height;
+    }
+
 }

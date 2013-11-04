@@ -13,7 +13,14 @@ class PhotoSource extends PhotoSourceBase
         return parent::model($className);
     }
 
+    public static function getDefaultPhotoSource()
+    {
+        return 'Default';
+    }
 
+    /**
+     * @throws Exception
+     */
     public function saveThrowEx()
     {
         if (!$this->save()) {
@@ -33,5 +40,27 @@ class PhotoSource extends PhotoSourceBase
         );
 
         return $photoSource;
+    }
+
+    public static function getByPhotoIdAndType($photoId, $type)
+    {
+        return self::model()->find(
+            'photo_id = :photo_id AND photo_type_id = :photo_type_id',
+            array(
+                ':photo_id' => $photoId,
+                ':photo_type_id' => $type,
+            )
+        );
+    }
+
+    public static function deleteByType($photoId, $typeId)
+    {
+        return self::model()->deleteAll(
+            'photo_id =:photo_id AND photo_type_id =:photo_type_id',
+            array(
+                ':photo_id' => $photoId,
+                ':photo_type_id' => $typeId
+            )
+        );
     }
 }

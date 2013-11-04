@@ -28,25 +28,7 @@ class SiteController extends BaseController
 	 */
 	public function actionIndex()
 	{
-
-        $product = new Product();
-
-        $criteria = new CDbCriteria;
-        $criteria->order = 'created_at DESC';
-        $total = $product->count($criteria);
-
-        $pages=new CPagination($total);
-        $pages->pageSize = BaseController::HOME_PAGE_SIZE;
-        $pages->applyLimit($criteria);
-
-        $products = $product->getProduct($pages->offset, $pages->limit);
-
-        $indexParams = array(
-            'products' => $products,
-            'pages'=>$pages,
-        );
-
-        $this->render(ControllerPagePartial::PAGE_SITE_INDEX, $indexParams);
+        $this->render(ControllerPagePartial::PAGE_SITE_INDEX);
 	}
 
 	/**
@@ -54,13 +36,48 @@ class SiteController extends BaseController
 	 */
 	public function actionError()
 	{
-	    if($error=Yii::app()->errorHandler->error)
-	    {
-	    	if(Yii::app()->request->isAjaxRequest)
-	    		echo $error['message'];
-	    	else
-	        	$this->render('error', $error);
-	    }
+        $error = Yii::app()->errorHandler->error;
+
+        try {
+            $message = new YiiMailMessage();
+            $message->view = ControllerPagePartial::MAIL_SITE_ERROR;
+
+            //userModel is passed to the view
+            $message->setBody(array('error'=>$error), 'text/html');
+            $message->setSubject('boneshaker.ro - error');
+
+            $message->addTo(Yii::app()->params['webmasterEmail']);
+            $message->from = Yii::app()->params['adminEmail'];
+            Yii::app()->mail->send($message);
+
+        } catch (Exception $e)
+        {
+            Yii::log('Can not send register email: ' . var_export($e->getMessage(), 1));
+        }
+
+        if (!$this->hasPermission(BaseController::ROLE_AUTHORITY))
+        {
+            $this->redirect($this->createUrl(ControllerPagePartial::PAGE_SITE_INDEX));
+        }
+
+
+//	    if($error=Yii::app()->errorHandler->error)
+//	    {
+//
+//            $to      = 'laci22002@gmail.com';
+//            $subject = 'Boneshaker';
+//            $message = 'Error: ' . var_export($error, 1);
+//            $headers = 'From: info@boneshaker.ro' . "\r\n" .
+//                'Reply-To: no-reply@boneshaker.ro' . "\r\n" .
+//                'X-Mailer: PHP/' . phpversion();
+//
+//            mail($to, $subject, $message, $headers);
+//
+//	    	if(Yii::app()->request->isAjaxRequest)
+//	    		echo $error['message'];
+//	    	else
+//	        	$this->render('error', $error);
+//	    }
 	}
 
 	/**
@@ -69,14 +86,30 @@ class SiteController extends BaseController
 	public function actionContact()
 	{
 		$model=new ContactForm;
-		if(isset($_POST['ContactForm']))
+
+		if(Yii::app()->request->getIsPostRequest())
 		{
 			$model->attributes=$_POST['ContactForm'];
 			if($model->validate())
 			{
 				$headers="From: {$model->email}\r\nReply-To: {$model->email}";
-				mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+
+                try {
+
+                    if (mail(Yii::app()->params['adminEmail'],$model->subject,$model->body,$headers))
+                    {
+                        $message = 'Mesajul s-a trimis cu success. Vom raspunde in cel mai scurt timp posibil.';
+                    } else {
+                        $message = 'Mesajul nu s-a trimis din motive technice. Va rugam sa incercati din nou';
+                    }
+
+                } catch (Exception $e)
+                {
+                    Yii::log('SiteController::contact - cannot send mail: ' , $e->getMessage(), CLogger::LEVEL_ERROR);
+                    $message = 'Mesajul nu s-a trimis din motive technice. Va rugam sa incercati din nou';
+                }
+
+				Yii::app()->user->setFlash('contact',$message);
 				$this->refresh();
 			}
 		}
@@ -88,7 +121,7 @@ class SiteController extends BaseController
 	 */
 	public function actionLogin()
 	{
-		$model=new LoginForm;
+		$model=new LoginForm();
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
@@ -156,5 +189,156 @@ class SiteController extends BaseController
 		$this->render('echipamente');
 		
 	}
-	
+
+    public function actionParametriiCautare()
+    {
+        $keywords = Yii::app()->request->getPost('keywords');
+        $url = Yii::app()->controller->createUrl(ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CAUTA, array('keywords' => $keywords));
+
+        Yii::app()->controller->redirect($url);
+    }
+
+    public function actionCauta()
+    {
+        $keywords = Yii::app()->request->getQuery('keywords');
+        $generaSearchForm = new GeneralSearchForm();
+        $generaSearchForm->keywords = $keywords;
+
+        $params = array('dataProvider' => $generaSearchForm->generateDataProvider());
+
+        $this->render(ControllerPagePartial::PARTIAl_SITE_GENERAL_SEARCH, $params);
+    }
+
+    public function actionContNou()
+    {
+        $registerForm = new RegisterForm('siteRegister');
+
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $registerForm->attributes = Yii::app()->request->getPost('RegisterForm');
+            if ($registerForm->validate())
+            {
+                if ($registerForm->registerUser() instanceof User)
+                {
+                   $message = 'Pentru a finaliza crearea contului te rugam sa urmezi pasii din e-mailul trimis la adresa: ' . $registerForm->email;
+                   Yii::app()->user->setFlash('success', $message);
+                   $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_SITE_LOGIN));
+                }
+            }
+        } else {
+            $registerForm->terms_and_conditions = 1;
+        }
+
+        $params = array(
+            'registerForm' => $registerForm
+        );
+
+        $this->render('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_SITE_REGISTER, $params);
+    }
+
+    public function actionConfirmaCont()
+    {
+        $confirmation_code = Yii::app()->request->getQuery('c', null);
+        $user = User::getByConfirmationCode($confirmation_code);
+
+        if (!$user instanceof User)
+        {
+            $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE));
+        }
+
+        $user->confirmEmail();
+
+        Yii::app()->user->setFlash('success', 'Adresa de email este confirmata.');
+
+        $this->actionLogin();
+
+    }
+
+    public function actionInscriereGresita()
+    {
+        $confirmation_code = Yii::app()->request->getQuery('c', null);
+        $user = User::getByConfirmationCode($confirmation_code);
+
+        if (!$user instanceof User)
+        {
+            $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE));
+        }
+
+        $user->unConfirmAccount();
+        Yii::app()->user->setFlash('success', 'Contul s-a sters. Multumim pentru intelegere.');
+        $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE) . '/' . ControllerPagePartial::PARTIAL_SITE_CONT_NOU);
+    }
+
+    public function actionInscriereNewsletter()
+    {
+        $newsLetterRegisterForm = new NewsLetterRegisterForm();
+
+        if (Yii::app()->request->getIsPostRequest()) {
+            $newsLetterRegisterForm->email = Yii::app()->request->getPost('email');
+            if ($newsLetterRegisterForm->validate()) {
+
+                if ($newsLetterRegisterForm->addToNewsletterList())
+                {
+                    $image = CHtml::image(Yii::app()->baseUrl . "/images/design/okSign.png", 'Una-Alta');
+                    $response = $image . ' Salvat. ';
+                    json::writeJSON($response);
+                } else {
+                    json::writeJSON('Eroare interna. Va rugam incercati mai tarziu.', false);
+                }
+
+            }
+
+            json::writeJSON($newsLetterRegisterForm->getError('email'), false);
+        }
+
+    }
+
+    public function actionConfirmaNewsLetter()
+    {
+        $confirmation_code = Yii::app()->request->getQuery('c', null);
+        $user = User::getByConfirmationCode($confirmation_code);
+
+        if (!$user instanceof User)
+        {
+            $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE));
+        }
+
+        NewsletterUser::setStatus($user->id, NewsletterUserStatus::getIdByLabel(NewsletterUserStatus::CONFIRMED));
+
+        Yii::app()->user->setFlash('success', 'Confirmat.');
+        $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE) . '/' . ControllerPagePartial::PAGE_SITE_INDEX);
+
+    }
+
+    public function actionInscriereNewsLetterGresita()
+    {
+        $confirmation_code = Yii::app()->request->getQuery('c', null);
+        $user = User::getByConfirmationCode($confirmation_code);
+
+        if (!$user instanceof User)
+        {
+            $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE));
+        }
+
+        try {
+            NewsletterUser::setStatus($user->id, NewsletterUserStatus::getIdByLabel(NewsletterUserStatus::INACTIVE));
+            $email = $user->id . $user->email;
+            $user->email = $email;
+            $user->saveThrowEx();
+        } catch (Exception $e)
+        {
+            Yii::log('Can not update email SiteController::actionInscriereNewsLetterGresita');
+        }
+
+
+        Yii::app()->user->setFlash('success', 'Dezabonat.');
+        $this->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE) . '/' . ControllerPagePartial::PAGE_SITE_INDEX);
+
+    }
+
+    public function actiontermeniSiConditii()
+    {
+        $this->render('/' . ControllerPagePartial::CONTROLLER_SITE . '/pages/' . ControllerPagePartial::PARTIAL_SITE_TERMS_AND_CONDITIONS);
+    }
+
 }

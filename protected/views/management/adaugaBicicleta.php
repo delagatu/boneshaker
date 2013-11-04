@@ -1,3 +1,4 @@
+<div id = 'addDetailsDialog'></div>
 <?php
 /**
  * Created by JetBrains PhpStorm.
@@ -14,23 +15,22 @@ $form = $this->beginWidget('CActiveForm',
         'id' => 'addBicicleForm',
         'enableClientValidation'=>true,
         'focus' => array($addBicicleForm, 'frame_id'),
-        'htmlOptions' => array(
-            'enctype' => 'multipart/form-data'
-        ),
     ));
 ?>
 
 <div class="grid_9 form">
 
-<h2 class="center_content">Editeaza detalii bicicleta</h2>
+<h2 class="center_content">Detalii bicicleta</h2>
 
 <div class = 'grid_9 boldText'>
     <?php
-    if (Yii::app()->user->hasFlash('addBicycleOutCome'))
-    {
-        echo  Yii::app()->user->getFlash('addBicycleOutCome');
-    }
+        $this->renderPartial('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_FLASH_MESSAGES);
     ?>
+</div>
+
+
+<div class='grid_9 padding-5'>
+    <?php echo $form->errorSummary($addBicicleForm, 'Eroare: '); ?>
 </div>
 
 <div class='grid_9 padding-5'>
@@ -38,8 +38,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'frame_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php $frames = CHtml::listData(Frame::getFrames(), 'id', 'name');
-        echo Chosen::activeDropDownList($addBicicleForm, 'frame_id', $frames, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php
+        echo Chosen::activeDropDownList($addBicicleForm, 'frame_id', $addBicicleForm->getFrames(),
+            array('class' => 'addBicicleDropDown long-input',
+                'id' => 'addFrame',
+                'empty' => 'Selecteaza',
+                'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_FRAME),
+                'data-dialog-id' => 'addFrameDialog',
+                'data-title' =>'Cadru'
+            )
+        );
         echo $form->error($addBicicleForm, 'frame_id');
         ?>
     </div>
@@ -50,8 +58,17 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'size_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php $sizes = CHtml::listData(BicycleSize::getSize(), 'id', 'size');
-        echo Chosen::activeDropDownList($addBicicleForm, 'size_id', $sizes, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php
+        echo Chosen::activeDropDownList($addBicicleForm, 'size_id', $addBicicleForm->getSizes(),
+            array('class' => 'addBicicleDropDown long-input',
+                'id' => 'addSize',
+                'empty' => 'Selecteaza',
+                'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_SIZE),
+                'data-dialog-id' => 'addSizeDialog',
+                'data-title' =>'Marime Cadru'
+            )
+        );
+
         echo $form->error($addBicicleForm, 'size_id');
         ?>
     </div>
@@ -62,8 +79,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'speed_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php $speeds = CHtml::listData(Speed::getSpeeds(), 'id', 'name');
-        echo Chosen::activeDropDownList($addBicicleForm, 'speed_id', $speeds, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php
+        echo Chosen::activeDropDownList($addBicicleForm, 'speed_id', $addBicicleForm->getSpeeds(),
+            array('class' => 'addBicicleDropDown long-input',
+                'id' => 'addSpeed',
+                'empty' => 'Selecteaza',
+                'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_SPEED),
+                'data-dialog-id' => 'addSpeedDialog',
+                'data-title' =>'Nr.Viteze'
+            )
+        );
         echo $form->error($addBicicleForm, 'speed_id');
         ?>
     </div>
@@ -74,8 +99,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'color_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php $colors = CHtml::listData(Color::getColors(), 'id', 'name');
-        echo Chosen::activeDropDownList($addBicicleForm, 'color_id', $colors, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php
+        echo Chosen::activeDropDownList($addBicicleForm, 'color_id', $addBicicleForm->getColors(),
+            array('class' => 'addBicicleDropDown long-input',
+                'id' => 'addColor',
+                'empty' => 'Selecteaza',
+                'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_COLOR),
+                'data-dialog-id' => 'addColorDialog',
+                'data-title' =>'Culoare'
+            )
+        );
         echo $form->error($addBicicleForm, 'color_id');
         ?>
     </div>
@@ -86,9 +119,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'fork_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $forks = CHtml::listData(Fork::getForks(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'fork_id', $forks, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'fork_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'fork_id', $addBicicleForm->getForks(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addFork',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_FORK),
+            'data-dialog-id' => 'addForkDialog',
+            'data-title' =>'Telescop / Furca'
+        )
+    );
+       echo $form->error($addBicicleForm, 'fork_id');
         ?>
     </div>
 </div>
@@ -98,8 +138,15 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'derailleur_front_id'); ?>
     </div>
     <div class="grid_4">
-        <?php  $derailleurs = CHtml::listData(Derailleur::getDerailleurs(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'derailleur_front_id', $derailleurs, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'derailleur_front_id', $addBicicleForm->getDerailleurs(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addFrontDerailleur',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_DERAILLEUR),
+            'data-dialog-id' => 'addFrontDerailleurDialog',
+            'data-title' =>'Schimbator fata'
+        )
+    );
         echo $form->error($addBicicleForm, 'derailleur_front_id');
         ?>
     </div>
@@ -110,8 +157,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'derailleur_rear_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $derailleurs = CHtml::listData(Derailleur::getDerailleurs(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'derailleur_rear_id', $derailleurs, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php
+        echo Chosen::activeDropDownList($addBicicleForm, 'derailleur_rear_id', $addBicicleForm->getDerailleurs(),
+            array('class' => 'addBicicleDropDown long-input',
+                'id' => 'addRearDerailleur',
+                'empty' => 'Selecteaza',
+                'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_DERAILLEUR),
+                'data-dialog-id' => 'addRearDerailleurDialog',
+                'data-title' =>'Schimbator fata'
+            )
+        );
         echo $form->error($addBicicleForm, 'derailleur_rear_id');
         ?>
     </div>
@@ -122,9 +177,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'shifter_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $shifters = CHtml::listData(Shifter::getShifters(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'shifter_id', $shifters, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'shifter_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'shifter_id', $addBicicleForm->getShifters(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addShifter',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_SHIFTER),
+            'data-dialog-id' => 'addShifterDialog',
+            'data-title' =>'Maneta Schimbator'
+        )
+    );
+       echo $form->error($addBicicleForm, 'shifter_id');
         ?>
     </div>
 </div>
@@ -134,9 +196,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'brake_lever_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $brake_levers = CHtml::listData(BrakeLever::getBrakeLevers(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'brake_lever_id', $brake_levers, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'brake_lever_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'brake_lever_id', $addBicicleForm->getBrakeLever(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addBrakeLever',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_BRAKE_LEVER),
+            'data-dialog-id' => 'addBrakeLeverDialog',
+            'data-title' =>'Maneta Frana'
+        )
+    );
+       echo $form->error($addBicicleForm, 'brake_lever_id');
         ?>
     </div>
 </div>
@@ -146,9 +215,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'brake_system_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $brake_systems = CHtml::listData(BrakeSystem::getBrakeSystems(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'brake_system_id', $brake_systems, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'brake_system_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'brake_system_id', $addBicicleForm->getBrakeSystems(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addBrakeSystem',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_BRAKE_SYSTEM),
+            'data-dialog-id' => 'addBrakeSystemDialog',
+            'data-title' =>'Frana'
+        )
+    );
+       echo $form->error($addBicicleForm, 'brake_system_id');
         ?>
     </div>
 </div>
@@ -158,9 +234,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'chain_wheel_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $chain_wheels = CHtml::listData(ChainWheel::getChainWheels(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'chain_wheel_id', $chain_wheels, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'chain_wheel_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'chain_wheel_id', $addBicicleForm->getChainWheels(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addChainWheel',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_CHAIN_WHEEL),
+            'data-dialog-id' => 'addChainWheelDialog',
+            'data-title' =>'Pedalier'
+        )
+    );
+       echo $form->error($addBicicleForm, 'chain_wheel_id');
         ?>
     </div>
 </div>
@@ -170,9 +253,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'bb_set_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $bb_sets = CHtml::listData(BbSet::getBbSets(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'bb_set_id', $bb_sets, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'bb_set_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'bb_set_id', $addBicicleForm->getBBSets(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addBBSet',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_BB_SET),
+            'data-dialog-id' => 'addBBSetDialog',
+            'data-title' =>'Butuc Pedalier'
+        )
+    );
+       echo $form->error($addBicicleForm, 'bb_set_id');
         ?>
     </div>
 </div>
@@ -182,9 +272,16 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'chain_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $chains = CHtml::listData(Chain::getChains(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'chain_id', $chains, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'chain_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'chain_id', $addBicicleForm->getChains(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addChain',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_CHAIN),
+            'data-dialog-id' => 'addChainDialog',
+            'data-title' =>'Lant'
+        )
+    );
+       echo $form->error($addBicicleForm, 'chain_id');
         ?>
     </div>
 </div>
@@ -194,8 +291,15 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'front_hub_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $hubs = CHtml::listData(Hub::getHubs(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'front_hub_id', $hubs, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'front_hub_id', $addBicicleForm->getHubs(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addFrontHub',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_HUB),
+            'data-dialog-id' => 'addFrontHubDialog',
+            'data-title' =>'Butuc fata'
+        )
+    );
         echo $form->error($addBicicleForm, 'front_hub_id');
         ?>
     </div>
@@ -206,8 +310,15 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'rear_hub_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $hubs = CHtml::listData(Hub::getHubs(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'rear_hub_id', $hubs, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'rear_hub_id', $addBicicleForm->getHubs(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addRearHub',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_HUB),
+            'data-dialog-id' => 'addRearHubDialog',
+            'data-title' =>'Butuc spate'
+        )
+    );
         echo $form->error($addBicicleForm, 'rear_hub_id');
         ?>
     </div>
@@ -219,8 +330,15 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'front_rim_id'); ?>
     </div>
     <div class='grid_4'>
-        <?php  $rims = CHtml::listData(Rim::getRims(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'front_rim_id', $rims, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'front_rim_id', $addBicicleForm->getRims(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addFrontRim',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_RIM),
+            'data-dialog-id' => 'addFrontRimDialog',
+            'data-title' =>'Janta fata'
+        )
+    );
         echo $form->error($addBicicleForm, 'front_rim_id');
         ?>
     </div>
@@ -231,38 +349,57 @@ $form = $this->beginWidget('CActiveForm',
         <?php echo $form->labelEx($addBicicleForm, 'rear_rim_id'); ?>
     </div>
     <div class="grid_4">
-        <?php  $rims = CHtml::listData(Rim::getRims(), 'id', 'makerAndProduct');
-        echo Chosen::activeDropDownList($addBicicleForm, 'rear_rim_id', $rims, array('class' => 'addBicicleDropDown long-input', 'empty' => 'Selecteaza'));
-        echo $form->error($addBicicleForm, 'rear_rim_id');
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'rear_rim_id', $addBicicleForm->getRims(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addRearRim',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_RIM),
+            'data-dialog-id' => 'addRearRimDialog',
+            'data-title' =>'Janta spate'
+        )
+    );
+       echo $form->error($addBicicleForm, 'rear_rim_id');
         ?>
     </div>
 </div>
 
-<!--<div class='grid_9 padding-5'>-->
-<!--    <div class="grid_2">-->
-<!--        --><?php //echo CHtml::label('Poze (max 4)', 'addBicycle'); ?>
-<!--    </div>-->
-<!--    --><?php
-//    $this->widget('CMultiFileUpload', array(
-//        'model' => $photoUpload,
-//        'name' => 'addBicycle',
-//        'attribute' => 'files',
-//        'accept' => 'jpg|gif',
-//        'max' => 4,
-//        'denied' => 'Format nesuportat.',
-//        'duplicate' => 'Atentie! Duplicat.',
-//        'remove' => 'X',
-////      'options'=>array(
-////          'onFileSelect'=>'function(e, v, m){ window.console.log(m) }',
-////          'afterFileSelect'=>'function(e, v, m){ alert("afterFileSelect - "+v) }',
-////          'onFileAppend'=>'function(e, v, m){ alert("onFileAppend - "+v) }',
-////          'afterFileAppend'=>'function(e, v, m){ alert("afterFileAppend - "+v) }',
-////          'onFileRemove'=>'function(e, v, m){ alert("onFileRemove - "+v) }',
-////          'afterFileRemove'=>'function(e, v, m){ alert("afterFileRemove - "+v) }',
-////      ),
-//    ));
-//    ?>
-<!--</div>-->
+<div class='grid_9 padding-5'>
+    <div class="grid_2">
+        <?php echo $form->labelEx($addBicicleForm, 'front_tire_id'); ?>
+    </div>
+    <div class="grid_4">
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'front_tire_id', $addBicicleForm->getTires(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addFrontTire',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_TIRE),
+            'data-dialog-id' => 'addFrontDialog',
+            'data-title' =>'Anvelopa'
+        )
+    );
+        echo $form->error($addBicicleForm, 'front_tire_id');
+        ?>
+    </div>
+</div>
+
+<div class='grid_9 padding-5'>
+    <div class="grid_2">
+        <?php echo $form->labelEx($addBicicleForm, 'rear_tire_id'); ?>
+    </div>
+    <div class="grid_4">
+        <?php  echo Chosen::activeDropDownList($addBicicleForm, 'rear_tire_id', $addBicicleForm->getTires(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addRearTire',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ADD_TIRE),
+            'data-dialog-id' => 'addFrontDialog',
+            'data-title' =>'Anvelopa'
+        )
+    );
+        echo $form->error($addBicicleForm, 'rear_tire_id');
+        ?>
+    </div>
+</div>
 
 
 <div class='grid_6 padding-5 center_content'>
@@ -272,3 +409,10 @@ $form = $this->beginWidget('CActiveForm',
 </div>
 
 <?php $this->endWidget(); ?>
+
+<div class = 'grid_9'>
+    <?php
+    $url = Yii::app()->controller->createUrl(ControllerPagePartial::PAGE_ADD_BICYCLE, array('id' => $addBicicleForm->product_id));
+    echo CHtml::link('Editeaza produs', $url, array('class' =>'action-link'));
+    ?>
+</div>
