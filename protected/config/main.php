@@ -176,6 +176,7 @@ return array(
         'buyAvailable' => true,
         'biciclesDir' =>'images/products/bicycle',
         'accessoryDir' =>'images/products/accessory',
+        'componentDir' =>'images/products/component',
         'equipmentsDir' =>'images/products/equipment',
         'defaultDir' =>'images/products/default',
         'webShopAvailable' => false,

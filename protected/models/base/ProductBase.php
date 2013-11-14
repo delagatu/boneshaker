@@ -16,30 +16,23 @@
  * @property string $updated_at
  * @property integer $accessory_type_id
  * @property integer $equipment_type_id
+ * @property integer $component_type_id
  *
  * The followings are the available model relations:
  * @property BicycleDescription[] $bicycleDescriptions
+ * @property HomePageProduct[] $homePageProducts
  * @property Offer[] $offers
  * @property Photo[] $photos
- * @property AccessoryType $accessoryType
+ * @property ComponentType $componentType
  * @property EquipmentType $equipmentType
  * @property Maker $maker
  * @property ItemType $itemType
  * @property SubProduct $subProduct
+ * @property AccessoryType $accessoryType
  * @property ProductKeywords[] $productKeywords
  */
 class ProductBase extends CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return ProductBase the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
@@ -57,13 +50,13 @@ class ProductBase extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('maker_id, item_type_id, created_at', 'required'),
-			array('maker_id, item_type_id, sub_product_id, available, accessory_type_id, equipment_type_id', 'numerical', 'integerOnly'=>true),
+			array('maker_id, item_type_id, sub_product_id, available, accessory_type_id, equipment_type_id, component_type_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>300),
 			array('price', 'length', 'max'=>10),
 			array('description, updated_at', 'safe'),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, maker_id, item_type_id, sub_product_id, name, description, price, available, created_at, updated_at, accessory_type_id, equipment_type_id', 'safe', 'on'=>'search'),
+			// @todo Please remove those attributes that should not be searched.
+			array('id, maker_id, item_type_id, sub_product_id, name, description, price, available, created_at, updated_at, accessory_type_id, equipment_type_id, component_type_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,13 +69,15 @@ class ProductBase extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'bicycleDescriptions' => array(self::HAS_MANY, 'BicycleDescription', 'product_id'),
+			'homePageProducts' => array(self::HAS_MANY, 'HomePageProduct', 'product_id'),
 			'offers' => array(self::HAS_MANY, 'Offer', 'product_id'),
 			'photos' => array(self::HAS_MANY, 'Photo', 'product_id'),
-			'accessoryType' => array(self::BELONGS_TO, 'AccessoryType', 'accessory_type_id'),
+			'componentType' => array(self::BELONGS_TO, 'ComponentType', 'component_type_id'),
 			'equipmentType' => array(self::BELONGS_TO, 'EquipmentType', 'equipment_type_id'),
 			'maker' => array(self::BELONGS_TO, 'Maker', 'maker_id'),
 			'itemType' => array(self::BELONGS_TO, 'ItemType', 'item_type_id'),
 			'subProduct' => array(self::BELONGS_TO, 'SubProduct', 'sub_product_id'),
+			'accessoryType' => array(self::BELONGS_TO, 'AccessoryType', 'accessory_type_id'),
 			'productKeywords' => array(self::HAS_MANY, 'ProductKeywords', 'product_id'),
 		);
 	}
@@ -105,17 +100,25 @@ class ProductBase extends CActiveRecord
 			'updated_at' => 'Updated At',
 			'accessory_type_id' => 'Accessory Type',
 			'equipment_type_id' => 'Equipment Type',
+			'component_type_id' => 'Component Type',
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -131,9 +134,21 @@ class ProductBase extends CActiveRecord
 		$criteria->compare('updated_at',$this->updated_at,true);
 		$criteria->compare('accessory_type_id',$this->accessory_type_id);
 		$criteria->compare('equipment_type_id',$this->equipment_type_id);
+		$criteria->compare('component_type_id',$this->component_type_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return ProductBase the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
 	}
 }

@@ -49,7 +49,7 @@ $form = $this->beginWidget('CActiveForm',
             'data-title' =>'Accesorii'
         ));
         ?>
-        <?php echo $form->error($addProductForm, 'sub_product_id'); ?>
+        <?php echo $form->error($addProductForm, 'accessory_type_id'); ?>
     </div>
 
     <div class="row">

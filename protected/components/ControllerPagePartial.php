@@ -55,11 +55,13 @@ class ControllerPagePartial
     const PARTIAL_ADD_BICYCLE = 'adaugaBicicleta';
     const PARTIAL_MANAGEMENT_BICYCLE_LIST = '_listaBiciclete';
     const PARTIAL_MANAGEMENT_PA_LIST = '_listaPieseAccessorii';
+    const PARTIAL_MANAGEMENT_COMPONENT_LIST = '_listaComponente';
     const PARTIAL_MANAGEMENT_EQUIPMENT_LIST = '_listaEchipamente';
     const VIEW_ALL_BICYCLE = 'listaBicicleta';
     const PAGE_MANAGEMENT_ADD_FRAME = 'addFrame';
     const PAGE_MANAGEMENT_SUB_PRODUCT = 'addSubProduct';
     const PAGE_MANAGEMENT_ACCESSORY_TYPE = 'addAcessoryType';
+    const PAGE_MANAGEMENT_COMPONENT_TYPE = 'addComponentType';
     const PAGE_MANAGEMENT_EQUIPMENT_TYPE = 'addEquipmentType';
     const PAGE_MANAGEMENT_ADD_FORK = 'addFork';
     const PAGE_MANAGEMENT_ADD_SHIFTER = 'addShifter';
@@ -85,7 +87,9 @@ class ControllerPagePartial
     const PAGE_MANAGEMENT_VALIDATE_SUB_PRODUCT = 'validateSubProduct';
     const PAGE_MANAGEMENT_VALIDATE_ACCESSORY_TYPE = 'validateAccessoryType';
     const PAGE_MANAGEMENT_VALIDATE_EQUIPMENT_TYPE = 'validateEquipmentType';
+    const PAGE_MANAGEMENT_VALIDATE_COMPONENT_TYPE = 'validateComponentType';
     const PAGE_MANAGEMENT_HOME_PAGE_PRODUCTS = 'produsePrimaPagina';
+    const PAGE_MANAGEMENT_COMPONENT_CATEGORY = 'categoriiComponente';
     const PARTIAL_ADD_FRAME = '_adaugaCadru';
     const PARTIAL_ADD_FORK = '_adaugaFurca';
     const PARTIAL_ADD_DERAILLEUR = '_adaugaSchimbator';
@@ -103,11 +107,13 @@ class ControllerPagePartial
     const PARTIAL_ADD_COLOR = '_addColor';
     const PARTIAL_ADD_SUB_PRODUCT = '_addSubProduct';
     const PARTIAL_ADD_ACCESSORY_TYPE = '_addAccessoryTpe';
+    const PARTIAL_ADD_COMPONENT_TYPE = '_addComponentType';
     const PARTIAL_ADD_EQUIPMENT_TYPE = '_addEquipmentType';
     const PARTIAL_PHOTOS = '_photos';
     const PARTIAL_ADD_MISSING_PHOTO = '_addMissingPhoto';
     const PARTIAL_MANAGEMENT_VIEW_SUB_PRODUCT = '_categoriiBiciclete';
     const PARTIAL_MANAGEMENT_VIEW_ACCESSORY_TYPE = '_categoriiAccesorii';
+    const PARTIAL_MANAGEMENT_VIEW_COMPONENT_TYPE = '_categoriiComponente';
     const PARTIAL_MANAGEMENT_VIEW_EQUIPMENT_TYPE = '_categoriiEchipamente';
     const PARTIAL_MANAGEMENT_HOME_PAGE_PRODUCTS = '_produsePrimaPagina';
 
@@ -123,6 +129,7 @@ class ControllerPagePartial
     // pieces & accessories
     const CONTOLLER_ACCESORY = 'accesorii';
     const ACTION_ADD = 'adaugaPieseAccesorii';
+    const ACTION_ADD_COMPONENTS = 'adaugaComponente';
     const PAGE_ADD = 'adaugaPieseAccessorii';
     const ACTION_LIST_PA = 'listaPieseAccesorii';
     const PAGE_LIST_PA = 'listPieseAccesorii';
@@ -130,6 +137,12 @@ class ControllerPagePartial
     const PAGE_ACCESSORY_INDEX = 'index';
     const PAGE_EQUIPMENT_INDEX = 'index';
     const PARTIAL_ADD_ACCESSORY_PIECES = '_adaugaAccesoriiPiese';
+
+    const CONTROLLER_COMPONENTE = 'componente';
+    const PAGE_COMPONENTE_INDEX = 'index';
+    const PAGE_COMPONENTE_DETAIL = 'detalii';
+    const ACTION_LIST_COMPONENTS = 'listaComponente';
+    const PARTIAL_ADD_COMPONENTS = '_adaugaComponente';
 
     const CONTROLLER_EQUIPMENT = 'echipamente';
     const PAGE_EQUIPMENT_VIEW = 'view';

@@ -29,11 +29,12 @@
     Yii::app()->clientScript->getCoreScriptUrl().
         '/jui/css/base/jquery-ui.css'
     );?>
+
     <?php Yii::app()->getClientScript()->registerCoreScript('jquery'); ?>
     <?php Yii::app()->clientScript->registerCoreScript('jquery.ui'); ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/management.js'); ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/jHtmlArea-0.7.5.js'); ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/jquery.colorbox-min.js'); ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/javascript/management.js'); ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/javascript/jHtmlArea-0.7.5.js'); ?>
+    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/javascript/jquery.colorbox-min.js'); ?>
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -43,16 +44,20 @@
 <div class="container_20">
     <div id="header">
         <div class="grid_14 push_3 prepend-top-180" id="menu">
-            <div class="grid_2 menu-padding padding-left-30"><?php echo CHtml::link('Home', $this->createUrl('/index.php'));?></div>
+            <div class="grid_2 menu-padding padding-left-20"><?php echo CHtml::link('Home', Yii::app()->getBaseUrl(true));?></div>
             <div
-                    class="grid_2 menu-padding padding-right-15"><?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?></div>
+                class="grid_2 menu-padding padding-right-15"><?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?></div>
+            <div class="grid_2 menu-padding padding-right-5"><?php echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?></div>
+
+            <div class="grid_2 menu-padding padding-right-5"><?php echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?></div>
             <div
-                    class="grid_2 menu-padding padding-right-30"><?php echo CHtml::link('Accessorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?></div>
+                class="grid_3 menu-padding padding-right-5"><?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?></div>
             <div
-                    class="grid_3 menu-padding padding-right-15"><?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?></div>
-            <div
-                    class="grid_2 menu-padding padding-right-15"><?php echo CHtml::link('Contact', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT));?></div>
+                class="grid_1 menu-padding padding-right-5"><?php echo CHtml::link('Contact', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT));?></div>
         </div>
+        <!-- menu -->
+
+    </div>
         <!-- menu -->
 
     </div>
@@ -140,6 +145,30 @@
                         </li>
                         <li>
                             <?php echo CHtml::link('Categorii', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_VIEW_ACCESSORY_TYPE));?>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class = 'grid_4'>
+                <div id = "piese_accesorii" class="categoryHeader">
+                    <h2>
+                        Componente
+                    </h2>
+
+                    <ul>
+                        <li>
+                            <?php echo CHtml::link('Adauga', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::ACTION_ADD_COMPONENTS));?>
+                        </li>
+                        <li>
+                            <?php echo CHtml::link('Lista', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::ACTION_LIST_COMPONENTS));?>
+                        </li>
+                        <li>
+                            <?php echo CHtml::link('Producatori', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::ACTION_VALID_MAKER_LIST, array('id' => ItemType::COMPONENTE)));?>
+                        </li>
+                        <li>
+                            <?php echo CHtml::link('Categorii', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_COMPONENT_CATEGORY));?>
                         </li>
                     </ul>
 

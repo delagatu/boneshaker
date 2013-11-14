@@ -18,6 +18,10 @@ class Product extends ProductBase
     const AVAILABLE = 1;
     const NOT_AVAILABLE = 0;
 
+    /**
+     * @param string $className
+     * @return ProductBase
+     */
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
@@ -36,6 +40,11 @@ class Product extends ProductBase
     public function isAccessory()
     {
         return $this->item_type_id == ItemType::ACCESORII;
+    }
+
+    public function isComponent()
+    {
+        return $this->item_type_id == ItemType::COMPONENTE;
     }
 
     public function isEquipment()
@@ -358,6 +367,13 @@ class Product extends ProductBase
         $editLink = Chtml::link('Editeaza', Yii::app()->controller->createUrl(ControllerPagePartial::ACTION_ADD, array('id' => $this->id)));
         return $editLink;
     }
+
+    public function getComponentEditLink()
+    {
+        $editLink = Chtml::link('Editeaza', Yii::app()->controller->createUrl(ControllerPagePartial::ACTION_ADD_COMPONENTS, array('id' => $this->id)));
+        return $editLink;
+    }
+
 
     public function getEquipmentEditLink()
     {

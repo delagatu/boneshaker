@@ -19,6 +19,7 @@ class AddProductForm extends CFormModel
     public $product;
     public $accessory_type_id;
     public $equipment_type_id;
+    public $component_type_id;
 
     public function rules()
     {
@@ -26,6 +27,7 @@ class AddProductForm extends CFormModel
             array('maker_id', 'required', 'message' => 'Alegeti producatorul'),
             array('accessory_type_id', 'required', 'on' =>'addAccessory','message' => 'Alegeti tipul accesoriului',),
             array('equipment_type_id', 'required', 'on' =>'addEquipment','message' => 'Alegeti tipul echipamentului',),
+            array('component_type_id', 'required', 'on' =>'addComponent','message' => 'Alegeti tipul componentei',),
             array('name', 'required','message' => 'Denumirea este obligatorie'),
 //            array('description', 'required','message' => 'Descrierea este obligatorie'),
             array('price', 'required', 'message' => 'Pretul este obligatoriu'),
@@ -43,7 +45,8 @@ class AddProductForm extends CFormModel
             'description' => 'Descriere',
             'price' => 'Pret',
             'accessory_type_id' => 'Tip accesoriu',
-            'equipment_type_id' => 'Tip echipament'
+            'equipment_type_id' => 'Tip echipament',
+            'component_type_id' => 'Tip Componenta',
         );
     }
 
@@ -59,6 +62,7 @@ class AddProductForm extends CFormModel
             $this->price = $this->product->price;
             $this->accessory_type_id = $this->product->accessory_type_id;
             $this->equipment_type_id = $this->product->equipment_type_id;
+            $this->component_type_id = $this->product->component_type_id;
         }
 
     }
@@ -96,6 +100,13 @@ class AddProductForm extends CFormModel
         return $this->addOtherOption($listData);
     }
 
+    public function componentList()
+    {
+        $componentTypes = ComponentType::getAll();
+        $listData = CHtml::listData($componentTypes, 'id', 'name');
+        return $this->addOtherOption($listData);
+    }
+
     private function getProduct()
     {
         $product = new Product();
@@ -126,6 +137,7 @@ class AddProductForm extends CFormModel
                 'available' => Product::AVAILABLE,
                 'accessory_type_id' => $this->accessory_type_id,
                 'equipment_type_id' => $this->equipment_type_id,
+                'component_type_id' => $this->component_type_id,
             );
 
             $product = $this->getProduct();
@@ -163,6 +175,10 @@ class AddProductForm extends CFormModel
         {
             case ItemType::ACCESORII:
                 $dir =  Yii::app()->params['accessoryDir'];
+                break;
+
+            case ItemType::COMPONENTE:
+                $dir =  Yii::app()->params['componentDir'];
                 break;
 
             case ItemType::BICICLETE:

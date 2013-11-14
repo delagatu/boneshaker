@@ -2,100 +2,111 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="543b30e0-76cd-4424-a109-1b1f6286dc9c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/management/_listaBiciclete.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/less/browntable.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/less/button_link_styles.less" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/design/header.png" afterPath="$PROJECT_DIR$/images/design/header.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/design/menu.jpg" afterPath="$PROJECT_DIR$/images/design/menu.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/AccesoriiController.php" afterPath="$PROJECT_DIR$/protected/controllers/AccesoriiController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/form/AddBicycleForm.php" afterPath="$PROJECT_DIR$/protected/models/form/AddBicycleForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/form/AddMakerForm.php" afterPath="$PROJECT_DIR$/protected/models/form/AddMakerForm.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/form/AddComponentTypeForm.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/ComponentType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/ComponentTypeBase.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/controllers/ComponenteController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/management/_adaugaComponente.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/management/_addComponentType.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/management/_categoriiComponente.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/componente/_detalii.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/management/_listaComponente.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dbcommands/applied_2013.11.14.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/componente/error.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/componente/index.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/componente/producator.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/themes/classic/views/.htaccess" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/form/AddProductForm.php" afterPath="$PROJECT_DIR$/protected/models/form/AddProductForm.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/BaseController.php" afterPath="$PROJECT_DIR$/protected/controllers/BaseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/BbSet.php" afterPath="$PROJECT_DIR$/protected/models/BbSet.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/BbSetBase.php" afterPath="$PROJECT_DIR$/protected/models/base/BbSetBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/BicicleteController.php" afterPath="$PROJECT_DIR$/protected/controllers/BicicleteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/BicycleDescription.php" afterPath="$PROJECT_DIR$/protected/models/BicycleDescription.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/BicycleDescriptionBase.php" afterPath="$PROJECT_DIR$/protected/models/base/BicycleDescriptionBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/BicycleSize.php" afterPath="$PROJECT_DIR$/protected/models/BicycleSize.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/BrakeLever.php" afterPath="$PROJECT_DIR$/protected/models/BrakeLever.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/BrakeLeverBase.php" afterPath="$PROJECT_DIR$/protected/models/base/BrakeLeverBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/BrakeSystem.php" afterPath="$PROJECT_DIR$/protected/models/BrakeSystem.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/BrakeSystemBase.php" afterPath="$PROJECT_DIR$/protected/models/base/BrakeSystemBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Chain.php" afterPath="$PROJECT_DIR$/protected/models/Chain.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/ChainBase.php" afterPath="$PROJECT_DIR$/protected/models/base/ChainBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/ChainWheel.php" afterPath="$PROJECT_DIR$/protected/models/ChainWheel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/ChainWheelBase.php" afterPath="$PROJECT_DIR$/protected/models/base/ChainWheelBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Color.php" afterPath="$PROJECT_DIR$/protected/models/Color.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/ControllerPagePartial.php" afterPath="$PROJECT_DIR$/protected/components/ControllerPagePartial.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Derailleur.php" afterPath="$PROJECT_DIR$/protected/models/Derailleur.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/DerailleurBase.php" afterPath="$PROJECT_DIR$/protected/models/base/DerailleurBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/EchipamenteController.php" afterPath="$PROJECT_DIR$/protected/controllers/EchipamenteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Fork.php" afterPath="$PROJECT_DIR$/protected/models/Fork.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/ForkBase.php" afterPath="$PROJECT_DIR$/protected/models/base/ForkBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Frame.php" afterPath="$PROJECT_DIR$/protected/models/Frame.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/FrameBase.php" afterPath="$PROJECT_DIR$/protected/models/base/FrameBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Hub.php" afterPath="$PROJECT_DIR$/protected/models/Hub.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/HubBase.php" afterPath="$PROJECT_DIR$/protected/models/base/HubBase.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/ItemType.php" afterPath="$PROJECT_DIR$/protected/models/ItemType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/ItemTypeBase.php" afterPath="$PROJECT_DIR$/protected/models/base/ItemTypeBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Maker.php" afterPath="$PROJECT_DIR$/protected/models/Maker.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/MakerBase.php" afterPath="$PROJECT_DIR$/protected/models/base/MakerBase.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/ManagementController.php" afterPath="$PROJECT_DIR$/protected/controllers/ManagementController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Offer.php" afterPath="$PROJECT_DIR$/protected/models/Offer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Photo.php" afterPath="$PROJECT_DIR$/protected/models/Photo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/PhotoBase.php" afterPath="$PROJECT_DIR$/protected/models/base/PhotoBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/PhotoSource.php" afterPath="$PROJECT_DIR$/protected/models/PhotoSource.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/PhotoType.php" afterPath="$PROJECT_DIR$/protected/models/PhotoType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/PhotoTypeBase.php" afterPath="$PROJECT_DIR$/protected/models/base/PhotoTypeBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/PhotoUpload.php" afterPath="$PROJECT_DIR$/protected/models/PhotoUpload.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Product.php" afterPath="$PROJECT_DIR$/protected/models/Product.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/ProductBase.php" afterPath="$PROJECT_DIR$/protected/models/base/ProductBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Rim.php" afterPath="$PROJECT_DIR$/protected/models/Rim.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/RimBase.php" afterPath="$PROJECT_DIR$/protected/models/base/RimBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Shifter.php" afterPath="$PROJECT_DIR$/protected/models/Shifter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/ShifterBase.php" afterPath="$PROJECT_DIR$/protected/models/base/ShifterBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SiteController.php" afterPath="$PROJECT_DIR$/protected/controllers/SiteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Speed.php" afterPath="$PROJECT_DIR$/protected/models/Speed.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/SubProduct.php" afterPath="$PROJECT_DIR$/protected/models/SubProduct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/User.php" afterPath="$PROJECT_DIR$/protected/models/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/UserBase.php" afterPath="$PROJECT_DIR$/protected/models/base/UserBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/UserStatus.php" afterPath="$PROJECT_DIR$/protected/models/UserStatus.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/biciclete/_bicycle.php" afterPath="$PROJECT_DIR$/protected/views/biciclete/_bicycle.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/biciclete/_detalii.php" afterPath="$PROJECT_DIR$/protected/views/biciclete/_detalii.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/layouts/_mainLeftMenu.php" afterPath="$PROJECT_DIR$/protected/views/layouts/_mainLeftMenu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/site/_product.php" afterPath="$PROJECT_DIR$/protected/views/site/_product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/management/adaugaBicicleta.php" afterPath="$PROJECT_DIR$/protected/views/management/adaugaBicicleta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/management/adaugaProducator.php" afterPath="$PROJECT_DIR$/protected/views/management/adaugaProducator.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/management/adaugaProducatorBicicleta.php" afterPath="$PROJECT_DIR$/protected/views/management/adaugaProducatorBicicleta.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/runtime/application.log" afterPath="$PROJECT_DIR$/protected/runtime/application.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/browntable.css" afterPath="$PROJECT_DIR$/css/browntable.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/button_link_styles.css" afterPath="$PROJECT_DIR$/css/button_link_styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/site/error.php" afterPath="$PROJECT_DIR$/protected/views/site/error.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" afterPath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/accesorii/index.php" afterPath="$PROJECT_DIR$/protected/views/accesorii/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/biciclete/index.php" afterPath="$PROJECT_DIR$/protected/views/biciclete/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/echipamente/index.php" afterPath="$PROJECT_DIR$/protected/views/echipamente/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/site/index.php" afterPath="$PROJECT_DIR$/protected/views/site/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/management/listaProducatori.php" afterPath="$PROJECT_DIR$/protected/views/management/listaProducatori.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/site/login.php" afterPath="$PROJECT_DIR$/protected/views/site/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/main.js" afterPath="$PROJECT_DIR$/javascript/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/less/main.less" afterPath="$PROJECT_DIR$/less/main.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/management/_adaugaAccesoriiPiese.php" afterPath="$PROJECT_DIR$/protected/views/management/_adaugaAccesoriiPiese.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/detailsSlideshow.js" afterPath="$PROJECT_DIR$/javascript/detailsSlideshow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/jHtmlArea-0.7.5.js" afterPath="$PROJECT_DIR$/javascript/jHtmlArea-0.7.5.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/jquery.colorbox-min.js" afterPath="$PROJECT_DIR$/javascript/jquery.colorbox-min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/main.php" afterPath="$PROJECT_DIR$/protected/config/main.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/layouts/main.php" afterPath="$PROJECT_DIR$/protected/views/layouts/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/management.css" afterPath="$PROJECT_DIR$/css/management.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/management.js" afterPath="$PROJECT_DIR$/javascript/management.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/less/management.less" afterPath="$PROJECT_DIR$/less/management.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/layouts/management.php" afterPath="$PROJECT_DIR$/protected/views/layouts/management.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/photos_management.js" afterPath="$PROJECT_DIR$/javascript/photos_management.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Boneshaker.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1383596064764" ignored="false" />
+    <ignored path="images/products/accessory/ad665f8a9f30f5b7fa4a95012de3131a.jpg" />
+    <ignored path="images/products/accessory/c6f988cbac0c6ac486e98f3c39e05413.jpg" />
+    <ignored path="assets/d5c9617d/chosen.css" />
+    <ignored path="assets/d5c9617d/chosen.jquery.min.js" />
+    <ignored path="assets/d5c9617d/chosen.jquery.js" />
+    <ignored path="assets/d5c9617d/chosen-sprite.png" />
+    <ignored path="protected/runtime/gii-1.1.14/ModelCode.php" />
+    <ignored path="images/products/component/483aef6f684e87200e67dc41bc7ce0f9.jpg" />
+    <ignored path="images/products/component/aafb2df22c5c5a8dbd7a6ac6bbe98b71.jpg" />
+    <ignored path="images/products/component/44aa4ead09e917de78f5e5c6c4f56a38.jpg" />
+    <ignored path="images/products/component/00ad9c646366b261ead9b3aae1688716.jpg" />
+    <ignored path="images/products/component/173284da77f34774b67b43b73e0fa981.jpg" />
+    <ignored path="images/products/component/7ab7b8e02d43e3dd3c8022ba23db0bb8.jpg" />
+    <ignored path="images/products/component/219b8a4a8c614d416452f5d35b315d10.jpg" />
+    <ignored path="images/products/component/a731f8b6c8f9272b21b3532043a7ae76.jpg" />
+    <ignored path="images/products/component/ce6e8c8accf8420db5f84c3eefeffafa.jpg" />
+    <ignored path="images/products/component/ddfe590a7720afee5cb7c4e356366f5f.jpg" />
+    <ignored path="images/products/component/df3225e2e4a90fd0c4466c52c0d27dc8.jpg" />
+    <ignored path="images/products/component/ba206b89fb3717217a3e40eece5c81fb.jpg" />
+    <ignored path="images/products/component/7ff8b6291aa63d689fa8f6b2a4703fd4.jpg" />
+    <ignored path="images/products/component/2a348d2598c187c7fd683e8ed2db076c.jpg" />
+    <ignored path="images/products/component/f244d1aa2ceb90a7a799c789a94bcd43.jpg" />
+    <ignored path="images/products/component/f4789308f9d278473ab4d566fe78a3c1.jpg" />
+    <ignored path="images/products/component/e7b1f1ab9754ed2fa94aadf5d8b6307e.jpg" />
+    <ignored path="images/products/component/34b42f5ed4d164c77656faa40c748279.jpg" />
+    <ignored path="images/products/component/4629f0340db854f2f15341909740d830.jpg" />
+    <ignored path="images/products/component/bd4f2e24e644c1ffd6467d8ee35a84d2.jpg" />
+    <ignored path="images/products/accessory/d920e9033a0f04e2723f78ea029d8bdc.jpg" />
+    <ignored path="images/products/accessory/cfd1617d2af086a7d0ece6e04e7138e3.jpg" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_nw.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/blank.gif" />
+    <ignored path="assets/a38e06d3/js/fancybox/jquery.fancybox-1.3.1.pack.js" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_title_left.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_sw.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_close.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_e.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/jquery.fancybox-1.3.1.css" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_nav_left.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_se.png" />
+    <ignored path="assets/a38e06d3/css/main.css" />
+    <ignored path="assets/a38e06d3/css/ie.css" />
+    <ignored path="assets/a38e06d3/css/print.css" />
+    <ignored path="assets/a38e06d3/css/screen.css" />
+    <ignored path="assets/a38e06d3/images/logo.png" />
+    <ignored path="assets/a38e06d3/js/tooltip.js" />
+    <ignored path="assets/a38e06d3/js/main.js" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_nav_right.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_title_over.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_loading.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_title_right.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancybox-y.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancybox-x.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancybox.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_n.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_s.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_title_main.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_w.png" />
+    <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_ne.png" />
+    <ignored path="images/products/" />
+    <file path="$PROJECT_DIR$/protected/models/base/PhotoBase.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384283023618" ignored="false" />
+    <file path="/Dummy.txt" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384455737369" ignored="false" />
+    <file path="/a.dummy" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384284208748" ignored="false" />
+    <file path="/.htaccess" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384284238279" ignored="false" />
+    <file path="/ControllerPagePartial.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384459316302" ignored="false" />
+    <file path="/_addComponentType.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384287301885" ignored="false" />
+    <file path="/_categoriiComponente.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384289457350" ignored="false" />
+    <file path="/ManagementController.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384459434451" ignored="false" />
+    <file path="/AddComponentTypeForm.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384289303389" ignored="false" />
+    <file path="/AddProductForm.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384460210112" ignored="false" />
+    <file path="/_listaComponente.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384457164349" ignored="false" />
+    <file path="/Product.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384457239446" ignored="false" />
+    <file path="/_adaugaComponente.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384459252390" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +120,11 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
+  <component name="DatabaseView">
+    <flatten value="false" />
+    <groupTables value="false" />
+    <sortChildren value="false" />
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="boneshaker" />
@@ -118,16 +134,41 @@
       <file leaf-file-name="ManagementController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/controllers/ManagementController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="0" selection-start="4691" selection-end="4691" vertical-scroll-proportion="-0.625">
-              <folding />
+            <state line="672" column="49" selection-start="22829" selection-end="22829" vertical-scroll-proportion="-15.25">
+              <folding>
+                <marker date="1384459462595" expanded="true" signature="100:119" placeholder="{...}" />
+                <marker date="1384459462595" expanded="true" signature="37810:37816" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="listaProducatori.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/management/listaProducatori.php">
+      <file leaf-file-name="management.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/layouts/management.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="6" selection-start="2302" selection-end="2302" vertical-scroll-proportion="-15.666667">
+            <state line="46" column="41" selection-start="2853" selection-end="2853" vertical-scroll-proportion="-10.25">
+              <folding>
+                <marker date="1384460464284" expanded="true" signature="761:799" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/layouts/main.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="10" selection-start="2279" selection-end="3518" vertical-scroll-proportion="-16.875">
+              <folding>
+                <marker date="1384283015276" expanded="true" signature="761:799" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddProductForm.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/form/AddProductForm.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="130" column="46" selection-start="4224" selection-end="4224" vertical-scroll-proportion="-9.0">
               <folding />
             </state>
           </provider>
@@ -136,34 +177,56 @@
       <file leaf-file-name="Product.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/models/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="691" column="0" selection-start="21234" selection-end="21234" vertical-scroll-proportion="0.0">
+            <state line="370" column="40" selection-start="11093" selection-end="11113" vertical-scroll-proportion="-10.375">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+      <file leaf-file-name="_listaComponente.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/management/_listaComponente.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="50" selection-start="5040" selection-end="5040" vertical-scroll-proportion="1.25">
-              <folding />
+            <state line="99" column="39" selection-start="3355" selection-end="3355" vertical-scroll-proportion="-15.0">
+              <folding>
+                <element signature="e#6#164#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".htaccess" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.htaccess">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControllerPagePartial.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ControllerPagePartial.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/components/ControllerPagePartial.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="56" selection-start="2580" selection-end="2580" vertical-scroll-proportion="0.3811395">
+            <state line="62" column="10" selection-start="2657" selection-end="2657" vertical-scroll-proportion="-6.7083335">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_adaugaAccesoriiPiese.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/management/_adaugaAccesoriiPiese.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="73" selection-start="1613" selection-end="1613" vertical-scroll-proportion="-13.125">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_adaugaComponente.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/management/_adaugaComponente.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="101" selection-start="1841" selection-end="1850" vertical-scroll-proportion="37.25">
+              <folding>
+                <element signature="e#6#164#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="178" column="51" selection-start="6784" selection-end="6793" vertical-scroll-proportion="2.260274">
               <folding />
             </state>
           </provider>
@@ -187,22 +250,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/protected/models/PhotoSource.php" />
+        <option value="$PROJECT_DIR$/protected/models/Photo.php" />
         <option value="$PROJECT_DIR$/protected/models/PhotoUpload.php" />
-        <option value="$PROJECT_DIR$/protected/models/form/AddProductForm.php" />
-        <option value="$PROJECT_DIR$/protected/models/Maker.php" />
-        <option value="$PROJECT_DIR$/css/button_link_styles.css" />
-        <option value="$PROJECT_DIR$/less/button_link_styles.less" />
-        <option value="$PROJECT_DIR$/css/browntable.css" />
-        <option value="$PROJECT_DIR$/less/browntable.less" />
-        <option value="$PROJECT_DIR$/protected/views/management/listaProducatori.php" />
-        <option value="$PROJECT_DIR$/protected/views/layouts/management.php" />
-        <option value="$PROJECT_DIR$/javascript/management.js" />
-        <option value="$PROJECT_DIR$/protected/controllers/ManagementController.php" />
-        <option value="$PROJECT_DIR$/protected/views/management/_listaBiciclete.php" />
-        <option value="$PROJECT_DIR$/protected/components/ControllerPagePartial.php" />
-        <option value="$PROJECT_DIR$/protected/models/Product.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
+        <option value="$PROJECT_DIR$/protected/views/management/_addComponentType.php" />
+        <option value="$PROJECT_DIR$/protected/models/form/AddComponentTypeForm.php" />
+        <option value="$PROJECT_DIR$/protected/views/management/_categoriiComponente.php" />
         <option value="$PROJECT_DIR$/protected/config/main.php" />
+        <option value="$PROJECT_DIR$/protected/models/Product.php" />
+        <option value="$PROJECT_DIR$/protected/views/management/_listaComponente.php" />
+        <option value="$PROJECT_DIR$/protected/components/ControllerPagePartial.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/ManagementController.php" />
+        <option value="$PROJECT_DIR$/protected/views/management/_adaugaComponente.php" />
+        <option value="$PROJECT_DIR$/protected/views/management/_adaugaAccesoriiPiese.php" />
+        <option value="$PROJECT_DIR$/protected/models/form/AddProductForm.php" />
+        <option value="$PROJECT_DIR$/protected/views/layouts/management.php" />
       </list>
     </option>
   </component>
@@ -213,7 +276,7 @@
     <option name="width" value="1368" />
     <option name="height" value="742" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -239,7 +302,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -258,23 +320,138 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="management" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="runtime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="boneshaker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbcommands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/css" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="PublishConfig">
     <servers>
       <server id="2b1cd0e6-5442-4947-b510-4081cddb2941">
-        <serverdata />
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
       </server>
     </servers>
   </component>
@@ -289,10 +466,16 @@
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -302,7 +485,6 @@
     <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
     <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="DETECT_NESTED_COPIES" value="true" />
     <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
@@ -318,26 +500,47 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.56462586" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42517006" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19756098" sideWeight="0.3272506" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32978722" sideWeight="0.57482994" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2287234" sideWeight="0.43537414" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25607902" sideWeight="0.57482994" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296837" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282313" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36861312" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24659865" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -375,7 +578,7 @@
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
     <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
     <option name="LIMIT_HISTORY" value="true" />
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
@@ -404,96 +607,128 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/protected/views/management/_categoriiComponente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="27" selection-start="2693" selection-end="2693" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/base/ProductBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="6" selection-start="921" selection-end="921" vertical-scroll-proportion="0.9235669">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/form/AddComponentTypeForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="5" selection-start="801" selection-end="801" vertical-scroll-proportion="-12.041667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/management/_listaPieseAccessorii.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="3467" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="370" column="40" selection-start="11093" selection-end="11113" vertical-scroll-proportion="-10.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/management/_listaComponente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="39" selection-start="3355" selection-end="3355" vertical-scroll-proportion="-15.0">
+          <folding>
+            <element signature="e#6#164#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/ManagementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="672" column="49" selection-start="22829" selection-end="22829" vertical-scroll-proportion="-15.25">
+          <folding>
+            <marker date="1384459462595" expanded="true" signature="100:119" placeholder="{...}" />
+            <marker date="1384459462595" expanded="true" signature="37810:37816" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/ControllerPagePartial.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="35" selection-start="887" selection-end="912" vertical-scroll-proportion="0.0">
+        <state line="62" column="10" selection-start="2657" selection-end="2657" vertical-scroll-proportion="-6.7083335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/management/_adaugaAccesoriiPiese.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="73" selection-start="1613" selection-end="1613" vertical-scroll-proportion="-13.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/management/_adaugaComponente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="101" selection-start="1841" selection-end="1850" vertical-scroll-proportion="37.25">
+          <folding>
+            <element signature="e#6#164#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/runtime/gii-1.1.14/ModelCode.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/form/AddProductForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="10" selection-start="1462" selection-end="1462" vertical-scroll-proportion="0.0738255" />
+        <state line="130" column="46" selection-start="4224" selection-end="4224" vertical-scroll-proportion="-9.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/Maker.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/layouts/main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="15" selection-start="1838" selection-end="1838" vertical-scroll-proportion="-14.833333" />
+        <state line="54" column="10" selection-start="2279" selection-end="3518" vertical-scroll-proportion="-16.875">
+          <folding>
+            <marker date="1384283015276" expanded="true" signature="761:799" placeholder="..." />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/button_link_styles.css">
+    <entry file="file://$PROJECT_DIR$/dbcommands/applied_2013.11.14.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="31" selection-start="0" selection-end="2608" vertical-scroll-proportion="0.0" />
+        <state line="7" column="16" selection-start="259" selection-end="259" vertical-scroll-proportion="0.23809524">
+          <folding />
+        </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/browntable.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="418" selection-end="418" vertical-scroll-proportion="0.11349306" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/layouts/management.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="73" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.47619048" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/management.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="89" selection-end="89" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="691" column="0" selection-start="21234" selection-end="21234" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="46" column="41" selection-start="2853" selection-end="2853" vertical-scroll-proportion="-10.25">
+          <folding>
+            <marker date="1384460464284" expanded="true" signature="761:799" placeholder="..." />
+          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index-test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/error_log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="50" selection-start="5040" selection-end="5040" vertical-scroll-proportion="1.25">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/ManagementController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="0" selection-start="4691" selection-end="4691" vertical-scroll-proportion="-0.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/management/listaProducatori.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="6" selection-start="2302" selection-end="2302" vertical-scroll-proportion="-15.666667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/ControllerPagePartial.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="56" selection-start="2580" selection-end="2580" vertical-scroll-proportion="0.3811395">
+        <state line="178" column="51" selection-start="6784" selection-end="6793" vertical-scroll-proportion="2.260274">
           <folding />
         </state>
       </provider>

@@ -50,7 +50,9 @@ class BaseController extends Controller
         $controller = $this->getId();
         $acceptedControllers = array(ControllerPagePartial::CONTROLLER_BICYCLE => ControllerPagePartial::CONTROLLER_BICYCLE,
             ControllerPagePartial::CONTOLLER_ACCESORY => ControllerPagePartial::CONTOLLER_ACCESORY,
-            ControllerPagePartial::CONTROLLER_EQUIPMENT => ControllerPagePartial::CONTROLLER_EQUIPMENT);
+            ControllerPagePartial::CONTROLLER_EQUIPMENT => ControllerPagePartial::CONTROLLER_EQUIPMENT,
+            ControllerPagePartial::CONTROLLER_COMPONENTE => ControllerPagePartial::CONTROLLER_COMPONENTE,
+        );
 
         $category = (isset($acceptedControllers[$controller])) ? $controller : ControllerPagePartial::CONTROLLER_BICYCLE;
 
@@ -68,6 +70,10 @@ class BaseController extends Controller
         {
             case ItemType::ACCESORII:
                 AccessoryType::getMenu();
+                break;
+
+            case ItemType::COMPONENTE:
+                ComponentType::getMenu();
                 break;
 
             case ItemType::ECHIPAMENTE:

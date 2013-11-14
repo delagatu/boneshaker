@@ -42,8 +42,9 @@
             <div class="grid_2 menu-padding padding-left-20"><?php echo CHtml::link('Home', Yii::app()->getBaseUrl(true));?></div>
             <div
                     class="grid_2 menu-padding padding-right-15"><?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?></div>
-            <div
-                    class="grid_4 menu-padding padding-right-5"><?php echo CHtml::link('Accesorii si Componente', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?></div>
+            <div class="grid_2 menu-padding padding-right-5"><?php echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?></div>
+
+            <div class="grid_2 menu-padding padding-right-5"><?php echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?></div>
             <div
                     class="grid_3 menu-padding padding-right-5"><?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?></div>
             <div

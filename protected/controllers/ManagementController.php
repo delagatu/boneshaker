@@ -196,6 +196,24 @@ class ManagementController extends BaseController
         $this->render(ControllerPagePartial::PARTIAL_MANAGEMENT_PA_LIST, $params);
     }
 
+    public function actionListaComponente()
+    {
+        $product = new Product();
+        $maker = Yii::app()->request->getQuery('maker_name_sort', null);
+        $name = Yii::app()->request->getQuery('name_sort', null);
+        $price = Yii::app()->request->getQuery('price_sort', null);
+
+        $params = array(
+            'itemType' => ItemType::COMPONENTE,
+            'product' => $product,
+            'maker' => $maker,
+            'name' => $name,
+            'price' => $price,
+        );
+
+        $this->render(ControllerPagePartial::PARTIAL_MANAGEMENT_COMPONENT_LIST, $params);
+    }
+
     //
 
     public function actionListaEchipamente()
@@ -634,6 +652,28 @@ class ManagementController extends BaseController
         json::writeJSON($addAccessoryType);
     }
 
+    public function actionAddComponentType()
+    {
+        $addComponentTypeForm = new AddComponentTypeForm();
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $postData = Yii::app()->request->getPost('AddComponentTypeForm');
+            $id = Yii::app()->request->getPost('id');
+
+            $addComponentTypeForm->attributes = $postData;
+            if ($addComponentTypeForm->validate())
+            {
+                $componentType = $addComponentTypeForm->saveComponentType();
+                $newValue = array('id' => $componentType->id, 'name' => $componentType->name);
+                $response = array('productAdded' => 1, 'id'  => $id ,'newValue' => $newValue);
+                json::writeJSON($response);
+            }
+        }
+
+        $addAccessoryType = $addComponentTypeForm->generateForm();
+        json::writeJSON($addAccessoryType);
+    }
+
     public function actionAddEquipmentType()
     {
         $addEquipmentTyepForm = new AddEquipmentTypeForm();
@@ -706,6 +746,43 @@ class ManagementController extends BaseController
         );
 
         $this->render(ControllerPagePartial::PARTIAL_ADD_ACCESSORY_PIECES, $params);
+
+    }
+
+    public function actionAdaugaComponente()
+    {
+        $addProductForm = new AddProductForm('addComponent');
+        $addProductForm->item_type_id = ItemType::COMPONENTE;
+
+        $id = Yii::app()->request->getQuery('id', null);
+
+        if (!is_null($id))
+        {
+            $addProductForm->getDetails($id);
+        }
+
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $postData = Yii::app()->request->getPost('AddProductForm', null);
+            $addProductForm->attributes = $postData;
+
+            if ($addProductForm->validate())
+            {
+                $productId = $addProductForm->saveProduct();
+
+                if (!empty($productId))
+                {
+                    Yii::app()->user->setFlash('success', 'Produs salvat.');
+                    Yii::app()->controller->redirect($this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::ACTION_ADD_COMPONENTS, array('id' => $productId), true, 302));
+                }
+            }
+        }
+
+        $params = array(
+            'addProductForm' => $addProductForm
+        );
+
+        $this->render(ControllerPagePartial::PARTIAL_ADD_COMPONENTS, $params);
 
     }
 
@@ -896,6 +973,40 @@ class ManagementController extends BaseController
         $this->render(ControllerPagePartial::PARTIAL_MANAGEMENT_VIEW_ACCESSORY_TYPE, $params);
     }
 
+    public function actionCategoriiComponente()
+    {
+        $name = Yii::app()->request->getQuery('name');
+
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $addComponentTypeForm = new AddComponentTypeForm();
+            $addComponentTypeForm->attributes = Yii::app()->request->getPost('AddComponentTypeForm');
+
+            if ($addComponentTypeForm->validate())
+            {
+                $componentType = $addComponentTypeForm->saveComponentType();
+
+                if ($componentType instanceof ComponentType)
+                {
+                    Yii::app()->user->setFlash('success', 'Categorie adaugata.');
+                    Yii::app()->controller->redirect(Yii::app()->controller->createUrl('management/CategoriiComponente'));
+
+                } else {
+                    Yii::log('ManagementController::CategoriiComponent: incorrect result.', CLogger::LEVEL_ERROR);
+                    Yii::app()->user->setFlash('eroare', 'Eroare interna.');
+                }
+
+            }
+
+        }
+
+        $params = array(
+            'name' => $name,
+        );
+
+        $this->render(ControllerPagePartial::PARTIAL_MANAGEMENT_VIEW_COMPONENT_TYPE, $params);
+    }
+
     public function actionCategoriiEchipamente()
     {
         $name = Yii::app()->request->getQuery('name');
@@ -960,6 +1071,26 @@ class ManagementController extends BaseController
 
             $accessoryType->available = $available;
             $accessoryType->saveThrowEx();
+
+            json::writeJSON(array('id' => $id,), true);
+        }
+    }
+
+    public function actionValidateComponentType()
+    {
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $id = Yii::app()->request->getPost('id');
+            $available = Yii::app()->request->getPost('available');
+
+            $componentType = ComponentType::getById($id);
+            if (!$componentType instanceof ComponentType)
+            {
+                json::writeJSON('Eroare interna. Incearca din nou.', false);
+            }
+
+            $componentType->available = $available;
+            $componentType->saveThrowEx();
 
             json::writeJSON(array('id' => $id,), true);
         }

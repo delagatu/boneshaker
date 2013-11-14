@@ -12,10 +12,9 @@ class ItemType extends ItemTypeBase
     const BICICLETE = 1;
     const ACCESORII = 2;
     const ECHIPAMENTE = 3;
-    const BICICLETE_SI_ACCESORII = 4;
-    const BICICLETE_SI_ECHIPAMENTE = 5;
-    const ACCESORII_SI_ECHIPAMENTE = 6;
+    const COMPONENTE = 4;
     const GENERAL = 7;
+
 
     /**
      * @static
@@ -56,6 +55,9 @@ class ItemType extends ItemTypeBase
             case self::ACCESORII:
                 return ControllerPagePartial::CONTOLLER_ACCESORY;
 
+            case self::COMPONENTE:
+                return ControllerPagePartial::CONTROLLER_COMPONENTE;
+
             case self::ECHIPAMENTE:
                 return ControllerPagePartial::CONTROLLER_EQUIPMENT;
 
@@ -73,6 +75,9 @@ class ItemType extends ItemTypeBase
 
             case self::ACCESORII:
                 return ControllerPagePartial::PAGE_ACCESSORY_DETAIL;
+
+            case self::COMPONENTE:
+                return ControllerPagePartial::PAGE_COMPONENTE_DETAIL;
 
             case self::ECHIPAMENTE:
                 return ControllerPagePartial::PAGE_EQUIPMENT_DETAIL;
