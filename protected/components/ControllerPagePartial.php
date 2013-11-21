@@ -74,6 +74,8 @@ class ControllerPagePartial
     const PAGE_MANAGEMENT_ADD_HUB = 'addHub';
     const PAGE_MANAGEMENT_ADD_RIM = 'addRim';
     const PAGE_MANAGEMENT_ADD_TIRE = 'addTire';
+    const PAGE_MANAGEMENT_ADD_REAR_SHOCK = 'addRearShock';
+    const PAGE_MANAGEMENT_ADD_WHEEL_SIZE = 'addWheelSize';
     const PAGE_MANAGEMENT_ADD_SIZE = 'addSize';
     const PAGE_MANAGEMENT_ADD_SPEED = 'addSpeed';
     const PAGE_MANAGEMENT_ADD_COLOR = 'addColor';
@@ -97,6 +99,7 @@ class ControllerPagePartial
     const PARTIAL_ADD_BB_SET = '_adaugaButucPedalier';
     const PARTIAL_ADD_RIM = '_adaugaJanta';
     const PARTIAL_ADD_TIRE = '_adaugaAnvelopa';
+    const PARTIAL_ADD_REAR_SHOCK = '_adaugaSuspensieSpate';
     const PARTIAL_ADD_HUB = '_adaugaButuc';
     const PARTIAL_ADD_CHAIN = '_adaugaLant';
     const PARTIAL_ADD_BRAKE_SYSTEM = '_adaugaFrana';
@@ -105,6 +108,7 @@ class ControllerPagePartial
     const PARTIAL_ADD_SIZE = '_addSize';
     const PARTIAL_ADD_SPEED = '_addSpeed';
     const PARTIAL_ADD_COLOR = '_addColor';
+    const PARTIAL_ADD_WHEEL_SIZE = '_addWheelSize';
     const PARTIAL_ADD_SUB_PRODUCT = '_addSubProduct';
     const PARTIAL_ADD_ACCESSORY_TYPE = '_addAccessoryTpe';
     const PARTIAL_ADD_COMPONENT_TYPE = '_addComponentType';

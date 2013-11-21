@@ -1,3 +1,5 @@
+<?php if ($bicycleDescription instanceof BicycleDescription): ?>
+
 <?php if ($bicycleDescription->hasFrame()): ?>
     <div class='grid_5'>
         <span class="boldText">Cadru:</span>
@@ -19,6 +21,12 @@
 </div>
 <?php endif; ?>
 
+    <?php if ($bicycleDescription->hasWheelSize()): ?>
+        <div class='grid_5'>
+            <span class="boldText">Marime Roata:</span>
+            <?php echo $bicycleDescription->getWheelSize(); ?>
+        </div>
+    <?php endif; ?>
 
 <?php if ($bicycleDescription->hasColor()): ?>
 <div class='grid_5'>
@@ -106,30 +114,53 @@
 </div>
 <?php endif; ?>
 
-<?php if ($bicycleDescription->hasFrontRim()): ?>
-<div class='grid_5'>
-    <span class="boldText">Janta fata:</span>
-    <?php echo $bicycleDescription->getFrontRim(); ?>
-</div>
+<?php if ($bicycleDescription->hasFrontRearRim()): ?>
+    <div class='grid_5'>
+        <span class="boldText">Janta F/S:</span>
+        <?php echo $bicycleDescription->getFrontRearRim(); ?>
+    </div>
 <?php endif; ?>
 
-<?php if ($bicycleDescription->hasRearRim()): ?>
-<div class='grid_5'>
-    <span class="boldText">Janta spate:</span>
-    <?php echo $bicycleDescription->getRearRim(); ?>
-</div>
+<?php //if ($bicycleDescription->hasFrontRim()): ?>
+<!--<div class='grid_5'>-->
+<!--    <span class="boldText">Janta fata:</span>-->
+<!--    --><?php //echo $bicycleDescription->getFrontRim(); ?>
+<!--</div>-->
+<?php //endif; ?>
+<!---->
+<?php //if ($bicycleDescription->hasRearRim()): ?>
+<!--<div class='grid_5'>-->
+<!--    <span class="boldText">Janta spate:</span>-->
+<!--    --><?php //echo $bicycleDescription->getRearRim(); ?>
+<!--</div>-->
+<?php //endif; ?>
+
+<?php //if ($bicycleDescription->hasFrontTire()): ?>
+<!--<div class='grid_5'>-->
+<!--    <span class="boldText">Anvelopa fata:</span>-->
+<!--    --><?php //echo $bicycleDescription->getFrontTire(); ?>
+<!--</div>-->
+<?php //endif; ?>
+<!---->
+<?php //if ($bicycleDescription->hasRearTire()): ?>
+<!--<div class='grid_5'>-->
+<!--    <span class="boldText">Anvelopa spate:</span>-->
+<!--    --><?php //echo $bicycleDescription->getRearTire(); ?>
+<!--</div>-->
+<?php //endif; ?>
+
+<?php if ($bicycleDescription->hasRearFrontTire()): ?>
+    <div class='grid_5'>
+        <span class="boldText">Anvelopa F/S:</span>
+        <?php echo $bicycleDescription->getRearFrontTire(); ?>
+    </div>
 <?php endif; ?>
 
-<?php if ($bicycleDescription->hasFrontTire()): ?>
-<div class='grid_5'>
-    <span class="boldText">Anvelopa fata:</span>
-    <?php echo $bicycleDescription->getFrontTire(); ?>
-</div>
-<?php endif; ?>
+    <?php if ($bicycleDescription->hasRearShock()): ?>
+        <div class='grid_5'>
+            <span class="boldText">Suspensie spate:</span>
+            <?php echo $bicycleDescription->getRearShock(); ?>
+        </div>
+    <?php endif; ?>
 
-<?php if ($bicycleDescription->hasRearTire()): ?>
-<div class='grid_5'>
-    <span class="boldText">Anvelopa spate:</span>
-    <?php echo $bicycleDescription->getRearTire(); ?>
-</div>
 <?php endif; ?>

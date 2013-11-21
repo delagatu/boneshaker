@@ -36,6 +36,10 @@ class AddBicycleForm extends CFormModel
     public $seat_post; // todo
     public $saddle; // todo
     public $pedals; // todo
+    public $front_rear_tire_id;
+    public $front_rear_rim_id;
+    public $rear_shock_id;
+    public $wheel_size_id;
 
     public function rules()
     {
@@ -60,6 +64,10 @@ class AddBicycleForm extends CFormModel
             array('front_rim_id', 'safe', 'message' => 'Janta fata?'),
             array('front_tire_id', 'safe', 'message' => 'Anvelopa fata?'),
             array('rear_tire_id', 'safe', 'message' => 'Anvelopa spate?'),
+            array('front_rear_tire_id', 'safe', 'message' => 'Anvelopa F/S?'),
+            array('front_rear_rim_id', 'safe', 'message' => 'Janta F/S?'),
+            array('rear_shock_id', 'safe', 'message' => 'Suspensie spate?'),
+            array('wheel_size_id', 'safe', 'message' => 'Marime Roata?'),
         );
     }
 
@@ -85,6 +93,10 @@ class AddBicycleForm extends CFormModel
             'front_rim_id' => 'Janta fata',
             'front_tire_id' => 'Anvelopa fata',
             'rear_tire_id' => 'Anvelopa spate',
+            'front_rear_tire_id' => 'Anvelopa F/S',
+            'front_rear_rim_id' => 'Janta F/S',
+            'rear_shock_id' => 'Suspensie spate',
+            'wheel_size_id' => 'Marime Roata',
         );
     }
 
@@ -112,6 +124,10 @@ class AddBicycleForm extends CFormModel
             $this->front_rim_id = $bicycleDescription->front_rim_id;
             $this->front_tire_id = $bicycleDescription->front_tire_id;
             $this->rear_tire_id = $bicycleDescription->rear_tire_id;
+            $this->front_rear_tire_id = $bicycleDescription->front_rear_tire_id;
+            $this->front_rear_rim_id = $bicycleDescription->front_rear_rim_id;
+            $this->rear_shock_id = $bicycleDescription->rear_shock_id;
+            $this->wheel_size_id = $bicycleDescription->wheel_size_id;
         }
     }
 
@@ -144,6 +160,10 @@ class AddBicycleForm extends CFormModel
         $bicycleDescription->front_rim_id = $this->front_rim_id;
         $bicycleDescription->front_tire_id = $this->front_tire_id;
         $bicycleDescription->rear_tire_id = $this->rear_tire_id;
+        $bicycleDescription->front_rear_tire_id = $this->front_rear_tire_id;
+        $bicycleDescription->front_rear_rim_id = $this->front_rear_rim_id;
+        $bicycleDescription->rear_shock_id = $this->rear_shock_id;
+        $bicycleDescription->wheel_size_id = $this->wheel_size_id;
         $bicycleDescription->saveThrowEx();
 
         Product::setUpdateDate($this->product_id);
@@ -246,5 +266,17 @@ class AddBicycleForm extends CFormModel
     {
         $tire = CHtml::listData(Tire::getTires(), 'id', 'makerAndProduct');
         return $this->addOtherOption($tire);
+    }
+
+    public function getRearShocks()
+    {
+        $shock = CHtml::listData(RearShock::getRearShocks(), 'id', 'makerAndProduct');
+        return $this->addOtherOption($shock);
+    }
+
+    public function getWheelSize()
+    {
+        $wheelSize = CHtml::listData(WheelSize::getWheelSizes(), 'id', 'name');
+        return $this->addOtherOption($wheelSize);
     }
 }

@@ -351,6 +351,46 @@ class BicycleDescription extends BicycleDescriptionBase
         return $default;
     }
 
+    public function hasRearFrontTire()
+    {
+        return ($this->frontRearTire instanceof Tire);
+    }
+
+    public function getRearFrontTire($default = '')
+    {
+        return ($this->frontRearTire instanceof Tire) ? $this->frontRearTire->getMakerAndProduct() : $default;
+    }
+
+    public function hasFrontRearRim()
+    {
+        return ($this->frontRearRim instanceof Rim);
+    }
+
+    public function getFrontRearRim($default = '')
+    {
+        return ($this->hasFrontRearRim()) ? $this->frontRearRim->getMakerAndProduct() : $default;
+    }
+
+    public function hasRearShock()
+    {
+        return ($this->rearShock instanceof RearShock);
+    }
+
+    public function getRearShock($default = '')
+    {
+        return ($this->hasRearShock()) ? $this->rearShock->getMakerAndProduct() : $default;
+    }
+
+    public function hasWheelSize()
+    {
+        return ($this->wheelSize instanceof WheelSize);
+    }
+
+    public function getWheelSize($default = '')
+    {
+        return ($this->hasWheelSize()) ? $this->wheelSize->getName() : $default;
+    }
+
     public function getKeywords()
     {
         $frame = $this->getFrameName('');
@@ -372,10 +412,15 @@ class BicycleDescription extends BicycleDescriptionBase
         $rearRim = $this->getRearRim('');
         $frontTire = $this->getFrontTire('');
         $rearTire = $this->getRearTire('');
+        $frontRearTire = $this->getRearFrontTire('');
+        $frontRearRim = $this->getFrontRearRim('');
+        $rearShock = $this->getRearShock('');
+        $wheelSize = $this->getWheelSize('');
 
         return $frame . $size . $speed . $color . $fork . $frontDerailleur . $rearDerailleur . $shifter . $brakeLever
-            . $brakeSystem . $chainWheel . $bbSet . $chain . $frontHub . $rearHub . $frontRim . $rearRim . $frontTire
-            . $rearTire;
+            . $brakeSystem . $chainWheel . $bbSet . $chain . $frontHub . $rearHub . $frontRim . $rearRim . $frontRearTire . $frontRearRim
+        . $frontTire . $rearTire . $rearShock . $wheelSize;
+            ;
     }
 
     public function getLimitedData($limit = 5)
@@ -400,6 +445,14 @@ class BicycleDescription extends BicycleDescriptionBase
         if ($this->hasSpeed() && ($count < $limit))
         {
             $params = array('header' => 'Viteze', 'data' => $this->getSpeed());
+            $bikeData .= Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_LIMITED_DESCRIPTION, $params);
+            $count++;
+        }
+
+
+        if ($this->hasWheelSize() && ($count < $limit))
+        {
+            $params = array('header' => 'Marime Roata', 'data' => $this->getWheelSize());
             $bikeData .= Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_LIMITED_DESCRIPTION, $params);
             $count++;
         }
@@ -516,6 +569,26 @@ class BicycleDescription extends BicycleDescriptionBase
             $count++;
         }
 
+       if ($this->hasRearFrontTire() && ($count < $limit))
+       {
+            $params = array('header' => 'Anvelopa F/S', 'data' => $this->getRearFrontTire());
+            $bikeData .= Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_LIMITED_DESCRIPTION, $params);
+            $count++;
+        }
+
+        if ($this->hasFrontRearRim() && ($count < $limit))
+        {
+            $params = array('header' => 'Janta F/S', 'data' => $this->getFrontRearRim());
+            $bikeData .= Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_LIMITED_DESCRIPTION, $params);
+            $count++;
+        }
+
+        if ($this->hasRearShock() && ($count < $limit))
+        {
+            $params = array('header' => 'Suspensie spate', 'data' => $this->getRearShock());
+            $bikeData .= Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_LIMITED_DESCRIPTION, $params);
+            $count++;
+        }
 
         return $bikeData;
     }

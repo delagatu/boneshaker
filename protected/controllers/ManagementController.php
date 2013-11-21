@@ -541,6 +541,28 @@ class ManagementController extends BaseController
         json::writeJSON($addTire);
     }
 
+    public function actionAddRearShock()
+    {
+        $addRearShockForm = new AddRearShockForm();
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $postData = Yii::app()->request->getPost('AddRearShockForm');
+            $id = Yii::app()->request->getPost('id');
+
+            $addRearShockForm->attributes = $postData;
+            if ($addRearShockForm->validate())
+            {
+                $rearShock = $addRearShockForm->saveRearShock();
+                $newValue = array('id' => $rearShock->id, 'name' => $rearShock->getMakerAndProduct());
+                $response = array('productAdded' => 1, 'id'  => $id ,'newValue' => $newValue);
+                json::writeJSON($response);
+            }
+        }
+
+        $addRearShock = $addRearShockForm->generateForm();
+        json::writeJSON($addRearShock);
+
+    }
 
     public function actionAddSize()
     {
@@ -606,6 +628,28 @@ class ManagementController extends BaseController
 
         $addSize = $addColorForm->generateForm();
         json::writeJSON($addSize);
+    }
+
+    public function actionAddWheelSize()
+    {
+        $addWheelSizeForm = new AddWheelSizeForm();
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $postData = Yii::app()->request->getPost('AddWheelSizeForm');
+            $id = Yii::app()->request->getPost('id');
+
+            $addWheelSizeForm->attributes = $postData;
+            if ($addWheelSizeForm->validate())
+            {
+                $wheelSize = $addWheelSizeForm->saveWheelSize();
+                $newValue = array('id' => $wheelSize->id, 'name' => $wheelSize->name);
+                $response = array('productAdded' => 1, 'id'  => $id ,'newValue' => $newValue);
+                json::writeJSON($response);
+            }
+        }
+
+        $addWheelSize = $addWheelSizeForm->generateForm();
+        json::writeJSON($addWheelSize);
     }
 
     public function actionAddSubProduct()
