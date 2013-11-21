@@ -90,7 +90,7 @@ class Maker extends MakerBase
 
     public function getName()
     {
-        return $this->name;
+        return str_replace(' ', '_', $this->name);
     }
 
     public function getUrlSafeName()
@@ -147,6 +147,52 @@ class Maker extends MakerBase
             return $maker->id;
         }
 
+    }
+
+    public static function getIdByLabelAndType($name, $itemTypeId)
+    {
+        $maker = self::model()->find(
+            'name like :name AND item_type_id =:item_type_id',
+            array(
+                ':name' => $name,
+                ':item_type_id' => $itemTypeId,
+            )
+        );
+
+        if ($maker instanceof Maker)
+        {
+            return $maker->id;
+        }
+    }
+
+    public static function getAllMakerDropDown($itemTypeId, $makerName = '')
+    {
+        $listData = CHtml::listData(self::getAll($itemTypeId), 'name', 'name');
+        $makerName = str_replace('_', ' ', $makerName);
+
+        $params = array();
+        $maker = Yii::app()->request->getQuery('makerName', Yii::app()->request->getQuery('makerAndProduct', ''));
+
+        if (!self::validMaker($maker))
+        {
+            $params = array('makerName' => str_replace(' ', '_', $maker));
+        }
+
+        $itemType = ItemType::getById($itemTypeId);
+        $controller = ($itemType instanceof ItemType) ? $itemType->itemController() : '/';
+
+        $htmlOptions = array(
+            'empty' => 'Producator',
+            'class' => 'long-input search-by-maker',
+            'data-url' => Yii::app()->controller->createUrl($controller . '/' . ControllerPagePartial::PAGE_COMPONENTE_INDEX, $params),
+        );
+
+        return Chosen::dropDownList('producator-' . $itemTypeId, $makerName, $listData, $htmlOptions);
+    }
+
+    public static function validMaker($makerName)
+    {
+        return self::model()->exists('name like :name', array(':name' => $makerName));
     }
 
 }

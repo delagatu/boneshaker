@@ -148,7 +148,82 @@ class Product extends ProductBase
 
     }
 
-    public function getProductByTypeAndUsage($typeId, $usage)
+    private function componentSort($usage, $subUsage)
+    {
+        $criteria = new CDbCriteria();
+
+        if (ComponentType::isValid($usage))
+        {
+            $componentId = ComponentType::getIdByLabel($usage);
+            $criteria->compare($this->tableAlias . '.component_type_id', $componentId);
+        }
+
+        if (Maker::validMaker($usage))
+        {
+            $makerId = Maker::getIdByLabelAndType($usage, ItemType::COMPONENTE);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
+        if (!empty($subUsage) && Maker::validMaker($subUsage))
+        {
+            $makerId = Maker::getIdByLabelAndType($subUsage, ItemType::COMPONENTE);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
+        return $criteria;
+    }
+
+    private function accessorySort($usage, $subUsage)
+    {
+        $criteria = new CDbCriteria();
+
+        if (AccessoryType::isValid($usage))
+        {
+            $accessoryTypeId = AccessoryType::getIdByLabel($usage);
+            $criteria->compare($this->tableAlias . '.accessory_type_id', $accessoryTypeId);
+        }
+
+        if (Maker::validMaker($usage))
+        {
+            $makerId = Maker::getIdByLabelAndType($usage, ItemType::ACCESORII);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
+        if (!empty($subUsage) && Maker::validMaker($subUsage))
+        {
+            $makerId = Maker::getIdByLabelAndType($subUsage, ItemType::ACCESORII);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
+        return $criteria;
+    }
+
+    private function equipmentSort($usage, $subUsage)
+    {
+        $criteria = new CDbCriteria();
+
+        if (EquipmentType::isValid($usage))
+        {
+            $equipmentTypeId = EquipmentType::getIdByLabel($usage);
+            $criteria->compare($this->tableAlias . '.equipment_type_id', $equipmentTypeId);
+        }
+
+        if (Maker::validMaker($usage))
+        {
+            $makerId = Maker::getIdByLabelAndType($usage, ItemType::ECHIPAMENTE);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
+        if (!empty($subUsage) && Maker::validMaker($subUsage))
+        {
+            $makerId = Maker::getIdByLabelAndType($subUsage, ItemType::ECHIPAMENTE);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
+        return $criteria;
+    }
+
+    public function getProductByTypeAndUsage($typeId, $usage, $subUsage = '')
     {
         $criteria = new CDbCriteria();
         $criteria->compare($this->tableAlias . '.available', self::AVAILABLE);
@@ -156,14 +231,21 @@ class Product extends ProductBase
 
         if ($typeId == ItemType::ACCESORII)
         {
-            $accessoryId = AccessoryType::getIdByLabel($usage);
-            $criteria->compare($this->tableAlias . '.accessory_type_id', $accessoryId);
+
+            $criteria->mergeWith($this->accessorySort($usage, $subUsage));
+        }
+
+        if ($typeId == ItemType::COMPONENTE)
+        {
+            $criteria->mergeWith($this->componentSort($usage, $subUsage));
         }
 
         if ($typeId == ItemType::ECHIPAMENTE)
         {
-            $equipmentId = EquipmentType::getIdByLabel($usage);
-            $criteria->compare($this->tableAlias . '.equipment_type_id', $equipmentId);
+//            $equipmentId = EquipmentType::getIdByLabel($usage);
+//            $criteria->compare($this->tableAlias . '.equipment_type_id', $equipmentId);
+
+            $criteria->mergeWith($this->equipmentSort($usage, $subUsage));
         }
 
         $criteria->order = $this->tableAlias . '.created_at DESC';

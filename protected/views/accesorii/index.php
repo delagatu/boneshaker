@@ -1,11 +1,22 @@
 <?php $this->pageTitle = Yii::app()->name . ' | Vanzari si Service Biciclete | Piese Biciclete '; ?>
 
+<div class="grid_1305">
+    <div class="grid_6">
+        <?php
+        $maker = empty($subProduct) ? $makerName : $subProduct;
+        echo Maker::getAllMakerDropDown(ItemType::ACCESORII, $maker);
+        ?>
+    </div>
+</div>
+
+<div class="clear"></div>
+
 <div class='grid_1305'>
 
     <?php
 
     $this->widget('zii.widgets.CListView', array(
-        'dataProvider'=>Product::model()->getProductByTypeAndUsage(ItemType::ACCESORII, $accessoryType),
+        'dataProvider'=>Product::model()->getProductByTypeAndUsage(ItemType::ACCESORII, $makerName, $subProduct),
         'itemView'=>'../' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_PRODUCT,
         'summaryText' => '<span class = "boldText">{start}</span> - <span class = "boldText">{end}</span> rezultate din totalul de <span class = "boldText">{count}</span>',
         'pagerCssClass' => 'grid_10 push_2 prepend-top-10',

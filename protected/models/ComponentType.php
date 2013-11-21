@@ -62,7 +62,7 @@ class ComponentType extends ComponentTypeBase{
 
     public function getUrlSafeName()
     {
-        return str_replace(' ', '-', $this->name);
+        return str_replace(' ', '_', $this->name);
     }
 
     public function isAvailable()
@@ -139,6 +139,11 @@ class ComponentType extends ComponentTypeBase{
     public function getNameLength()
     {
         return strlen($this->name);
+    }
+
+    public static function isValid($component)
+    {
+        return self::model()->exists('name like :name', array(':name' => $component));
     }
 
 }

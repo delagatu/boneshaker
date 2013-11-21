@@ -1,14 +1,39 @@
 $(function()
     {
+        $('.add-chosen').chosen();
         setLeftSpacerHeight();
         searchKeyWords();
 
         $( document ).tooltip();
 
         $('body').on('click', '#newsLetter',addNewsletter);
+        $('body').on('change', '.search-by-maker', searchByMaker);
     }
 
-)
+);
+
+function isCharacterNeeded(str, char)
+{
+    var lastChar = str.toString().slice(-1);
+    if (lastChar != char)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+function searchByMaker()
+{
+    var caller = $(this);
+    if (caller.attr('data-url').length)
+    {
+        var url = caller.attr('data-url');
+        var lastChar = isCharacterNeeded(url, '/') ? '/' : '';
+        $(location).attr('href',url + lastChar + caller.val().toString().replace(' ', '_'));
+
+    }
+}
 
 function setLeftSpacerHeight()
 {

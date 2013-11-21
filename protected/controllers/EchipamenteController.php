@@ -10,15 +10,12 @@ class EchipamenteController extends BaseController
     public function actionIndex()
     {
 
-        if (!is_null(Yii::app()->request->getQuery('makerName', null)))
-        {
-            $equipmentType = $this->readSafeName(Yii::app()->request->getQuery('makerName', null));
-        } else {
-            $equipmentType = $this->readSafeName(Yii::app()->request->getQuery('makerAndProduct', null));
-        }
+        $makerName = $this->readSafeName(Yii::app()->request->getQuery('makerName', null));
+        $subProduct = $this->readSafeName(Yii::app()->request->getQuery('subProduct', null));
 
         $indexParams = array(
-            'equipmentType' => $equipmentType,
+            'makerName' => $makerName,
+            'subProduct' => $subProduct
         );
 
         $this->render(ControllerPagePartial::PAGE_EQUIPMENT_INDEX, $indexParams);

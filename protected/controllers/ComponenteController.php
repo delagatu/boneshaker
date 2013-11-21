@@ -10,16 +10,12 @@ class ComponenteController extends BaseController
     public function actionIndex()
     {
 
-        if (!is_null(Yii::app()->request->getQuery('makerName', null)))
-        {
-            $componentType = $this->readSafeName(Yii::app()->request->getQuery('makerName', null));
-        } else {
-            $componentType = $this->readSafeName(Yii::app()->request->getQuery('makerAndProduct', null));
-        }
-
+        $makerName = $this->readSafeName(Yii::app()->request->getQuery('makerName', null));
+        $subProduct = $this->readSafeName(Yii::app()->request->getQuery('subProduct', null));
 
         $indexParams = array(
-            'componentType' => $componentType,
+            'makerName' => $makerName,
+            'subProduct' => $subProduct
         );
 
         $this->render(ControllerPagePartial::PAGE_COMPONENTE_INDEX, $indexParams);
@@ -37,6 +33,7 @@ class ComponenteController extends BaseController
 
         if ((!$product instanceof Product) || !$product->isComponent())
         {
+            Yii::log('Componente::detalii. Invalid product {'. var_export($product, 1) .'} or not a component');
             $this->redirect(Yii::app()->request->getUrlReferrer());
         }
 
