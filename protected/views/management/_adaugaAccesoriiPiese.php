@@ -21,13 +21,10 @@ $form = $this->beginWidget('CActiveForm',
     ));
 ?>
 
-<div>
-
-    <?php foreach (Yii::app()->user->getFlashes() as $key => $value) : ?>
-    <div class = 'flash-<?php echo $key; ?>' >
-        <?php echo $value; ?>
-    </div>
-    <?php endforeach; ?>
+<div class = 'grid_9 boldText'>
+    <?php
+    $this->renderPartial('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_FLASH_MESSAGES);
+    ?>
 </div>
 
 <div class="grid_9 form" id = "addBicicleForm">
@@ -50,6 +47,20 @@ $form = $this->beginWidget('CActiveForm',
         ));
         ?>
         <?php echo $form->error($addProductForm, 'accessory_type_id'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($addProductForm, 'accessory_sub_type_id'); ?>
+        <?php echo Chosen::activeDropDownList($addProductForm, 'accessory_sub_type_id', $addProductForm->accessorySubTypeList(),
+            array('class' => 'addBicicleDropDown long-input',
+                'id' => 'addAccessorySubType',
+                'empty' => 'Selecteaza',
+                'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_ACCESSORY_SUB_TYPE),
+                'data-dialog-id' => 'addAccessorySubTypeDialog',
+                'data-title' =>'Accesorii - sub categorie'
+            ));
+        ?>
+        <?php echo $form->error($addProductForm, 'accessory_sub_type_id'); ?>
     </div>
 
     <div class="row">
@@ -130,7 +141,7 @@ $form = $this->beginWidget('CActiveForm',
 
 
 <div class='grid_6 padding-5 center_content'>
-    <?php echo CHtml::submitButton('Adauga', array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
+    <?php echo CHtml::submitButton($addProductForm->getButtonLabel(), array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
 </div>
 
 

@@ -146,6 +146,9 @@
                         <li>
                             <?php echo CHtml::link('Categorii', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_VIEW_ACCESSORY_TYPE));?>
                         </li>
+                        <li>
+                            <?php echo CHtml::link('Subcategorii', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_VIEW_ACCESSORY_SUB_TYPE));?>
+                        </li>
                     </ul>
 
                 </div>

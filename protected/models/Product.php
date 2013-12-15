@@ -576,6 +576,11 @@ class Product extends ProductBase
         return ($this->accessoryType instanceof AccessoryType) ? $this->accessoryType->getName() : $default;
     }
 
+    public function getAccessorySubTypeName($default = 'INVALID')
+    {
+        return ($this->accessorySubType instanceof AccessorySubType) ? $this->accessorySubType->getName() : $default;
+    }
+
     public function getEquipmentTypeName($default = 'INVALID')
     {
         return ($this->equipmentType instanceof EquipmentType) ? $this->equipmentType->getName() : $default;
@@ -607,9 +612,10 @@ class Product extends ProductBase
         $description = $this->getDescription();
         $price = $this->getPrice();
         $accessoryType = $this->getAccessoryTypeName(' ');
+        $accessorySubType = $this->getAccessorySubTypeName(' ');
         $equipmentType = $this->getEquipmentTypeName(' ');
 
-        return $maker . $itemType . $subProduct . $name . $description . $price . $accessoryType . $equipmentType;
+        return $maker . $itemType . $subProduct . $name . $description . $price . $accessoryType . $accessorySubType . $equipmentType;
     }
 
     public static function existsProduct($id)
@@ -651,6 +657,28 @@ class Product extends ProductBase
         $this->getDbCriteria()->mergeWith(
             array(
                 'select' => ' distinct('.$this->getTableAlias().'.accessory_type_id) as accessory_type_id',
+                'condition' => $criteria->condition,
+                'params' => $criteria->params,
+                'join' => $criteria->join
+            )
+        );
+
+        return $this;
+
+    }
+
+    public function getAccessorySubTypeCriteria($accessoryId)
+    {
+        $criteria = new CDbCriteria();
+        $criteria->join = ' LEFT JOIN accessory_sub_type ast on '.$this->getTableAlias().'.accessory_sub_type_id = ast.id ';
+        $criteria->compare('ast.available', 1);
+        $criteria->compare($this->getTableAlias(). '.item_type_id', ItemType::ACCESORII);
+        $criteria->compare($this->getTableAlias(). '.accessory_type_id', $accessoryId);
+        $criteria->compare($this->getTableAlias(). '.available', self::AVAILABLE);
+
+        $this->getDbCriteria()->mergeWith(
+            array(
+                'select' => ' distinct('.$this->getTableAlias().'.accessory_sub_type_id) as accessory_sub_type_id',
                 'condition' => $criteria->condition,
                 'params' => $criteria->params,
                 'join' => $criteria->join
@@ -785,5 +813,25 @@ class Product extends ProductBase
         return Chtml::checkBox('is-for-home-page-product-' . $this->id, $this->isForHomePage(),$isForHomePageHtmlOptions);
     }
 
+
+    public static function getAccessorySubTypeIdListByAccessory($accessoryId)
+    {
+        $product = self::model()->getAccessorySubTypeCriteria($accessoryId)->findAll();
+        $accessoryName = AccessoryType::getNameById($accessoryId);
+
+        if (is_array($product) && !empty($product))
+        {
+            foreach ($product as $prod)
+            {
+                if ($prod instanceof Product)
+                {
+                    $accSubType = AccessorySubType::getById($prod->accessory_sub_type_id);
+                    Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT,
+                        array('subProduct' => $accSubType, 'makerName' => $accessoryName, 'controller' => ControllerPagePartial::CONTOLLER_ACCESORY));
+                }
+            }
+        }
+
+    }
 
 }

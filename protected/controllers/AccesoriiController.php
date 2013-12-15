@@ -15,7 +15,7 @@ class AccesoriiController extends BaseController
 
         $indexParams = array(
             'makerName' => $makerName,
-            'subProduct' => $subProduct
+            'subProduct' => $subProduct,
         );
 
         $this->render(ControllerPagePartial::PAGE_ACCESSORY_INDEX, $indexParams);

@@ -8,7 +8,20 @@
             array('class' => 'leftMenuLink',)
         );
 
+        $accessoryId = AccessoryType::getIdByName(Yii::app()->request->getQuery('makerName'));
+
+        $hiddenClass = ($accessoryId == $subProduct->id) ? '' : 'hidden';
+        $subCategoryClass = Product::getLeftMenuClass($subProduct->id, $itemTypeId, 20);
+
         ?>
+
+
+        <div class="grid_3 <?php echo $hiddenClass . ' ' . $subCategoryClass ?>" id='sub-product-<?php echo $subProduct->id; ?>'>
+            <?php
+            Product::getAccessorySubTypeIdListByAccessory($subProduct->id, $itemTypeId, $controller);
+            ?>
+        </div>
+
     </div>
 
     <?php if ($currentCount < $totalCount): ?>

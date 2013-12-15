@@ -17,12 +17,14 @@
  * @property integer $accessory_type_id
  * @property integer $equipment_type_id
  * @property integer $component_type_id
+ * @property integer $accessory_sub_type_id
  *
  * The followings are the available model relations:
  * @property BicycleDescription[] $bicycleDescriptions
  * @property HomePageProduct[] $homePageProducts
  * @property Offer[] $offers
  * @property Photo[] $photos
+ * @property AccessorySubType $accessorySubType
  * @property ComponentType $componentType
  * @property EquipmentType $equipmentType
  * @property Maker $maker
@@ -50,13 +52,13 @@ class ProductBase extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('maker_id, item_type_id, created_at', 'required'),
-			array('maker_id, item_type_id, sub_product_id, available, accessory_type_id, equipment_type_id, component_type_id', 'numerical', 'integerOnly'=>true),
+			array('maker_id, item_type_id, sub_product_id, available, accessory_type_id, equipment_type_id, component_type_id, accessory_sub_type_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>300),
 			array('price', 'length', 'max'=>10),
 			array('description, updated_at', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, maker_id, item_type_id, sub_product_id, name, description, price, available, created_at, updated_at, accessory_type_id, equipment_type_id, component_type_id', 'safe', 'on'=>'search'),
+			array('id, maker_id, item_type_id, sub_product_id, name, description, price, available, created_at, updated_at, accessory_type_id, equipment_type_id, component_type_id, accessory_sub_type_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +74,7 @@ class ProductBase extends CActiveRecord
 			'homePageProducts' => array(self::HAS_MANY, 'HomePageProduct', 'product_id'),
 			'offers' => array(self::HAS_MANY, 'Offer', 'product_id'),
 			'photos' => array(self::HAS_MANY, 'Photo', 'product_id'),
+			'accessorySubType' => array(self::BELONGS_TO, 'AccessorySubType', 'accessory_sub_type_id'),
 			'componentType' => array(self::BELONGS_TO, 'ComponentType', 'component_type_id'),
 			'equipmentType' => array(self::BELONGS_TO, 'EquipmentType', 'equipment_type_id'),
 			'maker' => array(self::BELONGS_TO, 'Maker', 'maker_id'),
@@ -101,6 +104,7 @@ class ProductBase extends CActiveRecord
 			'accessory_type_id' => 'Accessory Type',
 			'equipment_type_id' => 'Equipment Type',
 			'component_type_id' => 'Component Type',
+			'accessory_sub_type_id' => 'Accessory Sub Type',
 		);
 	}
 
@@ -135,6 +139,7 @@ class ProductBase extends CActiveRecord
 		$criteria->compare('accessory_type_id',$this->accessory_type_id);
 		$criteria->compare('equipment_type_id',$this->equipment_type_id);
 		$criteria->compare('component_type_id',$this->component_type_id);
+		$criteria->compare('accessory_sub_type_id',$this->accessory_sub_type_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
