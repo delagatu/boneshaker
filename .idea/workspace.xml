@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="543b30e0-76cd-4424-a109-1b1f6286dc9c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/AccessorySubType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/base/AccessorySubTypeBase.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/form/AddAccessorySubTypeForm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/management/_addAccessorySubType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/management/_subCategoriiAccesorii.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/AccesoriiController.php" afterPath="$PROJECT_DIR$/protected/controllers/AccesoriiController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/AccessoryType.php" afterPath="$PROJECT_DIR$/protected/models/AccessoryType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/form/AddProductForm.php" afterPath="$PROJECT_DIR$/protected/models/form/AddProductForm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/BaseController.php" afterPath="$PROJECT_DIR$/protected/controllers/BaseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/ControllerPagePartial.php" afterPath="$PROJECT_DIR$/protected/components/ControllerPagePartial.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Maker.php" afterPath="$PROJECT_DIR$/protected/models/Maker.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/ManagementController.php" afterPath="$PROJECT_DIR$/protected/controllers/ManagementController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/runtime/gii-1.1.14/ModelCode.php" afterPath="$PROJECT_DIR$/protected/runtime/gii-1.1.14/ModelCode.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/Product.php" afterPath="$PROJECT_DIR$/protected/models/Product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/base/ProductBase.php" afterPath="$PROJECT_DIR$/protected/models/base/ProductBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/SubProduct.php" afterPath="$PROJECT_DIR$/protected/models/SubProduct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/management/_adaugaAccesoriiPiese.php" afterPath="$PROJECT_DIR$/protected/views/management/_adaugaAccesoriiPiese.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/biciclete/_categoriiNoMaker.php" afterPath="$PROJECT_DIR$/protected/views/biciclete/_categoriiNoMaker.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/accesorii/index.php" afterPath="$PROJECT_DIR$/protected/views/accesorii/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/javascript/main.js" afterPath="$PROJECT_DIR$/javascript/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/main.php" afterPath="$PROJECT_DIR$/protected/config/main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/layouts/management.php" afterPath="$PROJECT_DIR$/protected/views/layouts/management.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="543b30e0-76cd-4424-a109-1b1f6286dc9c" name="Default" comment="" />
     <ignored path="Boneshaker.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="images/products/accessory/ad665f8a9f30f5b7fa4a95012de3131a.jpg" />
@@ -87,7 +63,7 @@
     <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_w.png" />
     <ignored path="assets/a38e06d3/js/fancybox/fancy_shadow_ne.png" />
     <ignored path="images/products/" />
-    <file path="/Dummy.txt" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1388088232131" ignored="false" />
+    <file path="/Dummy.txt" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1388330154800" ignored="false" />
     <file path="/a.dummy" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1385056858566" ignored="false" />
     <file path="/.htaccess" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1384284238279" ignored="false" />
     <file path="/ControllerPagePartial.php" changelist="543b30e0-76cd-4424-a109-1b1f6286dc9c" time="1386400620337" ignored="false" />
@@ -536,13 +512,13 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="99" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="79" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="79" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/boneshaker" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="105" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1003" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1003" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1003" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="105" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="GoToClass.includeJavaFiles" value="false" />
@@ -559,8 +535,8 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig">
     <servers>
@@ -642,8 +618,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
-    <editor active="false" />
+    <frame x="-1" y="27" width="1368" height="742" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5969388" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -651,7 +627,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27279636" sideWeight="0.3282313" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902735" sideWeight="0.6717687" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6717687" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15197569" sideWeight="0.56632656" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15425532" sideWeight="0.56632656" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27279636" sideWeight="0.3282313" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282313" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
