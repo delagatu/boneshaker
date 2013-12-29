@@ -113,6 +113,7 @@ return array(
                 '<action>/<id:\d+>' => 'site/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>/<subItem:.*>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<makerName:\w+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<makerAndProduct:.*>'=>'<controller>/<action>',
@@ -162,7 +163,7 @@ return array(
 				array(
 					'class'=>'CWebLogRoute',
 				),
-				*/
+				//*/
 			),
 		),
 	),

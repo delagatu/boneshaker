@@ -12,10 +12,12 @@ class AccesoriiController extends BaseController
 
         $makerName = $this->readSafeName(Yii::app()->request->getQuery('makerName', null));
         $subProduct = $this->readSafeName(Yii::app()->request->getQuery('subProduct', null));
+        $subItem = $this->readSafeName(Yii::app()->request->getQuery('subItem', null));
 
         $indexParams = array(
             'makerName' => $makerName,
-            'subProduct' => $subProduct
+            'subProduct' => $subProduct,
+            'subItem' => $subItem,
         );
 
         $this->render(ControllerPagePartial::PAGE_ACCESSORY_INDEX, $indexParams);

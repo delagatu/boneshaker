@@ -696,6 +696,28 @@ class ManagementController extends BaseController
         json::writeJSON($addAccessoryType);
     }
 
+    public function actionAddAcessorySubType()
+    {
+        $addAccessorySubTypeForm = new AddAccessorySubTypeForm();
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $postData = Yii::app()->request->getPost('AddAccessorySubTypeForm');
+            $id = Yii::app()->request->getPost('id');
+
+            $addAccessorySubTypeForm->attributes = $postData;
+            if ($addAccessorySubTypeForm->validate())
+            {
+                $accessorySubType = $addAccessorySubTypeForm->saveAccessorySubType();
+                $newValue = array('id' => $accessorySubType->id, 'name' => $accessorySubType->name);
+                $response = array('productAdded' => 1, 'id'  => $id ,'newValue' => $newValue);
+                json::writeJSON($response);
+            }
+        }
+
+        $addAccessorySubType = $addAccessorySubTypeForm->generateForm();
+        json::writeJSON($addAccessorySubType);
+    }
+
     public function actionAddComponentType()
     {
         $addComponentTypeForm = new AddComponentTypeForm();
@@ -779,8 +801,8 @@ class ManagementController extends BaseController
 
                 if (!empty($productId))
                 {
-                    Yii::app()->controller->redirect($this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::ACTION_ADD, array('id' => $productId), true, 302));
                     Yii::app()->user->setFlash('success', 'Produs salvat.');
+                    Yii::app()->controller->redirect($this->createUrl('/' . ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::ACTION_ADD, array('id' => $productId), true, 302));
                 }
             }
         }
@@ -1015,6 +1037,37 @@ class ManagementController extends BaseController
         );
 
         $this->render(ControllerPagePartial::PARTIAL_MANAGEMENT_VIEW_ACCESSORY_TYPE, $params);
+    }
+
+    public function actionSubCategoriiAccesorii()
+    {
+        $name = Yii::app()->request->getQuery('name');
+
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $addAccessorySubTypeForm = new AddAccessorySubTypeForm();
+            $addAccessorySubTypeForm->attributes = Yii::app()->request->getPost('AddAccessorySubTypeForm');
+            if ($addAccessorySubTypeForm->validate())
+            {
+                $accessorySubType = $addAccessorySubTypeForm->saveAccessorySubType();
+                if ($accessorySubType instanceof AccessorySubType)
+                {
+                    Yii::app()->user->setFlash('success', 'Categorie adaugata.');
+                    Yii::app()->controller->redirect('/' . ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_VIEW_ACCESSORY_SUB_TYPE);
+                } else {
+                    Yii::log('ManagementController::addNewCategory: incorrect result.');
+                    Yii::app()->user->setFlash('eroare', 'Eroare interna.');
+                }
+
+            }
+
+        }
+
+        $params = array(
+            'name' => $name,
+        );
+
+        $this->render(ControllerPagePartial::PARTIAL_MANAGEMENT_VIEW_ACCESSORY_SUB_TYPE, $params);
     }
 
     public function actionCategoriiComponente()

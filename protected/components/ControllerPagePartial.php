@@ -61,6 +61,7 @@ class ControllerPagePartial
     const PAGE_MANAGEMENT_ADD_FRAME = 'addFrame';
     const PAGE_MANAGEMENT_SUB_PRODUCT = 'addSubProduct';
     const PAGE_MANAGEMENT_ACCESSORY_TYPE = 'addAcessoryType';
+    const PAGE_MANAGEMENT_ACCESSORY_SUB_TYPE = 'addAcessorySubType';
     const PAGE_MANAGEMENT_COMPONENT_TYPE = 'addComponentType';
     const PAGE_MANAGEMENT_EQUIPMENT_TYPE = 'addEquipmentType';
     const PAGE_MANAGEMENT_ADD_FORK = 'addFork';
@@ -85,8 +86,10 @@ class ControllerPagePartial
     const PAGE_MANAEMENT_DELETE_ALL_PHOTO = 'deleteAllPhoto';
     const PAGE_MANAGEMENT_VIEW_SUB_PRODUCT = 'categoriiBiciclete';
     const PAGE_MANAGEMENT_VIEW_ACCESSORY_TYPE = 'categoriiAccesorii';
+    const PAGE_MANAGEMENT_VIEW_ACCESSORY_SUB_TYPE = 'subCategoriiAccesorii';
     const PAGE_MANAGEMENT_VIEW_EQUIPMENT_TYPE = 'categoriiEchipamente';
     const PAGE_MANAGEMENT_VALIDATE_SUB_PRODUCT = 'validateSubProduct';
+    const PAGE_MANAGEMENT_VALIDATE_ACCESSORY_SUB_TYPE = 'validateAccessorySubType';
     const PAGE_MANAGEMENT_VALIDATE_ACCESSORY_TYPE = 'validateAccessoryType';
     const PAGE_MANAGEMENT_VALIDATE_EQUIPMENT_TYPE = 'validateEquipmentType';
     const PAGE_MANAGEMENT_VALIDATE_COMPONENT_TYPE = 'validateComponentType';
@@ -111,12 +114,14 @@ class ControllerPagePartial
     const PARTIAL_ADD_WHEEL_SIZE = '_addWheelSize';
     const PARTIAL_ADD_SUB_PRODUCT = '_addSubProduct';
     const PARTIAL_ADD_ACCESSORY_TYPE = '_addAccessoryTpe';
+    const PARTIAL_ADD_ACCESSORY_SUB_TYPE = '_addAccessorySubType';
     const PARTIAL_ADD_COMPONENT_TYPE = '_addComponentType';
     const PARTIAL_ADD_EQUIPMENT_TYPE = '_addEquipmentType';
     const PARTIAL_PHOTOS = '_photos';
     const PARTIAL_ADD_MISSING_PHOTO = '_addMissingPhoto';
     const PARTIAL_MANAGEMENT_VIEW_SUB_PRODUCT = '_categoriiBiciclete';
     const PARTIAL_MANAGEMENT_VIEW_ACCESSORY_TYPE = '_categoriiAccesorii';
+    const PARTIAL_MANAGEMENT_VIEW_ACCESSORY_SUB_TYPE = '_subCategoriiAccesorii';
     const PARTIAL_MANAGEMENT_VIEW_COMPONENT_TYPE = '_categoriiComponente';
     const PARTIAL_MANAGEMENT_VIEW_EQUIPMENT_TYPE = '_categoriiEchipamente';
     const PARTIAL_MANAGEMENT_HOME_PAGE_PRODUCTS = '_produsePrimaPagina';

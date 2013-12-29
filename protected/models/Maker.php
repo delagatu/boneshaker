@@ -95,7 +95,7 @@ class Maker extends MakerBase
 
     public function getUrlSafeName()
     {
-        return str_replace(' ', '-', $this->name);
+        return str_replace(' ', '_', $this->name);
     }
 
     public static function deleteMaker($id)
@@ -165,17 +165,28 @@ class Maker extends MakerBase
         }
     }
 
-    public static function getAllMakerDropDown($itemTypeId, $makerName = '')
+    public static function getAllMakerDropDown($itemTypeId, $makerName = '', $subProduct = '')
     {
         $listData = CHtml::listData(self::getAll($itemTypeId), 'name', 'name');
         $makerName = str_replace('_', ' ', $makerName);
 
         $params = array();
         $maker = Yii::app()->request->getQuery('makerName', Yii::app()->request->getQuery('makerAndProduct', ''));
+        $subItem = str_replace('_', ' ',Yii::app()->request->getQuery('subItem'));
+
+        if (self::validMaker($subItem))
+        {
+            $makerName = $subItem;
+        }
 
         if (!self::validMaker($maker))
         {
             $params = array('makerName' => str_replace(' ', '_', $maker));
+        }
+
+        if (!empty($subProduct))
+        {
+            $params['subProduct'] = str_replace(' ', '_', $subProduct);
         }
 
         $itemType = ItemType::getById($itemTypeId);

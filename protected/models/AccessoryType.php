@@ -17,6 +17,11 @@ class AccessoryType extends AccessoryTypeBase
         return parent::model($className);
     }
 
+    public static function getByName($name)
+    {
+        return self::model()->find('name =:name', array(':name' => $name));
+    }
+
     public  function getById($id)
     {
         return self::model()->findByPk($id);
@@ -98,9 +103,9 @@ class AccessoryType extends AccessoryTypeBase
 
     public static function getIdByLabel($label)
     {
-        $accessoryType = self::model()->find('name like :name', array(':name' => $label));
+        $accessoryType = self::getByName($label);
 
-        return ($accessoryType instanceof AccessoryType) ? $accessoryType->getId() : null;
+        return ($accessoryType instanceof AccessoryType) ? $accessoryType->getId() : self::model()->id;
     }
 
     public static function getAllValid()
@@ -117,9 +122,18 @@ class AccessoryType extends AccessoryTypeBase
         $count = 0;
         foreach ($accessoryTypes as $at)
         {
-            Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT_NO_MAKER,
-                array('subProduct' => $at, 'controller' => ControllerPagePartial::CONTOLLER_ACCESORY, 'currentCount' => $count, 'totalCount' => $totalCount));
-            $count++;
+            if ($at instanceof AccessoryType)
+            {
+                $params = array(
+                    'subProduct' => $at,
+                    'controller' => ControllerPagePartial::CONTOLLER_ACCESORY,
+                    'currentCount' => $count,
+                    'totalCount' => $totalCount,
+                    'itemTypeId' => ItemType::ACCESORII,
+                );
+                Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT_NO_MAKER,$params);
+                $count++;
+            }
         }
 
     }
@@ -132,6 +146,18 @@ class AccessoryType extends AccessoryTypeBase
     public static function isValid($accessoryType)
     {
         return self::model()->exists('name like :name', array(':name' => $accessoryType));
+    }
+
+    public static function getNameById($id)
+    {
+        $accessoryType = self::getById($id);
+
+        if ($accessoryType instanceof AccessoryType)
+        {
+            return $accessoryType->getName();
+        }
+
+        return '';
     }
 
 }
