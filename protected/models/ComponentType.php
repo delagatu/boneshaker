@@ -62,7 +62,7 @@ class ComponentType extends ComponentTypeBase{
 
     public function getUrlSafeName()
     {
-        return str_replace(' ', '_', $this->name);
+        return StringManager::getUrlSafeName($this->name);
     }
 
     public function isAvailable()
@@ -115,7 +115,13 @@ class ComponentType extends ComponentTypeBase{
 
     public static function getIdByLabel($label)
     {
-        $componentType = self::model()->find('name like :name', array(':name' => $label));
+        $criteria = '  name like :name AND available =:available ';
+        $params = array(
+            ':name' => $label,
+            ':available' => 1
+        );
+
+        $componentType = self::model()->find($criteria, $params);
 
         return ($componentType instanceof ComponentType) ? $componentType->getId() : null;
     }
@@ -127,11 +133,26 @@ class ComponentType extends ComponentTypeBase{
 
         $totalCount = count($componentTypes);
         $count = 0;
-        foreach ($componentTypes as $ct )
+
+        $makerName = StringManager::readSafeName(Yii::app()->request->getQuery('makerName'));
+        $componentId = ComponentType::getIdByLabel($makerName);
+
+        foreach ($componentTypes as $ct)
         {
-            Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT_NO_MAKER,
-                array('subProduct' => $ct, 'controller' => ControllerPagePartial::CONTROLLER_COMPONENTE, 'currentCount' => $count, 'totalCount' => $totalCount));
-            $count++;
+            if ($ct instanceof ComponentType)
+            {
+                $params = array(
+                    'subProduct' => $ct,
+                    'controller' => ControllerPagePartial::CONTROLLER_COMPONENTE,
+                    'currentCount' => $count,
+                    'totalCount' => $totalCount,
+                    'itemTypeId' => ItemType::COMPONENTE,
+                    'makerName' => $makerName,
+                    'foundId' => $componentId,
+                );
+                Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT_NO_MAKER,$params);
+                $count++;
+            }
         }
 
     }
@@ -144,6 +165,18 @@ class ComponentType extends ComponentTypeBase{
     public static function isValid($component)
     {
         return self::model()->exists('name like :name', array(':name' => $component));
+    }
+
+    public static function getNameById($id)
+    {
+        $componentType = self::getById($id);
+
+        if ($componentType instanceof ComponentType)
+        {
+            return $componentType->getName();
+        }
+
+        return '';
     }
 
 }

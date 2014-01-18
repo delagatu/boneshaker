@@ -8,7 +8,18 @@
             array('class' => 'leftMenuLink',)
         );
 
+        $hiddenClass = ($foundId == $subProduct->id) ? '' : 'hidden';
+        $subCategoryClass = Product::getLeftMenuClass($subProduct->id, $itemTypeId, 20);
+
         ?>
+
+        <div class="grid_3 <?php echo $hiddenClass . ' ' . $subCategoryClass ?>" id='sub-product-<?php echo $subProduct->id; ?>'>
+            <?php
+            Product::getSubTypeIdListByAccessory($subProduct->id, $controller);
+
+            ?>
+        </div>
+
     </div>
 
     <?php if ($currentCount < $totalCount): ?>

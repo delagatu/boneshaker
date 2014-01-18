@@ -20,19 +20,23 @@ class AddProductForm extends CFormModel
     public $accessory_type_id;
     public $equipment_type_id;
     public $component_type_id;
+    public $accessory_sub_type_id;
+    public $component_sub_type_id;
 
     public function rules()
     {
         return array(
             array('maker_id', 'required', 'message' => 'Alegeti producatorul'),
             array('accessory_type_id', 'required', 'on' =>'addAccessory','message' => 'Alegeti tipul accesoriului',),
+//            array('accessory_sub_type_id', 'required', 'on' =>'addAccessory','message' => 'Alegeti tipul accesoriului',),
             array('equipment_type_id', 'required', 'on' =>'addEquipment','message' => 'Alegeti tipul echipamentului',),
             array('component_type_id', 'required', 'on' =>'addComponent','message' => 'Alegeti tipul componentei',),
+//            array('component_type_sub_id', 'required', 'on' =>'addComponent','message' => 'Alegeti tipul sub componentei',),
             array('name', 'required','message' => 'Denumirea este obligatorie'),
 //            array('description', 'required','message' => 'Descrierea este obligatorie'),
             array('price', 'required', 'message' => 'Pretul este obligatoriu'),
             array('price', 'numerical', 'allowEmpty' => false, 'message' => 'Te rog sa introduci doar numere'),
-            array('description, product_id, sub_product_id', 'safe')
+            array('description, product_id, sub_product_id, component_sub_type_id, accessory_sub_type_id', 'safe')
         );
     }
 
@@ -47,6 +51,8 @@ class AddProductForm extends CFormModel
             'accessory_type_id' => 'Tip accesoriu',
             'equipment_type_id' => 'Tip echipament',
             'component_type_id' => 'Tip Componenta',
+            'accessory_sub_type_id' => 'Sub categorie',
+            'component_sub_type_id' => 'Sub categorie',
         );
     }
 
@@ -63,6 +69,8 @@ class AddProductForm extends CFormModel
             $this->accessory_type_id = $this->product->accessory_type_id;
             $this->equipment_type_id = $this->product->equipment_type_id;
             $this->component_type_id = $this->product->component_type_id;
+            $this->accessory_sub_type_id = $this->product->accessory_sub_type_id;
+            $this->component_sub_type_id = $this->product->component_sub_type_id;
         }
 
     }
@@ -93,6 +101,13 @@ class AddProductForm extends CFormModel
         return $this->addOtherOption($listData);
     }
 
+    public function accessorySubTypeList()
+    {
+        $accessorySubType = AccessorySubType::getAllSubProduct();
+        $listData = CHtml::listData($accessorySubType, 'id', 'name');
+        return $this->addOtherOption($listData);
+    }
+
     public function equipmentList()
     {
         $equipmentTypes = EquipmentType::getAll();
@@ -104,6 +119,13 @@ class AddProductForm extends CFormModel
     {
         $componentTypes = ComponentType::getAll();
         $listData = CHtml::listData($componentTypes, 'id', 'name');
+        return $this->addOtherOption($listData);
+    }
+
+    public function componentSubTypeList()
+    {
+        $componentSubType = ComponentSubType::getAllSubProduct();
+        $listData = CHtml::listData($componentSubType, 'id', 'name');
         return $this->addOtherOption($listData);
     }
 
@@ -138,6 +160,8 @@ class AddProductForm extends CFormModel
                 'accessory_type_id' => $this->accessory_type_id,
                 'equipment_type_id' => $this->equipment_type_id,
                 'component_type_id' => $this->component_type_id,
+                'accessory_sub_type_id' => $this->accessory_sub_type_id,
+                'component_sub_type_id' => $this->component_sub_type_id
             );
 
             $product = $this->getProduct();
@@ -164,7 +188,6 @@ class AddProductForm extends CFormModel
         } catch (Exception $e) {
             Yii::log($e->getMessage(), CLogger::LEVEL_ERROR);
         }
-
 
         return $product->id;
     }
@@ -213,4 +236,17 @@ class AddProductForm extends CFormModel
         }
 
     }
+
+    public function getButtonLabel()
+    {
+        $label = 'Adauga';
+
+        if ($this->product instanceof Product)
+        {
+            $label = 'Salveaza modificari';
+        }
+
+        return $label;
+    }
+
 }

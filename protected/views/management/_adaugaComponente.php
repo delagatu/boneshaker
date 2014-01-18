@@ -34,6 +34,18 @@ $form = $this->beginWidget('CActiveForm',
 
     <h2 class="center_content">Componente</h2>
 
+    <?php
+        $createUpdate = $addProductForm->getCreationUpdateTime();
+        if (is_array($createUpdate)):
+        foreach ($createUpdate as $key => $value):
+    ?>
+
+    <div class='grid_9'><span class = 'boldText'><?php echo $key ?>: </span><?php echo $value; ?></div>
+
+    <?php endforeach; endif; ?>
+
+
+
     <div class = "row">
         Campurile marcate cu <span class ='redText'>*</span> sunt obligatorii.
     </div>
@@ -45,11 +57,25 @@ $form = $this->beginWidget('CActiveForm',
                 'id' => 'addComponentType',
                 'empty' => 'Selecteaza',
                 'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_COMPONENT_TYPE),
-                'data-dialog-id' => 'addAccessoryTypeDialog',
+                'data-dialog-id' => 'addComponentTypeDialog',
                 'data-title' =>'Componente'
             ));
         ?>
         <?php echo $form->error($addProductForm, 'component_type_id'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($addProductForm, 'component_sub_type_id'); ?>
+        <?php echo Chosen::activeDropDownList($addProductForm, 'component_sub_type_id', $addProductForm->componentSubTypeList(),
+            array('class' => 'addBicicleDropDown long-input',
+                'id' => 'addComponentSubType',
+                'empty' => 'Selecteaza',
+                'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_COMPONENT_SUB_TYPE),
+                'data-dialog-id' => 'addComponentSubTypeDialog',
+                'data-title' =>'Sub-componente'
+            ));
+        ?>
+        <?php echo $form->error($addProductForm, 'component_sub_type_id'); ?>
     </div>
 
     <div class="row">
@@ -128,9 +154,18 @@ $form = $this->beginWidget('CActiveForm',
 
 </div>
 
+<?php
+$createUpdate = $addProductForm->getCreationUpdateTime();
+if (is_array($createUpdate)):
+    foreach ($createUpdate as $key => $value):
+        ?>
+
+        <div class='grid_9'><span class = 'boldText'><?php echo $key ?>: </span><?php echo $value; ?></div>
+
+    <?php endforeach; endif; ?>
 
 <div class='grid_6 padding-5 center_content'>
-    <?php echo CHtml::submitButton('Adauga', array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
+    <?php echo CHtml::submitButton($addProductForm->getButtonLabel(), array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
 </div>
 
 

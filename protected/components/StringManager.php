@@ -14,4 +14,14 @@ class StringManager
         return (strlen($inputStr) > $maxLength) ? ' ' . $newClass : '';
     }
 
+    public static function readSafeName($getParam)
+    {
+        return str_replace('_', ' ', $getParam);
+    }
+
+    public static function getUrlSafeName($name)
+    {
+        return str_replace(' ', '_', $name);
+    }
+
 }

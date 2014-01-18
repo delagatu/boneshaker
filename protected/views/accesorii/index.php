@@ -3,8 +3,9 @@
 <div class="grid_1305">
     <div class="grid_6">
         <?php
+
         $maker = empty($subProduct) ? $makerName : $subProduct;
-        echo Maker::getAllMakerDropDown(ItemType::ACCESORII, $maker);
+        echo Maker::getAllMakerDropDown(ItemType::ACCESORII, $maker, $subProduct);
         ?>
     </div>
 </div>
@@ -16,7 +17,7 @@
     <?php
 
     $this->widget('zii.widgets.CListView', array(
-        'dataProvider'=>Product::model()->getProductByTypeAndUsage(ItemType::ACCESORII, $makerName, $subProduct),
+        'dataProvider'=>Product::model()->getProductByTypeAndUsage(ItemType::ACCESORII, $makerName, $subProduct, $subItem),
         'itemView'=>'../' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_PRODUCT,
         'summaryText' => '<span class = "boldText">{start}</span> - <span class = "boldText">{end}</span> rezultate din totalul de <span class = "boldText">{count}</span>',
         'pagerCssClass' => 'grid_10 push_2 prepend-top-10',

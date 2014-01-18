@@ -1,6 +1,5 @@
 $(function()
     {
-        $('.add-chosen').chosen();
         setLeftSpacerHeight();
         searchKeyWords();
 

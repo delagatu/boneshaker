@@ -42,7 +42,7 @@ class SubProduct extends SubProductBase
 
     public function getUrlSafeName()
     {
-        return str_replace(' ', '-', $this->name);
+        return StringManager::getUrlSafeName($this->name);
     }
 
     public function isAvailable()

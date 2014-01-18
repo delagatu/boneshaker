@@ -17,7 +17,12 @@ class AccessoryType extends AccessoryTypeBase
         return parent::model($className);
     }
 
-    public  function getById($id)
+    public static function getByName($name)
+    {
+        return self::model()->find('name =:name', array(':name' => $name));
+    }
+
+    public static function getById($id)
     {
         return self::model()->findByPk($id);
     }
@@ -45,7 +50,7 @@ class AccessoryType extends AccessoryTypeBase
 
     public function getUrlSafeName()
     {
-        return str_replace(' ', '_', $this->name);
+        return StringManager::getUrlSafeName($this->name);
     }
 
     public function isAvailable()
@@ -98,9 +103,9 @@ class AccessoryType extends AccessoryTypeBase
 
     public static function getIdByLabel($label)
     {
-        $accessoryType = self::model()->find('name like :name', array(':name' => $label));
+        $accessoryType = self::getByName($label);
 
-        return ($accessoryType instanceof AccessoryType) ? $accessoryType->getId() : null;
+        return ($accessoryType instanceof AccessoryType) ? $accessoryType->getId() : self::model()->id;
     }
 
     public static function getAllValid()
@@ -115,11 +120,26 @@ class AccessoryType extends AccessoryTypeBase
 
         $totalCount = count($accessoryTypes);
         $count = 0;
+
+        $makerName = StringManager::readSafeName(Yii::app()->request->getQuery('makerName'));
+        $accessoryId = AccessoryType::getIdByLabel($makerName);
+
         foreach ($accessoryTypes as $at)
         {
-            Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT_NO_MAKER,
-                array('subProduct' => $at, 'controller' => ControllerPagePartial::CONTOLLER_ACCESORY, 'currentCount' => $count, 'totalCount' => $totalCount));
-            $count++;
+            if ($at instanceof AccessoryType)
+            {
+                $params = array(
+                    'subProduct' => $at,
+                    'controller' => ControllerPagePartial::CONTOLLER_ACCESORY,
+                    'currentCount' => $count,
+                    'totalCount' => $totalCount,
+                    'itemTypeId' => ItemType::ACCESORII,
+                    'makerName' => $makerName,
+                    'foundId' => $accessoryId,
+                );
+                Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT_NO_MAKER,$params);
+                $count++;
+            }
         }
 
     }
@@ -132,6 +152,18 @@ class AccessoryType extends AccessoryTypeBase
     public static function isValid($accessoryType)
     {
         return self::model()->exists('name like :name', array(':name' => $accessoryType));
+    }
+
+    public static function getNameById($id)
+    {
+        $accessoryType = self::getById($id);
+
+        if ($accessoryType instanceof AccessoryType)
+        {
+            return $accessoryType->getName();
+        }
+
+        return '';
     }
 
 }

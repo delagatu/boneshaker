@@ -33,6 +33,16 @@ $form = $this->beginWidget('CActiveForm',
 
     <h2 class="center_content">Biciclete</h2>
 
+    <?php
+    $createUpdate = $addProductForm->getCreationUpdateTime();
+    if (is_array($createUpdate)):
+        foreach ($createUpdate as $key => $value):
+            ?>
+
+            <div class='grid_9'><span class = 'boldText'><?php echo $key ?>: </span><?php echo $value; ?></div>
+
+        <?php endforeach; endif; ?>
+
     <div class = "row">
         Campurile marcate cu <span class ='redText'>*</span> sunt obligatorii.
     </div>
@@ -127,9 +137,18 @@ $form = $this->beginWidget('CActiveForm',
 
 </div>
 
+<?php
+$createUpdate = $addProductForm->getCreationUpdateTime();
+if (is_array($createUpdate)):
+    foreach ($createUpdate as $key => $value):
+        ?>
+
+        <div class='grid_9'><span class = 'boldText'><?php echo $key ?>: </span><?php echo $value; ?></div>
+
+    <?php endforeach; endif; ?>
 
 <div class='grid_6 padding-5 center_content'>
-    <?php echo CHtml::submitButton('Adauga', array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
+    <?php echo CHtml::submitButton($addProductForm->getButtonLabel(), array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
 </div>
 
 <?php $this->endWidget(); ?>

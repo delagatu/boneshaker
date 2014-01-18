@@ -279,4 +279,26 @@ class AddBicycleForm extends CFormModel
         $wheelSize = CHtml::listData(WheelSize::getWheelSizes(), 'id', 'name');
         return $this->addOtherOption($wheelSize);
     }
+
+    public function getCreationUpdateTime()
+    {
+        $createUpdate = array();
+        $product = Product::getProductById($this->product_id);
+
+        if ($product instanceof Product)
+        {
+            if ($product->hasCreateDate())
+            {
+                $createUpdate['Inserat'] = $product->getCreatedDate('d-m-Y') . ', ora ' . $product->getCreatedDate('H:i:s');
+            }
+
+            if ($product->hasUpdateDate())
+            {
+                $createUpdate['Actualizat'] = $product->getUpdatedDate('d-m-Y') . ', ora ' . $product->getUpdatedDate('H:i:s');
+            }
+
+        }
+
+        return $createUpdate;
+    }
 }

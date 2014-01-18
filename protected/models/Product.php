@@ -148,14 +148,15 @@ class Product extends ProductBase
 
     }
 
-    private function componentSort($usage, $subUsage)
+    private function componentSort($usage, $subUsage, $subItem)
     {
+
         $criteria = new CDbCriteria();
 
         if (ComponentType::isValid($usage))
         {
-            $componentId = ComponentType::getIdByLabel($usage);
-            $criteria->compare($this->tableAlias . '.component_type_id', $componentId);
+            $componentTypeId = ComponentType::getIdByLabel($usage);
+            $criteria->compare($this->tableAlias . '.component_type_id', $componentTypeId);
         }
 
         if (Maker::validMaker($usage))
@@ -170,10 +171,23 @@ class Product extends ProductBase
             $criteria->compare($this->tableAlias . '.maker_id', $makerId);
         }
 
+        if (!empty($subUsage) && ComponentSubType::isValid($subUsage))
+        {
+            $componentSubTypeId = ComponentSubType::getIdByName($subUsage);
+            $criteria->compare($this->tableAlias . '.component_sub_type_id', $componentSubTypeId);
+        }
+
+        if (!empty($subItem) && Maker::validMaker($subItem))
+        {
+            $makerId = Maker::getIdByLabelAndType($subItem, ItemType::COMPONENTE);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
         return $criteria;
+
     }
 
-    private function accessorySort($usage, $subUsage)
+    private function accessorySort($usage, $subUsage, $subItem)
     {
         $criteria = new CDbCriteria();
 
@@ -192,6 +206,18 @@ class Product extends ProductBase
         if (!empty($subUsage) && Maker::validMaker($subUsage))
         {
             $makerId = Maker::getIdByLabelAndType($subUsage, ItemType::ACCESORII);
+            $criteria->compare($this->tableAlias . '.maker_id', $makerId);
+        }
+
+        if (!empty($subUsage) && AccessorySubType::isValid($subUsage))
+        {
+            $accessorySubTypeId = AccessorySubType::getIdByName($subUsage);
+            $criteria->compare($this->tableAlias . '.accessory_sub_type_id', $accessorySubTypeId);
+        }
+
+        if (!empty($subItem) && Maker::validMaker($subItem))
+        {
+            $makerId = Maker::getIdByLabelAndType($subItem, ItemType::ACCESORII);
             $criteria->compare($this->tableAlias . '.maker_id', $makerId);
         }
 
@@ -223,7 +249,7 @@ class Product extends ProductBase
         return $criteria;
     }
 
-    public function getProductByTypeAndUsage($typeId, $usage, $subUsage = '')
+    public function getProductByTypeAndUsage($typeId, $usage, $subUsage = '', $subItem = '')
     {
         $criteria = new CDbCriteria();
         $criteria->compare($this->tableAlias . '.available', self::AVAILABLE);
@@ -231,13 +257,12 @@ class Product extends ProductBase
 
         if ($typeId == ItemType::ACCESORII)
         {
-
-            $criteria->mergeWith($this->accessorySort($usage, $subUsage));
+            $criteria->mergeWith($this->accessorySort($usage, $subUsage, $subItem));
         }
 
         if ($typeId == ItemType::COMPONENTE)
         {
-            $criteria->mergeWith($this->componentSort($usage, $subUsage));
+            $criteria->mergeWith($this->componentSort($usage, $subUsage, $subItem));
         }
 
         if ($typeId == ItemType::ECHIPAMENTE)
@@ -576,6 +601,16 @@ class Product extends ProductBase
         return ($this->accessoryType instanceof AccessoryType) ? $this->accessoryType->getName() : $default;
     }
 
+    public function getAccessorySubTypeName($default = 'INVALID')
+    {
+        return ($this->accessorySubType instanceof AccessorySubType) ? $this->accessorySubType->getName() : $default;
+    }
+
+    public function getComponentSubTypeName($default = 'INVALID')
+    {
+        return ($this->componentSubType instanceof ComponentSubType) ? $this->componentSubType->getName() : $default;
+    }
+
     public function getEquipmentTypeName($default = 'INVALID')
     {
         return ($this->equipmentType instanceof EquipmentType) ? $this->equipmentType->getName() : $default;
@@ -607,9 +642,11 @@ class Product extends ProductBase
         $description = $this->getDescription();
         $price = $this->getPrice();
         $accessoryType = $this->getAccessoryTypeName(' ');
+        $accessorySubType = $this->getAccessorySubTypeName(' ');
+        $componentSubType = $this->getComponentSubTypeName(' ');
         $equipmentType = $this->getEquipmentTypeName(' ');
 
-        return $maker . $itemType . $subProduct . $name . $description . $price . $accessoryType . $equipmentType;
+        return $maker . $itemType . $subProduct . $name . $description . $price . $accessoryType . $accessorySubType . $componentSubType . $equipmentType;
     }
 
     public static function existsProduct($id)
@@ -651,6 +688,50 @@ class Product extends ProductBase
         $this->getDbCriteria()->mergeWith(
             array(
                 'select' => ' distinct('.$this->getTableAlias().'.accessory_type_id) as accessory_type_id',
+                'condition' => $criteria->condition,
+                'params' => $criteria->params,
+                'join' => $criteria->join
+            )
+        );
+
+        return $this;
+
+    }
+
+    public function getAccessorySubTypeCriteria($accessoryId)
+    {
+        $criteria = new CDbCriteria();
+        $criteria->join = ' LEFT JOIN accessory_sub_type ast on '.$this->getTableAlias().'.accessory_sub_type_id = ast.id ';
+        $criteria->compare('ast.available', 1);
+        $criteria->compare($this->getTableAlias(). '.item_type_id', ItemType::ACCESORII);
+        $criteria->compare($this->getTableAlias(). '.accessory_type_id', $accessoryId);
+        $criteria->compare($this->getTableAlias(). '.available', self::AVAILABLE);
+
+        $this->getDbCriteria()->mergeWith(
+            array(
+                'select' => ' distinct('.$this->getTableAlias().'.accessory_sub_type_id) as accessory_sub_type_id',
+                'condition' => $criteria->condition,
+                'params' => $criteria->params,
+                'join' => $criteria->join
+            )
+        );
+
+        return $this;
+
+    }
+
+    public function getComponentSubTypeCriteria($componentId)
+    {
+        $criteria = new CDbCriteria();
+        $criteria->join = ' LEFT JOIN component_sub_type cst on '.$this->getTableAlias().'.component_sub_type_id = cst.id ';
+        $criteria->compare('cst.available', 1);
+        $criteria->compare($this->getTableAlias(). '.item_type_id', ItemType::COMPONENTE);
+        $criteria->compare($this->getTableAlias(). '.component_type_id', $componentId);
+        $criteria->compare($this->getTableAlias(). '.available', self::AVAILABLE);
+
+        $this->getDbCriteria()->mergeWith(
+            array(
+                'select' => ' distinct('.$this->getTableAlias().'.component_sub_type_id) as component_sub_type_id',
                 'condition' => $criteria->condition,
                 'params' => $criteria->params,
                 'join' => $criteria->join
@@ -785,5 +866,94 @@ class Product extends ProductBase
         return Chtml::checkBox('is-for-home-page-product-' . $this->id, $this->isForHomePage(),$isForHomePageHtmlOptions);
     }
 
+    public static function getProductForSubTypeList($id, $controller)
+    {
+        $product = array();
+        switch ($controller)
+        {
+            case ControllerPagePartial::CONTOLLER_ACCESORY:
+                $product = self::model()->getAccessorySubTypeCriteria($id)->findAll();
+
+                break;
+
+            case ControllerPagePartial::CONTROLLER_COMPONENTE:
+                $product = self::model()->getComponentSubTypeCriteria($id)->findAll();
+                break;
+
+        }
+
+        return $product;
+    }
+
+
+    public static function getNameForSubTypeList($id, $controller)
+    {
+        $name = '';
+        switch ($controller)
+        {
+            case ControllerPagePartial::CONTOLLER_ACCESORY:
+                $name = AccessoryType::getNameById($id);
+
+                break;
+
+            case ControllerPagePartial::CONTROLLER_COMPONENTE:
+                $name = ComponentType::getNameById($id);
+                break;
+
+        }
+
+        return $name;
+    }
+
+    public static function getSubTypeForSubTypeList($controller, Product $prod)
+    {
+        $subType = '';
+        switch ($controller)
+        {
+            case ControllerPagePartial::CONTOLLER_ACCESORY:
+                $subType = AccessorySubType::getById($prod->accessory_sub_type_id);
+
+                break;
+
+            case ControllerPagePartial::CONTROLLER_COMPONENTE:
+                $subType = ComponentSubType::getById($prod->component_sub_type_id);
+                break;
+
+        }
+
+        return $subType;
+
+    }
+
+    public static function getSubTypeIdListByAccessory($id, $controller)
+    {
+        $product = self::getProductForSubTypeList($id, $controller);
+        //todo: read name based on $controller
+        $accessoryName = self::getNameForSubTypeList($id, $controller);
+
+        if (is_array($product) && !empty($product))
+        {
+            foreach ($product as $prod)
+            {
+                if ($prod instanceof Product)
+                {
+                    //todo: read subtype based on $controller
+                    $accSubType = self::getSubTypeForSubTypeList($controller, $prod);
+                    Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT,
+                        array('subProduct' => $accSubType, 'makerName' => $accessoryName, 'controller' => $controller));
+                }
+            }
+        }
+    }
+
+    public function hasCreateDate()
+    {
+        return (!is_null($this->created_at));
+    }
+
+    public function hasUpdateDate()
+    {
+        return (!is_null($this->updated_at));
+    }
 
 }

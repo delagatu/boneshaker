@@ -34,7 +34,7 @@ class BaseController extends Controller
 
     public function readSafeName($getParam)
     {
-        return str_replace('-', ' ', $getParam);
+        return StringManager::readSafeName($getParam);
     }
 
     public function readProductId()

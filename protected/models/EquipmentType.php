@@ -51,7 +51,7 @@ class EquipmentType extends EquipmentTypeBase
 
     public function getUrlSafeName()
     {
-        return str_replace(' ', '_', $this->name);
+        return StringManager::getUrlSafeName($this->name);
     }
 
     public function isAvailable()
@@ -116,10 +116,24 @@ class EquipmentType extends EquipmentTypeBase
 
         $totalCount = count($equipmentTypes);
         $count = 0;
+
+        $makerName = StringManager::readSafeName(Yii::app()->request->getQuery('makerName'));
+        $equipmentId = EquipmentType::getIdByLabel($makerName);
+
         foreach ($equipmentTypes as $et)
         {
+            $params = array(
+                'subProduct' => $et,
+                'controller' => ControllerPagePartial::CONTROLLER_EQUIPMENT,
+                'currentCount' => $count,
+                'totalCount' => $totalCount,
+                'itemTypeId' => ItemType::ECHIPAMENTE,
+                'makerName' => $makerName,
+                'foundId' => $equipmentId,
+            );
+
             Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PARTIAL_BICYCLE_SUB_PRODUCT_NO_MAKER,
-                array('subProduct' => $et, 'controller' => ControllerPagePartial::CONTROLLER_EQUIPMENT, 'currentCount' => $count, 'totalCount' => $totalCount));
+                $params);
             $count++;
         }
 

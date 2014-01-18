@@ -16,7 +16,7 @@
     <?php
 
     $this->widget('zii.widgets.CListView', array(
-        'dataProvider'=>Product::model()->getProductByTypeAndUsage(ItemType::COMPONENTE, $makerName, $subProduct),
+        'dataProvider'=>Product::model()->getProductByTypeAndUsage(ItemType::COMPONENTE, $makerName, $subProduct,$subItem),
         'itemView'=>'../' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_PRODUCT,
         'summaryText' => '<span class = "boldText">{start}</span> - <span class = "boldText">{end}</span> rezultate din totalul de <span class = "boldText">{count}</span>',
         'pagerCssClass' => 'grid_10 push_2 prepend-top-10',

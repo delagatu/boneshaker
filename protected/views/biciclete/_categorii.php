@@ -1,3 +1,5 @@
+<?php if (is_object($subProduct) && method_exists($subProduct, 'getName') && method_exists($subProduct, 'getUrlSafeName')): ?>
+
 <?php $name = $subProduct->getName(); ?>
 
 <div class='grid_4 tree-view-item'>
@@ -7,10 +9,11 @@
 
         echo CHtml::link($name,
             $this->createUrl($controller . '/' . ControllerPagePartial::PAGE_BICYCLE_INDEX,
-                array('subProduct' => $subProduct->getUrlSafeName(), 'makerName' => $makerName)),
+                array('subProduct' => $subProduct->getUrlSafeName(), 'makerName' => StringManager::getUrlSafeName($makerName))),
             array('class' => 'leftMenuLink')
         );
 
         ?>
     </div>
 </div>
+<?php endif; ?>
