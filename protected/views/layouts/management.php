@@ -216,7 +216,17 @@
                         <li>
                             <?php echo CHtml::link('Produse prima pagina', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_HOME_PAGE_PRODUCTS));?>
                         </li>
+
+
+                        <?php if (Yii::app()->user->checkAccess(Items::ROLE_AUTHORITY)): ?>
+
+                            <li><?php echo CHtml::link('Up Last', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_MIGRATE, array('dir' => 'up')));?></li>
+                            <li><?php echo CHtml::link('Down Last', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_MIGRATE, array('dir' => 'down', 'mc' => 1)));?></li>
+
+                        <?php endif;?>
+
                     </ul>
+
 
                 </div>
             </div>

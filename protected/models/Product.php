@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class Product extends ProductBase
+class Product extends ProductBase implements IECartPosition
 {
     /**
      * @static
@@ -381,9 +381,9 @@ class Product extends ProductBase
         return !empty($price);
     }
 
-    public function getPrice()
+    public function getPrice($currency = ' RON ')
     {
-        return floor($this->price) .' RON ';
+        return floor($this->price) . $currency;
     }
 
     public function displayPrice($additionalClass = '')
@@ -956,4 +956,11 @@ class Product extends ProductBase
         return (!is_null($this->updated_at));
     }
 
+    /**
+     * @return mixed id
+     */
+    public function getId()
+    {
+       return $this->id;
+    }
 }

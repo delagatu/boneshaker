@@ -10,7 +10,6 @@ class BaseController extends Controller
 {
 
     const PAGE_SIZE = 6;
-    const ROLE_AUTHORITY = 'Authority';
 
     protected function getUserHomePage()
     {
@@ -30,6 +29,19 @@ class BaseController extends Controller
     public function hasPermission($role)
     {
         return Yii::app()->user->checkAccess($role);
+    }
+
+    public function hasMultiplePermission(Array $roles = array())
+    {
+        foreach ($roles as $role)
+        {
+            if (Yii::app()->user->checkAccess($role))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function readSafeName($getParam)

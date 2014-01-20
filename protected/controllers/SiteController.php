@@ -55,7 +55,7 @@ class SiteController extends BaseController
             Yii::log('Can not send register email: ' . var_export($e->getMessage(), 1));
         }
 
-        if (!$this->hasPermission(BaseController::ROLE_AUTHORITY))
+        if (!$this->hasPermission(BaseController::ROLE_ADMINISTRATOR))
         {
             $this->redirect($this->createUrl(ControllerPagePartial::PAGE_SITE_INDEX));
         }
@@ -339,6 +339,28 @@ class SiteController extends BaseController
     public function actiontermeniSiConditii()
     {
         $this->render('/' . ControllerPagePartial::CONTROLLER_SITE . '/pages/' . ControllerPagePartial::PARTIAL_SITE_TERMS_AND_CONDITIONS);
+    }
+
+    public function actionCosulMeu()
+    {
+
+        Yii::app()->shoppingCart->clear();
+
+        $product72 = Product::model()->findByPk(72);
+
+        Yii::app()->shoppingCart->put($product72,2); //1 item with id=1, quantity=3.
+        Yii::app()->shoppingCart->update($product72,12);
+
+        $positions = Yii::app()->shoppingCart->getPositions();
+
+        $price = 0;
+        foreach($positions as $position) {
+            $price += $position->getSumPrice();
+        }
+
+        echo $price;
+
+        return true;
     }
 
 }

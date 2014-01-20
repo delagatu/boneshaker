@@ -22,6 +22,7 @@ return array(
         'application.modules.srbac.controllers.SBaseController',
         'application.extensions.chosen.*',
         'application.extensions.YiiMail.YiiMailMessage',
+        'application.extensions.shoppingCart.*',
         'system.base',
         'application.helpers.*',
 	),
@@ -146,6 +147,7 @@ return array(
 			'password' => 'bone2012',
 			'charset' => 'utf8',
 			'enableProfiling' =>true,
+            'queryCacheID' => 'apcCache',
 		),		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -166,7 +168,14 @@ return array(
 				//*/
 			),
 		),
+
+
+        'shoppingCart' =>
+            array(
+                'class' => 'application.extensions.shoppingCart.EShoppingCart',
+            ),
 	),
+
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']

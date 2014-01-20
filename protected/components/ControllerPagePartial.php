@@ -98,6 +98,7 @@ class ControllerPagePartial
     const PAGE_MANAGEMENT_VALIDATE_COMPONENT_TYPE = 'validateComponentType';
     const PAGE_MANAGEMENT_HOME_PAGE_PRODUCTS = 'produsePrimaPagina';
     const PAGE_MANAGEMENT_COMPONENT_CATEGORY = 'categoriiComponente';
+    const PAGE_MANAGEMENT_MIGRATE = 'migrate';
     const PARTIAL_ADD_FRAME = '_adaugaCadru';
     const PARTIAL_ADD_FORK = '_adaugaFurca';
     const PARTIAL_ADD_DERAILLEUR = '_adaugaSchimbator';
@@ -130,6 +131,7 @@ class ControllerPagePartial
     const PARTIAL_MANAGEMENT_VIEW_COMPONENT_TYPE = '_categoriiComponente';
     const PARTIAL_MANAGEMENT_VIEW_EQUIPMENT_TYPE = '_categoriiEchipamente';
     const PARTIAL_MANAGEMENT_HOME_PAGE_PRODUCTS = '_produsePrimaPagina';
+
 
     // maker
     const ACTION_VALID_MAKER_LIST = 'listaProducatoriValizi';

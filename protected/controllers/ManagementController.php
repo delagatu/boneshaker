@@ -4,12 +4,14 @@ class ManagementController extends BaseController
 {
     public function beforeAction($action)
     {
-        if (Yii::app()->request->getIsAjaxRequest() && !$this->hasPermission(BaseController::ROLE_AUTHORITY))
+
+        $roles = array(Items::ROLE_ADMINISTRATOR, Items::ROLE_AUTHORITY);
+        if (Yii::app()->request->getIsAjaxRequest() && (!$this->hasMultiplePermission($roles)))
         {
             json::writeJSON('Nu esti autentificat!', false);
         }
 
-        if (!$this->hasPermission(BaseController::ROLE_AUTHORITY)) {
+        if (!$this->hasMultiplePermission($roles)) {
             $this->leave();
         } else {
             return true;
@@ -1327,5 +1329,61 @@ class ManagementController extends BaseController
         }
     }
 
+    private function _runMigrationTool(Array $additional = array()) {
+
+        $commandPath = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . 'commands';
+        $runner = new CConsoleCommandRunner();
+        $runner->addCommands($commandPath);
+        $commandPath = Yii::getFrameworkPath() . DIRECTORY_SEPARATOR . 'cli' . DIRECTORY_SEPARATOR . 'commands';
+        $runner->addCommands($commandPath);
+
+        $args = array('yiic', 'migrate', '--interactive=0'); //todo: read the direction from GET
+
+        if (!empty($additional))
+        {
+            if (array_key_exists('direction', $additional))
+            {
+                $args[] = $additional['direction'];
+
+                if (array_key_exists('count', $additional))
+                {
+                    $args[] = $additional['count'];
+                }
+
+            }
+        }
+
+        ob_start();
+        $runner->run($args);
+        echo htmlentities(ob_get_clean(), null, Yii::app()->charset);
+    }
+
+    public function actionMigrate()
+    {
+
+//        if (!Yii::app()->user->checkAccess(Items::ROLE_AUTHORITY))
+//        {
+//            if (Yii::app()->request->getIsAjaxRequest())
+//            {
+//                json::writeJSON('No-no!', false);
+//            }
+//
+//            $this->leave();
+//        }
+
+        $direction = Yii::app()->request->getQuery('dir', 'up');
+        $count = Yii::app()->request->getQuery('mc');
+
+        $params = array('direction' => $direction);
+
+        if (!empty($count))
+        {
+            $params['count'] = $count;
+        }
+
+        $this->_runMigrationTool($params);
+
+        echo CHtml::link('Back', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_MANAGEMENT));
+    }
 
 }

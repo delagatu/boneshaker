@@ -249,4 +249,23 @@ class AddProductForm extends CFormModel
         return $label;
     }
 
+    public function getCreationUpdateTime()
+    {
+        $createUpdate = array();
+        if ($this->product instanceof Product)
+        {
+            if ($this->product->hasCreateDate())
+            {
+                $createUpdate['Inserat'] = $this->product->getCreatedDate('d-m-Y') . ', ora ' . $this->product->getCreatedDate('H:i:s');
+            }
+
+            if ($this->product->hasUpdateDate())
+            {
+                $createUpdate['Actualizat'] = $this->product->getUpdatedDate('d-m-Y') . ', ora ' . $this->product->getUpdatedDate('H:i:s');
+            }
+
+        }
+
+        return $createUpdate;
+    }
 }

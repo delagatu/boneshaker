@@ -64,4 +64,9 @@ class User extends UserBase
         $this->saveThrowEx();
     }
 
+    public static function getByUserName($username)
+    {
+        return self::model()->find('username =:username', array(':username' => $username));
+    }
+
 }
