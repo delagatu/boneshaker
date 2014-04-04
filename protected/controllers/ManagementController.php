@@ -1361,15 +1361,15 @@ class ManagementController extends BaseController
     public function actionMigrate()
     {
 
-//        if (!Yii::app()->user->checkAccess(Items::ROLE_AUTHORITY))
-//        {
-//            if (Yii::app()->request->getIsAjaxRequest())
-//            {
-//                json::writeJSON('No-no!', false);
-//            }
-//
-//            $this->leave();
-//        }
+        if (!Yii::app()->user->checkAccess(Items::ROLE_AUTHORITY))
+        {
+            if (Yii::app()->request->getIsAjaxRequest())
+            {
+                json::writeJSON('No-no!', false);
+            }
+
+            $this->leave();
+        }
 
         $direction = Yii::app()->request->getQuery('dir', 'up');
         $count = Yii::app()->request->getQuery('mc');

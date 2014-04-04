@@ -344,23 +344,38 @@ class SiteController extends BaseController
     public function actionCosulMeu()
     {
 
-        Yii::app()->shoppingCart->clear();
-
-        $product72 = Product::model()->findByPk(72);
-
-        Yii::app()->shoppingCart->put($product72,2); //1 item with id=1, quantity=3.
-        Yii::app()->shoppingCart->update($product72,12);
+//        Yii::app()->shoppingCart->clear();
+//
+//        $product72 = Product::model()->findByPk(72);
+//
+//        Yii::app()->shoppingCart->put($product72,2); //1 item with id=1, quantity=3.
+//        Yii::app()->shoppingCart->update($product72,12);
 
         $positions = Yii::app()->shoppingCart->getPositions();
+        //getQuantity()
 
-        $price = 0;
-        foreach($positions as $position) {
-            $price += $position->getSumPrice();
+        $params = array(
+            'positions' => $positions
+        );
+
+       $this->render(ControllerPagePartial::PARTIAL_SITE_MY_CART, $params);
+    }
+
+    public function actionAdaugaInCos()
+    {
+        if (Yii::app()->request->getIsAjaxRequest())
+        {
+            $id = Yii::app()->request->getQuery('id');
+            $product = Product::model()->findByPk($id);
+
+            Yii::app()->shoppingCart->put($product);
+            json::writeJSON('Produs adaugat.');
         }
+    }
 
-        echo $price;
-
-        return true;
+    public function actionUpdateQuantity()
+    {
+        json::writeJSON('OK');
     }
 
 }

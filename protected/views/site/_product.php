@@ -21,15 +21,18 @@
     <div class = 'grid_6 prepend-top-10'>
         Pret:<?php echo $data->displayPrice(); ?>
     </div>
-    <div class = 'grid_6 prepend-top-10'>
+    <div class = 'grid_3 prepend-top-10'>
         <?php
         echo CHtml::link('Detalii', $link, array('class' => 'fancy_green_link'));
         ?>
     </div>
     <?php if (Yii::app()->params['webShopAvailable']): ?>
-    <div class = 'grid_1'>
+    <div class = 'grid_2 prepend-top-10'>
         <?php $link = $this->createUrl(ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::ADD_TO_CART, array('id' => $data->id)) ?>
-        <?php echo CHtml::link('In Cos', $link, array('class' => 'fancy_black_link')); ?>
+        <?php
+            $htmlOptions = array('class' => 'fancy_black_link add-to-cart', 'data-add-url' => $link, 'id' => $data->id);
+            echo CHtml::link($data->getLabelByCart(), 'javascript::void(0)', $htmlOptions);
+        ?>
     </div>
     <?php endif; ?>
 

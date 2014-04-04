@@ -60,15 +60,25 @@
 
     <div class="grid_18 push_1" id="main_content">
         <div class="grid_10 push_8">
-        <?php if (Yii::app()->params['webShopAvailable']): ?>
-            <div  class="grid_1"><?php echo Chtml::image(Yii::app()->baseUrl . '/images/design/shopping_car.jpg'); ?></div>
-        <?php endif; ?>
+
             <div
                 class="grid_4 push_4 prepend-top-10">
                 <?php
                     Yii::app()->controller->renderPartial('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAl_SITE_GENERAL_SEARCH_FORM);
                 ?>
             </div>
+
+            <?php if (Yii::app()->params['webShopAvailable']): ?>
+                <div  class="grid_1 push_4">
+                    <?php
+                        $altTitle = 'Cosul Meu';
+                        $image = Chtml::image(Yii::app()->baseUrl . '/images/design/shopping_car.jpg', $altTitle);
+                        $url = Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_MY_CART);
+                        echo CHtml::link($image, $url, array('title' => $altTitle));
+                    ?>
+                </div>
+            <?php endif; ?>
+
             <div class = 'grid_1 push_4 prepend-top-15'>
                 <?php echo Chtml::image(Yii::app()->baseUrl . '/images/design/ajax-loader.gif','Se incarca ...', array('class' => 'progressbar')); ?>
             </div>

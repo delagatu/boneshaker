@@ -21,6 +21,8 @@ class ControllerPagePartial
     const PAGE_SITE_WRONG_NEWSLETTER = 'inscriereNewsLetterGresita';
     const PAGE_SITE_REGISTER_NEWSLETTER = 'inscriereNewsletter';
     const PAGE_SITE_TERMS_AND_CONDITIONS = 'termeniSiConditii';
+    const PAGE_SITE_MY_CART = 'cosulMeu';
+    const PAGE_UPDATE_QUANTITY = 'updateQuantity';
     const PARTIAL_PRODUCT = '_product';
     const PARTIAL_FLASH_MESSAGES = '_flashMessages';
     const PARTIAL_OFFERS = '_offers';
@@ -31,6 +33,7 @@ class ControllerPagePartial
     const PARTIAL_SITE_LOGIN = 'login';
     const PARTIAL_SITE_CONT_NOU = 'ContNou';
     const PARTIAL_SITE_TERMS_AND_CONDITIONS = '_termeniSiConditii';
+    const PARTIAL_SITE_MY_CART = '_cosulMeu';
 
     const LAYOUTS = 'layouts';
     const PARTIAL_LAYOUT_MAIN_LEFT_MENU = '_mainLeftMenu';
@@ -168,7 +171,7 @@ class ControllerPagePartial
     const PARTIAL_ADD_EQUIPMENT = '_adaugaEchipament';
     const PARTIAL_EQUIPMENT_DETAIL = '_detalii';
 
-    const ADD_TO_CART = 'inCos';
+    const ADD_TO_CART = 'adaugaInCos';
 
     //products
     const PAGE_DELETE_PRODUCT = 'deleteProduct';

@@ -2,11 +2,13 @@ $(function()
     {
         setLeftSpacerHeight();
         searchKeyWords();
+        updateQuantity();
 
         $( document ).tooltip();
 
         $('body').on('click', '#newsLetter',addNewsletter);
         $('body').on('change', '.search-by-maker', searchByMaker);
+        $('body').on('click', '.add-to-cart', addToCart);
     }
 
 );
@@ -100,6 +102,42 @@ function addNewsletter()
     }
 }
 
+function addToCart()
+{
+    var caller = $(this);
+    var addUrl = caller.attr('data-add-url');
+
+    if ( addUrl != 'undefined')
+    {
+        ajaxGet(
+            addUrl,
+            function(resp){
+                //OK
+                alert(resp);
+            },
+            function(){
+                //error
+            }
+        );
+    }
+}
+
+function ajaxGet(url, doneFn, failFn)
+{
+    var request = $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json"
+    });
+
+    request.done(function(resp) {
+        doneFn(resp);
+    });
+
+    request.fail(function(resp) {
+        failFn(resp);
+    });
+}
 
 function ajaxPost(url, data, doneFn, failFn)
 {
@@ -118,4 +156,27 @@ function ajaxPost(url, data, doneFn, failFn)
     request.fail(function(resp) {
         failFn(resp);
     });
+}
+
+function updateQuantity()
+{
+    var oldQuantity;
+    $('.update-quantity').on('focus',
+        function () {
+            quantity = $(this).val();
+        }
+    );
+
+    $('.update-quantity').on('blur',
+        function () {
+            var caller = $(this);
+            var newQuantity = caller.val()
+            alert(quantity + ' - ' + newQuantity);
+
+            if (newQuantity != oldQuantity)
+            {
+
+            }
+        }
+    );
 }

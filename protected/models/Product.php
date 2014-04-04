@@ -963,4 +963,89 @@ class Product extends ProductBase implements IECartPosition
     {
        return $this->id;
     }
+
+    public function getIsInCart()
+    {
+        $positions = Yii::app()->shoppingCart->getPositions();
+        return array_key_exists($this->id, $positions);
+    }
+
+    public function getItemCountInCart()
+    {
+        $positions = Yii::app()->shoppingCart->getPositions();
+
+        $quantity = 0;
+        foreach ($positions as $key => $value)
+        {
+            if ($key == $this->id)
+            {
+                $quantity += $value->getQuantity();
+            }
+        }
+
+        return $quantity;
+    }
+
+    public function getLabelByCart()
+    {
+        $count = $this->getItemCountInCart();
+        return $this->getIsInCart() ? 'In Cos ('.$count.')' : 'Adauga in cos';
+    }
+
+    public function getThumbPic()
+    {
+        $photo = Photo::getPrimaryPhotoPerProduct($this->id);
+        if ($photo instanceof Photo)
+        {
+            $photoSource = PhotoSource::getByPhotoAndType($photo->id,PhotoType::PHOTO_TYPE_THUMB_ID);
+            if ($photoSource instanceof PhotoSource)
+            {
+                return $photoSource->photo_source_path;
+            }
+        }
+
+    }
+
+    public function getUrlWithPic()
+    {
+        $thumb = $this->getThumbPic();
+
+        $text = $this->id;
+        if (!empty($thumb))
+        {
+            $text = CHtml::image(Yii::app()->getBaseUrl(true) . '/' . $thumb);
+        }
+
+        $url = Yii::app()->controller->createUrl(
+            $this->itemType->itemController() . '/' . $this->itemType->itemView(),
+            array('makerAndProduct' => $this->getDisplayNameWithId())
+        );
+
+        $link = CHtml::link($text, $url);
+        return $link;
+    }
+
+    public function getNameForCart()
+    {
+        return $this->getUrlWithPic() . $this->getDisplayName();
+    }
+
+    public function getQuantityInput()
+    {
+        $quantity = $this->getQuantity();
+        $htmlOptions = array(
+            'class' => 'styled-input small-input center_content update-quantity',
+            'maxlength' => 2,
+            'data-update-quantity' => Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_UPDATE_QUANTITY, array('id' => $this->id)),
+        );
+
+        $input = CHtml::textField($this->id, $quantity, $htmlOptions);
+
+        return $input;
+    }
+
+    public function getSumPriceForCart()
+    {
+        return '<span id = "'.$this->id.'">' . $this->getSumPrice() . '</span>';
+    }
 }

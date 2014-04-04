@@ -189,6 +189,6 @@ return array(
         'componentDir' =>'images/products/component',
         'equipmentsDir' =>'images/products/equipment',
         'defaultDir' =>'images/products/default',
-        'webShopAvailable' => false,
+        'webShopAvailable' => true,
 	),
 );
