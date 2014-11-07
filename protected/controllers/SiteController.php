@@ -55,7 +55,7 @@ class SiteController extends BaseController
             Yii::log('Can not send register email: ' . var_export($e->getMessage(), 1));
         }
 
-        if (!$this->hasPermission(BaseController::ROLE_ADMINISTRATOR))
+        if (!$this->hasPermission(Items::ROLE_ADMINISTRATOR))
         {
             $this->redirect($this->createUrl(ControllerPagePartial::PAGE_SITE_INDEX));
         }

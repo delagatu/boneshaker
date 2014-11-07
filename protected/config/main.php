@@ -10,7 +10,7 @@ return array(
 	'name'=>'Boneshaker',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log', 'booster'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -174,6 +174,9 @@ return array(
             array(
                 'class' => 'application.extensions.shoppingCart.EShoppingCart',
             ),
+        'booster' => array(
+            'class' => 'application.extensions.yiibooster.components.Booster',
+        ),
 	),
 
 
