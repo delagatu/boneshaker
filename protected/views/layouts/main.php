@@ -32,18 +32,6 @@
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/jquery.colorbox-min.js'); ?>
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-<!--    <style type="text/css">-->
-<!--        body {-->
-<!--            min-width: 1100px;-->
-<!--            background-image: url('../../../images/design/3.jpg');-->
-<!--            -webkit-background-size: cover;-->
-<!--            -moz-background-size: cover;-->
-<!--            -o-background-size: cover;-->
-<!--            background-size: cover;-->
-<!--            background-repeat:no-repeat;-->
-<!--            background-attachment:fixed;-->
-<!--        }-->
-<!--    </style>-->
 </head>
 
 <body>
@@ -60,11 +48,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-
-                <?php
-                //$logoImg = CHtml::image(Yii::app()->baseUrl . "/images/design/logo.jpg", 'Boneshaker Baia Mare');
-                //echo CHtml::link($logoImg, Yii::app()->getBaseUrl(true), array('class' => 'navbar-brand'));
-                ?>
 
                 <?php echo CHtml::link(Yii::app()->name, Yii::app()->getBaseUrl(true), array('class' => 'navbar-brand'));?>
             </div>
@@ -148,13 +131,10 @@
           <hr class="featurette-divider">
 
           <div class="row featurette">
-              <div class="col-md-7">
+              <div class="col-md-9">
 <!--                  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>-->
 <!--                  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>-->
                   <?php echo $content; ?>
-              </div>
-              <div class="col-md-5">
-                  <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
               </div>
           </div>
 
