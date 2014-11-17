@@ -98,4 +98,19 @@ class BaseController extends Controller
         }
 
     }
+
+    public function getIsActiveHeaderByController($compare)
+    {
+        $controller = $this->getId();
+
+        return (strtolower($compare) == strtolower($controller)) ? 'active' : '';
+    }
+
+    public function getIsActiveHeaderByUrl($compare)
+    {
+        $url = Yii::app()->request->getUrl();
+        var_dump('URL: ' . $url);
+
+        return (strtolower($compare) == strtolower($url)) ? 'active' : '';
+    }
 }

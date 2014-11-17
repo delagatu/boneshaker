@@ -4,7 +4,7 @@ $(function()
         searchKeyWords();
         updateQuantity();
 
-        $( document ).tooltip();
+//        $( document ).tooltip();
 
         $('body').on('click', '#newsLetter',addNewsletter);
         $('body').on('change', '.search-by-maker', searchByMaker);

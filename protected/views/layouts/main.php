@@ -52,15 +52,30 @@
                 <?php echo CHtml::link(Yii::app()->name, Yii::app()->getBaseUrl(true), array('class' => 'navbar-brand'));?>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
+
+                <?php
+                    $contactUrl = $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT);
+                ?>
+
               <ul class="nav navbar-nav">
-                <li class="active">
+                <li >
                     <?php echo CHtml::link('Home', Yii::app()->getBaseUrl(true));?>
                 </li>
-                <li><?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?></li>
-                <li><?php echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?></li>
-                <li><?php echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?></li>
-                <li><?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?></li>
-                <li><?php echo CHtml::link('Contact', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT));?></li>
+                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_BICYCLE) ?>">
+                    <?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?>
+                </li>
+                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTOLLER_ACCESORY) ?>">
+                    <?php echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?>
+                </li>
+                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_COMPONENTE) ?>">
+                    <?php echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?>
+                </li>
+                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_EQUIPMENT) ?>">
+                    <?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?>
+                </li>
+                <li class="<?php echo $this->getIsActiveHeaderByUrl($contactUrl) ?>">
+                    <?php echo CHtml::link('Contact', $contactUrl);?>
+                </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -88,7 +103,7 @@
               </ol>
               <div class="carousel-inner" role="listbox">
                   <div class="item active">
-                      <img src="/images/carousel/2b701030679871261895f3b4c254a1b2.jpg" alt="First slide">
+                      <img src="<?php echo Yii::app()->getBaseUrl(true); ?>/images/carousel/2b701030679871261895f3b4c254a1b2.jpg" alt="First slide">
                       <div class="container">
                           <div class="carousel-caption">
                               <h1>Example headline.</h1>
@@ -98,7 +113,7 @@
                       </div>
                   </div>
                   <div class="item">
-                      <img src="/images/carousel/0bfa8f92ec622ea617d9f988d4f301ed.jpg" alt="Second slide">
+                      <img src="<?php echo Yii::app()->getBaseUrl(true); ?>/images/carousel/0bfa8f92ec622ea617d9f988d4f301ed.jpg" alt="Second slide">
                       <div class="container">
                           <div class="carousel-caption">
                               <h1>Another example headline.</h1>
@@ -108,7 +123,7 @@
                       </div>
                   </div>
                   <div class="item">
-                      <img src="/images/carousel/1c2564a238c9200c00d07fb79533acf5.jpg" alt="Third slide">
+                      <img src="<?php echo Yii::app()->getBaseUrl(true); ?>/images/carousel/1c2564a238c9200c00d07fb79533acf5.jpg" alt="Third slide">
                       <div class="container">
                           <div class="carousel-caption">
                               <h1>One more for good measure.</h1>
@@ -130,12 +145,12 @@
 
           <hr class="featurette-divider">
 
-          <div class="row featurette">
-              <div class="col-md-9">
+          <div class="row">
+<!--              <div class="col-md-9">-->
 <!--                  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>-->
 <!--                  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>-->
                   <?php echo $content; ?>
-              </div>
+<!--              </div>-->
           </div>
 
           <!-- FOOTER -->
@@ -150,7 +165,7 @@
 
               ?>
               <p class="pull-right"><a href="#">Sus</a></p>
-              <p>&copy; 2012 -  <?php echo date('Y'); ?> Boneshaker, Inc. &middot;
+              <p>&copy; 2012 -  <?php echo date('Y'); ?> Boneshaker &middot;
                   <?php echo CHtml::link('Termeni si conditii', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_TERMS_AND_CONDITIONS)); ?> &middot;
                   <?php echo (Yii::app()->user->isGuest) ? $login : $accountLink . $logout; ?>
                   <?php echo (Yii::app()->user->isGuest) ? ' &middot; ' . CHtml::link('Cont nou', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_SITE_CONT_NOU)) : ''; ?>

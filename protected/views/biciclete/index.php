@@ -1,6 +1,6 @@
 <?php $this->pageTitle = Yii::app()->name . ' | Vanzari si Service Biciclete | Piese Biciclete '; ?>
 
-<div class='grid_13'>
+<!--<div class='row'>-->
 
     <?php
 
@@ -23,5 +23,5 @@
     ));
 
     ?>
-</div> <!-- content right content end -->
+<!--</div> <!-- content right content end -->
 
