@@ -177,6 +177,10 @@ return array(
         'booster' => array(
             'class' => 'application.extensions.yiibooster.components.Booster',
         ),
+        'bikeFun' => array(
+            'class' => 'application.components.BikeFunImport',
+            'host' => 'http://office.bikefun.hu:5555/cgi-bin/tboltcgi.exe',
+        ),
 	),
 
 

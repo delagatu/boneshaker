@@ -37,6 +37,7 @@ class SiteController extends BaseController
 	public function actionError()
 	{
         $error = Yii::app()->errorHandler->error;
+        var_dump($error);
 
         try {
             $message = new YiiMailMessage();
