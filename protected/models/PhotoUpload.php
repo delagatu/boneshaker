@@ -12,8 +12,11 @@ class PhotoUpload extends Photo
     const THUMB_HEIGHT = 63;
     const THUMB_WIDTH = 90;
 
-    const GENERAL_DISPLAY_WIDTH = 120;
-    const GENERAL_DISPLAY_HEIGHT = 75;
+//    const GENERAL_DISPLAY_WIDTH = 120;
+//    const GENERAL_DISPLAY_HEIGHT = 75;
+
+    const GENERAL_DISPLAY_WIDTH = 300;
+    const GENERAL_DISPLAY_HEIGHT = 150;
 
     const MEDIUM_WIDTH =  300;
     const MEDIUM_HEIGHT =  200;

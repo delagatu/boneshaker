@@ -110,6 +110,17 @@ class ItemType extends ItemTypeBase
         return $this->submenu_only == 1;
     }
 
+    public static function getMenuArray($makerName, $type)
+    {
+        $makerList = Maker::getMakerByType($type);
+
+//        $totalCount = count($makerList);
+//        $currentCount = 1;
+//        $makerId = Maker::getIdByName($makerName);
+
+        return $makerList;
+    }
+
     public static function getMenu($makerName)
     {
         $makerList = Maker::getMakerByType(self::BICICLETE);

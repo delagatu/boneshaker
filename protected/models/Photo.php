@@ -161,8 +161,11 @@ class Photo extends PhotoBase
                 $width = isset($photoAttributes[0]) ? $photoAttributes[0] : 0;
                 $height = isset($photoAttributes[1]) ? $photoAttributes[1] : 0;
 
-                $returnWidth = (($width > PhotoUpload::GENERAL_DISPLAY_WIDTH) || empty($width)) ? PhotoUpload::GENERAL_DISPLAY_WIDTH : $width;
-                $returnHeight = (($height > PhotoUpload::GENERAL_DISPLAY_HEIGHT) || empty($height)) ? PhotoUpload::GENERAL_DISPLAY_HEIGHT : $height;
+                //$returnWidth = (($width > PhotoUpload::GENERAL_DISPLAY_WIDTH) || empty($width)) ? PhotoUpload::GENERAL_DISPLAY_WIDTH : $width;
+                //$returnHeight = (($height > PhotoUpload::GENERAL_DISPLAY_HEIGHT) || empty($height)) ? PhotoUpload::GENERAL_DISPLAY_HEIGHT : $height;
+
+                $returnWidth = 300;
+                $returnHeight = 150;
 
                 return array('width' => $returnWidth, 'height' => $returnHeight);
             }

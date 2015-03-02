@@ -51,6 +51,13 @@ $this->layout = '//layouts/management';
             ),
 
             array(
+                'header' => 'Poza',
+                'type' => 'raw',
+                'value' => 'Chtml::image("/" . $data->getThumbPic(), $data->getName(), array("title" => $data->getName()))',
+                'filter' => false,
+            ),
+
+            array(
                 'header' => 'Producator',
                 'name' => 'maker_name_sort',
                 'value' => '$data->getMaker()',

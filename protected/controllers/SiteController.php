@@ -38,22 +38,22 @@ class SiteController extends BaseController
 	{
         $error = Yii::app()->errorHandler->error;
 
-        try {
-            $message = new YiiMailMessage();
-            $message->view = ControllerPagePartial::MAIL_SITE_ERROR;
-
-            //userModel is passed to the view
-            $message->setBody(array('error'=>$error), 'text/html');
-            $message->setSubject('boneshaker.ro - error');
-
-            $message->addTo(Yii::app()->params['webmasterEmail']);
-            $message->from = Yii::app()->params['adminEmail'];
-            Yii::app()->mail->send($message);
-
-        } catch (Exception $e)
-        {
-            Yii::log('Can not send register email: ' . var_export($e->getMessage(), 1));
-        }
+//        try {
+//            $message = new YiiMailMessage();
+//            $message->view = ControllerPagePartial::MAIL_SITE_ERROR;
+//
+//            //userModel is passed to the view
+//            $message->setBody(array('error'=>$error), 'text/html');
+//            $message->setSubject('boneshaker.ro - error');
+//
+//            $message->addTo(Yii::app()->params['webmasterEmail']);
+//            $message->from = Yii::app()->params['adminEmail'];
+//            Yii::app()->mail->send($message);
+//
+//        } catch (Exception $e)
+//        {
+//            Yii::log('Can not send register email: ' . var_export($e->getMessage(), 1));
+//        }
 
 //        if (!$this->hasPermission(Items::ROLE_ADMINISTRATOR))
 //        {

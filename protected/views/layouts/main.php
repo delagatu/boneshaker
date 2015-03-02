@@ -1,176 +1,218 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: delegatu
- * Date: 11/7/14
- * Time: 9:59 PM
- * To change this template use File | Settings | File Templates.
- */
-?>
+<!DOCTYPE html>
+<html class="full" lang="en">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="language" content="en"/>
 
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/design/favicon.ico">
-
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/button_link_styles.css"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/pager.css"/>
-
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/_flashMessages.css"/>
-    <?php Yii::app()->clientScript->registerCssFile(
-        Yii::app()->clientScript->getCoreScriptUrl().
-        '/jui/css/base/jquery-ui.css'
-    );?>
-    <?php Yii::app()->getClientScript()->registerCoreScript('jquery'); ?>
-    <?php Yii::app()->clientScript->registerCoreScript('jquery.ui'); ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/main.js'); ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/jquery.colorbox-min.js'); ?>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/custom_design.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/shop-homepage.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/general.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body>
 
-<div class="navbar-wrapper">
-      <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!--            <a class="navbar-brand" href="--><?php //echo  Yii::app()->getBaseUrl(true)?><!-- ">-->
+                        <!--                <img alt="Brand" src="--><?php //echo Yii::app()->request->baseUrl; ?><!-- /images/design/logo.jpg">-->
+                        <!--            </a>-->
+                        <a class="navbar-brand" href="<?php echo  Yii::app()->getBaseUrl(true)?> ">
+                            Logo
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                <?php echo CHtml::link(Yii::app()->name, Yii::app()->getBaseUrl(true), array('class' => 'navbar-brand'));?>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
+                        <?php
+                        $contactUrl = $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT);
+                        ?>
+
+
+                        <ul class="nav navbar-nav">
+                            <!--                <li >-->
+                            <!--                    --><?php //echo CHtml::link('Home', Yii::app()->getBaseUrl(true));?>
+                            <!--                </li>-->
+                            <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_BICYCLE) ?>">
+                                <?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?>
+                            </li>
+                            <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTOLLER_ACCESORY) ?>">
+                                <?php echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?>
+                            </li>
+                            <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_COMPONENTE) ?>">
+                                <?php echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?>
+                            </li>
+                            <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_EQUIPMENT) ?>">
+                                <?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?>
+                            </li>
+                            <li class="<?php echo $this->getIsActiveHeaderByUrl($contactUrl) ?>">
+                                <?php echo CHtml::link('Contact', $contactUrl);?>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container -->
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+
+<!--        <div class="col-md-12">-->
+<!--            --><?php
+//            $this->widget('zii.widgets.CBreadcrumbs', array(
+//                'links'=>$this->breadcrumbs,
+//            ));
+//            ?>
+<!--        </div>-->
+
+        <div class="col-md-12">
+
+<!--            <div class="row carousel-holder">-->
+<!---->
+<!--                <div class="col-md-12">-->
+<!--                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">-->
+<!--                        <ol class="carousel-indicators">-->
+<!--                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
+<!--                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>-->
+<!--                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
+<!--                        </ol>-->
+<!--                        <div class="carousel-inner">-->
+<!--                            <div class="item active">-->
+<!--                                <img class="slide-image" src="http://placehold.it/800x300" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="item">-->
+<!--                                <img class="slide-image" src="http://placehold.it/800x300" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="item">-->
+<!--                                <img class="slide-image" src="http://placehold.it/800x300" alt="">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">-->
+<!--                            <span class="glyphicon glyphicon-chevron-left"></span>-->
+<!--                        </a>-->
+<!--                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">-->
+<!--                            <span class="glyphicon glyphicon-chevron-right"></span>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!---->
+<!--            </div>-->
+
+            <!-- nav time here -->
+            <div class="col-md-3">
+                <?php
+                $menuArray = $this->getLeftMenuContent();
+                ?>
+                <div class="list-group">
+                    <span class="list-group-item text-center"><strong><?php echo $this->getMenuHeader();?></strong></span>
+                    <?php foreach($menuArray as $menuItem):  ?>
+                        <?php if ($menuItem instanceof Maker): ?>
+                            <?php
+
+                            $maker = Yii::app()->request->getQuery('makerName');
+                            $active = $maker == $menuItem->getName() ? ' active ' : '';
+
+                            //$url = $this->createUrl(ControllerPagePartial::CONTROLLER_BICYCLE . '/' . ControllerPagePartial::PAGE_BICYCLE_INDEX, array('makerName' => $menuItem->getUrlSafeName()));
+                            $url = $this->createUrl($this->id . '/index', array('makerName' => $menuItem->getUrlSafeName()));
+                            echo CHtml::link($menuItem->getName(),$url, array('class' => $active . 'list-group-item leftMenuLink', 'data-maker-id' => $menuItem->id));
+                            ?>
+                            <!--                <a href="#" class="list-group-item">Category 1</a>-->
+                            <!--                <a href="#" class="list-group-item">Category 2</a>-->
+                            <!--                <a href="#" class="list-group-item">Category 3</a>-->
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <!--            --><?php //$this->getLeftMenuContent(); ?>
 
                 <?php
-                    $contactUrl = $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT);
+
+                $this->renderPartial('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_NEWSLETTER);
+
                 ?>
-
-              <ul class="nav navbar-nav">
-                <li >
-                    <?php echo CHtml::link('Home', Yii::app()->getBaseUrl(true));?>
-                </li>
-                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_BICYCLE) ?>">
-                    <?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?>
-                </li>
-                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTOLLER_ACCESORY) ?>">
-                    <?php echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?>
-                </li>
-                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_COMPONENTE) ?>">
-                    <?php echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?>
-                </li>
-                <li class="<?php echo $this->getIsActiveHeaderByController(ControllerPagePartial::CONTROLLER_EQUIPMENT) ?>">
-                    <?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?>
-                </li>
-                <li class="<?php echo $this->getIsActiveHeaderByUrl($contactUrl) ?>">
-                    <?php echo CHtml::link('Contact', $contactUrl);?>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
             </div>
-          </div>
-        </nav>
 
+            <div class="col-md-9">
+                <?php echo $content; ?>
+            </div>
 
-          <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-              </ol>
-              <div class="carousel-inner" role="listbox">
-                  <div class="item active">
-                      <img src="<?php echo Yii::app()->getBaseUrl(true); ?>/images/carousel/2b701030679871261895f3b4c254a1b2.jpg" alt="First slide">
-                      <div class="container">
-                          <div class="carousel-caption">
-                              <h1>Example headline.</h1>
-                              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-                              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="item">
-                      <img src="<?php echo Yii::app()->getBaseUrl(true); ?>/images/carousel/0bfa8f92ec622ea617d9f988d4f301ed.jpg" alt="Second slide">
-                      <div class="container">
-                          <div class="carousel-caption">
-                              <h1>Another example headline.</h1>
-                              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="item">
-                      <img src="<?php echo Yii::app()->getBaseUrl(true); ?>/images/carousel/1c2564a238c9200c00d07fb79533acf5.jpg" alt="Third slide">
-                      <div class="container">
-                          <div class="carousel-caption">
-                              <h1>One more for good measure.</h1>
-                              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                  <span class="sr-only">Next</span>
-              </a>
-          </div><!-- /.carousel -->
+        </div>
 
-          <hr class="featurette-divider">
+    </div>
 
-          <div class="row">
-<!--              <div class="col-md-9">-->
-<!--                  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>-->
-<!--                  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>-->
-                  <?php echo $content; ?>
-<!--              </div>-->
-          </div>
+</div>
+<!-- /.container -->
 
-          <!-- FOOTER -->
-          <footer>
-              <?php
+<div class="container">
 
-              $login = CHtml::link('Login', $this->createUrl('/site/login'));
-              $logout = CHtml::link('Logout', $this->createUrl('/site/logout'));
+    <hr>
 
-              $userData = (Yii::app()->user->isGuest) ? '' : Yii::app()->user->getState('userData', '') . ' &middot; ';
-              $accountLink = (empty($userData)) ? '' : CHtml::link($userData, $this->createUrl('/' . ControllerPagePartial::CONTROLLER_MANAGEMENT), array('class' => 'account'));
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <?php
 
-              ?>
-              <p class="pull-right"><a href="#">Sus</a></p>
-              <p>&copy; 2012 -  <?php echo date('Y'); ?> Boneshaker &middot;
-                  <?php echo CHtml::link('Termeni si conditii', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_TERMS_AND_CONDITIONS)); ?> &middot;
-                  <?php echo (Yii::app()->user->isGuest) ? $login : $accountLink . $logout; ?>
-                  <?php echo (Yii::app()->user->isGuest) ? ' &middot; ' . CHtml::link('Cont nou', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_SITE_CONT_NOU)) : ''; ?>
-              </p>
-          </footer>
+            $login = CHtml::link('Login', $this->createUrl('/site/login'));
+            $logout = CHtml::link('Logout', $this->createUrl('/site/logout'));
 
-      </div><!-- /.container -->
+            $userData = (Yii::app()->user->isGuest) ? '' : Yii::app()->user->getState('userData', '') . ' &middot; ';
+            $accountLink = (empty($userData)) ? '' : CHtml::link($userData, $this->createUrl('/' . ControllerPagePartial::CONTROLLER_MANAGEMENT), array('class' => 'account'));
+
+            ?>
+            <p class="pull-right">
+                <a href="#"><span class="glyphicon glyphicon-arrow-up"></span></a>
+            </p>
+            <p>&copy; 2012 -  <?php echo date('Y'); ?> Boneshaker &middot;
+                <?php echo CHtml::link('Termeni si conditii', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_TERMS_AND_CONDITIONS)); ?> &middot;
+                <?php echo (Yii::app()->user->isGuest) ? $login : $accountLink . $logout; ?>
+                <?php echo (Yii::app()->user->isGuest) ? ' &middot; ' . CHtml::link('Cont nou', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_SITE_CONT_NOU)) : ''; ?>
+            </p>
+
+        </div>
+    </footer>
+
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+
 </body>
+
+</html>

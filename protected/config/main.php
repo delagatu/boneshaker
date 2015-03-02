@@ -103,24 +103,24 @@ return array(
             // The itemChildTable name (default:authitemchild)
             'itemChildTable' => 'itemchildren',
         ),
-        'urlManager'=>array(
-            'urlFormat'=>'path',
-            'showScriptName'=>false,
-            'caseSensitive'=>false,
-            'rules'=>array(
-                '' => 'site/index',
-                'pages/<view:.*>'=>'site/page',
-                'cauta/<keywords:.*>'=>'site/cauta',
-                '<action>/<id:\d+>' => 'site/<action>',
-                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>/<subItem:.*>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<makerName:\w+>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<makerAndProduct:.*>'=>'<controller>/<action>',
-                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-            ),
-        ),
+//        'urlManager'=>array(
+//            'urlFormat'=>'path',
+//            'showScriptName'=>false,
+//            'caseSensitive'=>false,
+//            'rules'=>array(
+//                '' => 'site/index',
+//                'pages/<view:.*>'=>'site/page',
+//                'cauta/<keywords:.*>'=>'site/cauta',
+//                '<action>/<id:\d+>' => 'site/<action>',
+//                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+//                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>/<subItem:.*>'=>'<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>'=>'<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>/<makerName:\w+>'=>'<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>/<makerAndProduct:.*>'=>'<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+//            ),
+//        ),
 		// uncomment the following to enable URLs in path-format
         /*
 		'urlManager'=>array(
@@ -174,9 +174,9 @@ return array(
             array(
                 'class' => 'application.extensions.shoppingCart.EShoppingCart',
             ),
-        'booster' => array(
-            'class' => 'application.extensions.yiibooster.components.Booster',
-        ),
+//        'booster' => array(
+//            'class' => 'application.extensions.yiibooster.components.Booster',
+//        ),
 	),
 
 

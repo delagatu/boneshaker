@@ -77,26 +77,7 @@ class BaseController extends Controller
         $itemTypeId = ItemType::getIdByLabel($controller);
         $makerName = Yii::app()->request->getQuery('makerName');
 
-
-        switch ($itemTypeId)
-        {
-            case ItemType::ACCESORII:
-                AccessoryType::getMenu();
-                break;
-
-            case ItemType::COMPONENTE:
-                ComponentType::getMenu();
-                break;
-
-            case ItemType::ECHIPAMENTE:
-                EquipmentType::getMenu();
-                break;
-
-            default:
-                ItemType::getMenu($makerName);
-                break;
-        }
-
+        return ItemType::getMenuArray($makerName, $itemTypeId);
     }
 
     public function getIsActiveHeaderByController($compare)
@@ -109,8 +90,23 @@ class BaseController extends Controller
     public function getIsActiveHeaderByUrl($compare)
     {
         $url = Yii::app()->request->getUrl();
-        var_dump('URL: ' . $url);
 
         return (strtolower($compare) == strtolower($url)) ? 'active' : '';
+    }
+
+    public function generateBreadcrumb()
+    {
+        $breadCrumbs = array(
+            ucfirst($this->id) => $this->createUrl('/' . $this->id),
+        );
+
+        $makerName = Yii::app()->request->getQuery('makerName');
+
+        if (!empty($makerName))
+        {
+            $breadCrumbs[$makerName] = $this->createUrl($this->id . '/index/', array('makerName' => $makerName));
+        }
+
+        $this->breadcrumbs = $breadCrumbs;
     }
 }

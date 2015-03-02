@@ -393,7 +393,8 @@ class Product extends ProductBase implements IECartPosition
             return '<span class="boldText '.$additionalClass.'">'. $this->getPrice() . '</span>';
         }
 
-        return Chtml::image(Yii::app()->getBaseUrl(true) . '/images/design/Phone-icon20x20.png', 'Telefonic', array('class' => 'align-text-bottom'));
+        //return Chtml::image(Yii::app()->getBaseUrl(true) . '/images/design/Phone-icon20x20.png', 'Telefonic', array('class' => 'align-text-bottom'));
+        return '<span class="glyphicon glyphicon-earphone"></span>';
 
     }
 
@@ -491,7 +492,7 @@ class Product extends ProductBase implements IECartPosition
     public function getDisplayName()
     {
         $maker = $this->getMaker(' ');
-        return empty($maker) ? '' : $maker . '-' . $this->name;
+        return empty($maker) ? '' : $maker . ': ' . $this->name;
     }
 
     public function getDisplayNameWithId()
@@ -523,7 +524,7 @@ class Product extends ProductBase implements IECartPosition
 //        $startDiv =  preg_replace('~(.*)' . preg_quote('<div>', '~') . '~', '$1' . '', $substr, 1);
 //        return preg_replace('~(.*)' . preg_quote('</div>', '~') . '~', '$1' . '', $startDiv, 1);
 
-        return substr_replace($substr, '', strrpos($substr, '<div>'), strlen($substr)) . '...';
+        return substr_replace($substr, '', strrpos($substr, '<div>'), strlen($substr));
 
 
 

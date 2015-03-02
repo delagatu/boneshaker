@@ -53,6 +53,20 @@ $this->layout = '//layouts/management';
             ),
 
             array(
+                'header' => 'Poza',
+                'type' => 'raw',
+                'value' => 'Chtml::image($data->getThumbPic())',
+                'filter' => false,
+            ),
+
+            array(
+                'header' => 'Prima pagina',
+                'type' => 'raw',
+                'value' => '$data->isForHomePageCheckBox()',
+                'filter' => false,
+            ),
+
+            array(
                 'header' => 'Producator',
                 'name' => 'maker_name_sort',
                 'value' => '$data->getMaker()',
