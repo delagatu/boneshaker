@@ -22,14 +22,15 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/grid_1100.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/_flashMessages.css"/>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css"/>
+
     <?php Yii::app()->clientScript->registerCssFile(
     Yii::app()->clientScript->getCoreScriptUrl().
         '/jui/css/base/jquery-ui.css'
 );?>
-    <?php Yii::app()->getClientScript()->registerCoreScript('jquery'); ?>
-    <?php Yii::app()->clientScript->registerCoreScript('jquery.ui'); ?>
+
     <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/main.js'); ?>
-    <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/jquery.colorbox-min.js'); ?>
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -38,21 +39,49 @@
 
 <div class="container_20">
     <div id="header">
-        <div class="grid_14 push_3 prepend-top-180" id="menu">
-            <div class="grid_2 menu-padding padding-left-20"><?php echo CHtml::link('Home', Yii::app()->getBaseUrl(true));?></div>
-            <div
-                    class="grid_2 menu-padding padding-right-15"><?php echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?></div>
-            <div class="grid_2 menu-padding padding-right-5"><?php echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?></div>
+        <div class="grid_18 push_1" id="menu">
+<!--            <div class="grid_2 menu-padding padding-left-20">--><?php //echo CHtml::link('Home', Yii::app()->getBaseUrl(true));?><!--</div>-->
+<!--            <div-->
+<!--                    class="grid_2 menu-padding padding-right-15">--><?php //echo CHtml::link('Biciclete', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_BICYCLE));?><!--</div>-->
+<!--            <div class="grid_2 menu-padding padding-right-5">--><?php //echo CHtml::link('Accesorii', $this->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY));?><!--</div>-->
+<!---->
+<!--            <div class="grid_2 menu-padding padding-right-5">--><?php //echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?><!--</div>-->
+<!--            <div-->
+<!--                    class="grid_3 menu-padding padding-right-5">--><?php //echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?><!--</div>-->
+<!--            <div-->
+<!--                    class="grid_1 menu-padding padding-right-5">--><?php //echo CHtml::link('Contact', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT));?><!--</div>-->
 
-            <div class="grid_2 menu-padding padding-right-5"><?php echo CHtml::link('Componente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_COMPONENTE));?></div>
-            <div
-                    class="grid_3 menu-padding padding-right-5"><?php echo CHtml::link('Echipamente', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_EQUIPMENT));?></div>
-            <div
-                    class="grid_1 menu-padding padding-right-5"><?php echo CHtml::link('Contact', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT));?></div>
+            <div id = "navcontainer">
+            <?php  $this->widget('zii.widgets.CMenu', array(
+                'items'=>array(
+                    // Important: you need to specify url as 'controller/action',
+                    // not just as 'controller' even if default action is used.
+                    array('label'=>'Home', 'url'=>array('site/index')),
+                    array('label'=>'Biciclete', 'url'=>array('biciclete/index')),
+                    array('label'=>'Accesorii', 'url'=>array('accesorii/index')),
+                    array('label'=>'Componente', 'url'=>array('componente/index')),
+                    array('label'=>'Echipamente', 'url'=>array('echipamente/index')),
+                    array('label'=>'Contact', 'url'=>array('site/contact')),
+                ),
+            ));
+//            ?>
+            </div>
+
         </div>
         <!-- menu -->
 
     </div>
+
+    <!-- carousel -->
+
+    <div class="slider grid_18 push_1">
+        <div class="main-slider">
+            <?php
+                Yii::app()->controller->renderPartial('/site/main-slider');
+            ?>
+        </div>
+    </div>
+
 </div>
 <!-- header -->
 
@@ -158,6 +187,12 @@
         Copyright &copy; 2012 -  <?php echo date('Y'); ?> by Boneshaker
     </div>
 </div>
+
+<?php Yii::app()->getClientScript()->registerCoreScript('jquery'); ?>
+<?php Yii::app()->clientScript->registerCoreScript('jquery.ui'); ?>
+<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/javascript/jquery.colorbox-min.js'); ?>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js"></script>
 
 </body>
 </html>

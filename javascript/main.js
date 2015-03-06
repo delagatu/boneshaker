@@ -9,6 +9,14 @@ $(function()
         $('body').on('click', '#newsLetter',addNewsletter);
         $('body').on('change', '.search-by-maker', searchByMaker);
         $('body').on('click', '.add-to-cart', addToCart);
+
+        $('.main-slider').slick({
+            autoplay: true,
+//            prevArrow : '<button type="button" class="slick-prev"><</button>',
+//            nextArrow : '<button type="button" class="slick-prev">></button>',
+            arrows: false
+            });
+
     }
 
 );

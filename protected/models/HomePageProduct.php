@@ -106,4 +106,12 @@ class HomePageProduct extends HomePageProductBase
         return $count > 0;
     }
 
+    public static function getAllForSlider()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->order = 'rand()';
+
+        return self::model()->findAll($criteria);
+    }
+
 }
