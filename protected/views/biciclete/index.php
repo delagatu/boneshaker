@@ -1,30 +1,27 @@
 <?php $this->pageTitle = Yii::app()->name . ' | Vanzari si Service Biciclete | Piese Biciclete '; ?>
 
-<div class='grid_9'>
+<div class='grid_13'>
 
     <?php
 
-    foreach ($bicycle as $b) {
-        $params = array(
-            'bicycle' => $b,
-        );
-
-        $this->renderPartial(ControllerPagePartial::PARTIAL_BICYCLE, $params);
-    }
+    $this->widget('zii.widgets.CListView', array(
+        'dataProvider'=>Product::model()->getProductByTypeAndMaker(ItemType::BICICLETE, $makerName, $subProduct),
+        'itemView'=>'../' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_PRODUCT,
+        'summaryText' => '<span class = "boldText">{start}</span> - <span class = "boldText">{end}</span> rezultate din totalul de <span class = "boldText">{count}</span>',
+        'pagerCssClass' => 'grid_10 push_2 prepend-top-10',
+        'ajaxUpdate' => false,
+        'emptyText' =>'Niciun rezultat.',
+        'pager' => array(
+            'class' => 'CLinkPager',
+            'maxButtonCount' => 6,
+            'header' => 'Pagina:',
+            'prevPageLabel' => ' < Anterioara',
+            'nextPageLabel' => 'Urmatoare > ',
+            'lastPageLabel' => 'Ultima',
+            'cssFile' => Yii::app()->request->baseUrl . "/css/pager.css",
+        ),
+    ));
 
     ?>
 </div> <!-- content right content end -->
 
-<div class='grid_9 center_content prepend-top-10'>
-    <?php $this->widget('CLinkPager',
-    array(
-        'pages' => $pages,
-        'maxButtonCount' => 6,
-        'header' => 'Pagina:',
-        'prevPageLabel' => ' < Anterioara',
-        'nextPageLabel' => 'Urmatoare > ',
-        'lastPageLabel' => 'Ultima',
-        'cssFile' => Yii::app()->request->baseUrl . "/css/pager.css",
-    )
-); ?>
-</div>

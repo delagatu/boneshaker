@@ -10,15 +10,12 @@
 $this->layout = '//layouts/management';
 ?>
 
-<div class='grid_9'>
+<div class='grid_7'>
 
     <h4 class="boldText">
+
         <?php
-
-        if (Yii::app()->user->hasFlash('success')) {
-            echo Yii::app()->user->getFlash('success');
-        }
-
+        $this->renderPartial('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PARTIAL_FLASH_MESSAGES);
         ?>
 
     </h4>
@@ -26,12 +23,12 @@ $this->layout = '//layouts/management';
     <?php
     $this->widget('zii.widgets.grid.CGridView', array(
         'id' => 'listaProducatori',
-        'dataProvider' => $maker->searchMakerByType(ItemType::BICICLETE),
-        'filter' => $maker,
+        'dataProvider' => Maker::model()->searchMakerByType($name, $itemType),
+        'filter' => Maker::model()->searchMakerByType($name, $itemType),
         'itemsCssClass' => 'browntable',
-        'rowCssClassExpression' => '(($row % 2) == 0) ? "e" : "o"',
-        'filterCssClass' => 'o',
-        'afterAjaxUpdate' => 'confirmDeleteMaker',
+        'rowCssClassExpression' => '(($row % 2) == 0) ? "even" : "odd"',
+        'filterCssClass' => 'odd',
+        'afterAjaxUpdate' => 'invalidateMaker',
         'pager' => array(
             'maxButtonCount' => 6,
             'header' => 'Pagina:',
@@ -42,17 +39,29 @@ $this->layout = '//layouts/management';
         ),
         'summaryText' => '<span class = "boldText">{start}</span> - <span class = "boldText">{end}</span> rezultate din totalul de <span class = "boldText">{count}</span>',
         'columns' => array(
-            array( // display 'create_time' using an expression
-                'header' => 'Producator',
-                'name' => 'name_sort',
-                'value' => '$data->name',
-                'filter' => CHtml::textField('Maker[name_sort]', isset($_GET['Maker']['name_sort']) ? $_GET['Maker']['name_sort'] : '', array('class' => 'styled-input', 'placeholder' => 'Cauta producator ...')),
-            ),
+
             array(
-                'header' => '',
+                'header' => 'Valid',
                 'type' => 'raw',
-                'value' => array($this, 'getMakerListActions'),
-            )
+                'value' => '$data->getValidCheckBox()',
+                'filter' => false,
+            ),
+
+            array(
+                'header' => 'Producator',
+                'name' => 'name',
+                'type' => 'raw',
+                'value' => '$data->getEditName()',
+                'filter' => CHtml::textField('name', $name, array('class' => 'styled-input', 'placeholder' => 'Cauta producator ...')),
+            ),
+
+            array(
+                'header' => 'Tipul',
+                'name' => 'name',
+                'type' => 'raw',
+                'value' => '$data->getType()',
+                'filter' => false
+            ),
         ),
     ));
 

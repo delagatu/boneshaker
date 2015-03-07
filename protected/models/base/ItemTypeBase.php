@@ -8,6 +8,7 @@
  * @property string $name
  * @property string $insert_date
  * @property integer $available
+ * @property integer $submenu_only
  *
  * The followings are the available model relations:
  * @property Maker[] $makers
@@ -41,12 +42,12 @@ class ItemTypeBase extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('available', 'numerical', 'integerOnly'=>true),
+			array('available, submenu_only', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>200),
 			array('insert_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, insert_date, available', 'safe', 'on'=>'search'),
+			array('id, name, insert_date, available, submenu_only', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,6 +74,7 @@ class ItemTypeBase extends CActiveRecord
 			'name' => 'Name',
 			'insert_date' => 'Insert Date',
 			'available' => 'Available',
+			'submenu_only' => 'Submenu Only',
 		);
 	}
 
@@ -91,6 +93,7 @@ class ItemTypeBase extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('insert_date',$this->insert_date,true);
 		$criteria->compare('available',$this->available);
+		$criteria->compare('submenu_only',$this->submenu_only);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

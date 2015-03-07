@@ -22,12 +22,32 @@ class Offer extends OfferBase
     /**
      * @return mixed
      */
-    public function getRandomOffer()
-    {
-        $Sql = 'SELECT id, product_id, offer_title, offer_description, discount_percent, offer_price ';
-        $Sql .= ' FROM offer WHERE DATE(NOW()) BETWEEN DATE(begin_date) AND DATE(end_date) ORDER BY RAND() LIMIT 1';
 
-        return self::model()->findBySql($Sql);
+    public function randomCriteria()
+    {
+        $this->getDbCriteria()->mergeWith(
+            array(
+                'order' => 'RAND()',
+                'limit' => 1
+            )
+        );
+
+        return $this;
+
+    }
+
+    public static function getRandomOffer()
+    {
+        $condition = ' CURDATE() BETWEEN DATE(begin_date) AND DATE(end_date) ';
+        return self::model()->randomCriteria()->find($condition);
+    }
+
+    public function saveThrowEx()
+    {
+        if (!$this->save())
+        {
+            Throw new Exception('Can not add the offer: ' . var_export($this->getErrors(), 1));
+        }
     }
 
 }

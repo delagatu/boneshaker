@@ -33,8 +33,15 @@
  * @property integer $rim_id
  * @property integer $front_rim_id
  * @property integer $rear_rim_id
+ * @property integer $front_tire_id
+ * @property integer $rear_tire_id
+ * @property integer $front_rear_tire_id
+ * @property integer $front_rear_rim_id
+ * @property integer $rear_shock_id
+ * @property integer $wheel_size_id
  *
  * The followings are the available model relations:
+ * @property WheelSize $wheelSize
  * @property BbSet $bbSet
  * @property BrakeLever $brakeLever
  * @property BrakeSystem $brakeSystem
@@ -43,7 +50,10 @@
  * @property Derailleur $derailleurFront
  * @property Derailleur $derailleurRear
  * @property Hub $frontHub
+ * @property Rim $frontRearRim
+ * @property Tire $frontRearTire
  * @property Rim $frontRim
+ * @property Tire $frontTire
  * @property Product $product
  * @property Frame $frame
  * @property BicycleSize $size
@@ -51,21 +61,13 @@
  * @property Color $color
  * @property Hub $rearHub
  * @property Rim $rearRim
+ * @property RearShock $rearShock
+ * @property Tire $rearTire
  * @property Fork $fork
  * @property Shifter $shifter
  */
 class BicycleDescriptionBase extends CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return BicycleDescriptionBase the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
-
 	/**
 	 * @return string the associated database table name
 	 */
@@ -82,12 +84,12 @@ class BicycleDescriptionBase extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product_id, frame_id, size_id, speed_id, color_id, fork_id, derailleur_front_id, derailleur_rear_id, shifter_id, brake_lever_id, brake_system_id, chain_wheel_id, chain_id, front_hub_id, rear_hub_id, rim_id, front_rim_id, rear_rim_id', 'required'),
-			array('product_id, frame_id, size_id, speed_id, color_id, fork_id, derailleur_front_id, derailleur_rear_id, shifter_id, brake_lever_id, brake_system_id, chain_wheel_id, bb_set_id, chain_id, front_hub_id, rear_hub_id, rim_id, front_rim_id, rear_rim_id', 'numerical', 'integerOnly'=>true),
+			array('product_id', 'required'),
+			array('product_id, frame_id, size_id, speed_id, color_id, fork_id, derailleur_front_id, derailleur_rear_id, shifter_id, brake_lever_id, brake_system_id, chain_wheel_id, bb_set_id, chain_id, front_hub_id, rear_hub_id, rim_id, front_rim_id, rear_rim_id, front_tire_id, rear_tire_id, front_rear_tire_id, front_rear_rim_id, rear_shock_id, wheel_size_id', 'numerical', 'integerOnly'=>true),
 			array('freewheel, spokes, tires, handlebar, stem, headset, seatpost, saddle, pedals', 'length', 'max'=>200),
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, product_id, freewheel, spokes, tires, handlebar, stem, headset, seatpost, saddle, pedals, frame_id, size_id, speed_id, color_id, fork_id, derailleur_front_id, derailleur_rear_id, shifter_id, brake_lever_id, brake_system_id, chain_wheel_id, bb_set_id, chain_id, front_hub_id, rear_hub_id, rim_id, front_rim_id, rear_rim_id', 'safe', 'on'=>'search'),
+			// @todo Please remove those attributes that should not be searched.
+			array('id, product_id, freewheel, spokes, tires, handlebar, stem, headset, seatpost, saddle, pedals, frame_id, size_id, speed_id, color_id, fork_id, derailleur_front_id, derailleur_rear_id, shifter_id, brake_lever_id, brake_system_id, chain_wheel_id, bb_set_id, chain_id, front_hub_id, rear_hub_id, rim_id, front_rim_id, rear_rim_id, front_tire_id, rear_tire_id, front_rear_tire_id, front_rear_rim_id, rear_shock_id, wheel_size_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -99,6 +101,7 @@ class BicycleDescriptionBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'wheelSize' => array(self::BELONGS_TO, 'WheelSize', 'wheel_size_id'),
 			'bbSet' => array(self::BELONGS_TO, 'BbSet', 'bb_set_id'),
 			'brakeLever' => array(self::BELONGS_TO, 'BrakeLever', 'brake_lever_id'),
 			'brakeSystem' => array(self::BELONGS_TO, 'BrakeSystem', 'brake_system_id'),
@@ -107,7 +110,10 @@ class BicycleDescriptionBase extends CActiveRecord
 			'derailleurFront' => array(self::BELONGS_TO, 'Derailleur', 'derailleur_front_id'),
 			'derailleurRear' => array(self::BELONGS_TO, 'Derailleur', 'derailleur_rear_id'),
 			'frontHub' => array(self::BELONGS_TO, 'Hub', 'front_hub_id'),
+			'frontRearRim' => array(self::BELONGS_TO, 'Rim', 'front_rear_rim_id'),
+			'frontRearTire' => array(self::BELONGS_TO, 'Tire', 'front_rear_tire_id'),
 			'frontRim' => array(self::BELONGS_TO, 'Rim', 'front_rim_id'),
+			'frontTire' => array(self::BELONGS_TO, 'Tire', 'front_tire_id'),
 			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
 			'frame' => array(self::BELONGS_TO, 'Frame', 'frame_id'),
 			'size' => array(self::BELONGS_TO, 'BicycleSize', 'size_id'),
@@ -115,6 +121,8 @@ class BicycleDescriptionBase extends CActiveRecord
 			'color' => array(self::BELONGS_TO, 'Color', 'color_id'),
 			'rearHub' => array(self::BELONGS_TO, 'Hub', 'rear_hub_id'),
 			'rearRim' => array(self::BELONGS_TO, 'Rim', 'rear_rim_id'),
+			'rearShock' => array(self::BELONGS_TO, 'RearShock', 'rear_shock_id'),
+			'rearTire' => array(self::BELONGS_TO, 'Tire', 'rear_tire_id'),
 			'fork' => array(self::BELONGS_TO, 'Fork', 'fork_id'),
 			'shifter' => array(self::BELONGS_TO, 'Shifter', 'shifter_id'),
 		);
@@ -155,17 +163,30 @@ class BicycleDescriptionBase extends CActiveRecord
 			'rim_id' => 'Rim',
 			'front_rim_id' => 'Front Rim',
 			'rear_rim_id' => 'Rear Rim',
+			'front_tire_id' => 'Front Tire',
+			'rear_tire_id' => 'Rear Tire',
+			'front_rear_tire_id' => 'Front Rear Tire',
+			'front_rear_rim_id' => 'Front Rear Rim',
+			'rear_shock_id' => 'Rear Shock',
+			'wheel_size_id' => 'Wheel Size',
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -198,9 +219,26 @@ class BicycleDescriptionBase extends CActiveRecord
 		$criteria->compare('rim_id',$this->rim_id);
 		$criteria->compare('front_rim_id',$this->front_rim_id);
 		$criteria->compare('rear_rim_id',$this->rear_rim_id);
+		$criteria->compare('front_tire_id',$this->front_tire_id);
+		$criteria->compare('rear_tire_id',$this->rear_tire_id);
+		$criteria->compare('front_rear_tire_id',$this->front_rear_tire_id);
+		$criteria->compare('front_rear_rim_id',$this->front_rear_rim_id);
+		$criteria->compare('rear_shock_id',$this->rear_shock_id);
+		$criteria->compare('wheel_size_id',$this->wheel_size_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return BicycleDescriptionBase the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
 	}
 }

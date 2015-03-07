@@ -9,9 +9,7 @@
 class BaseController extends Controller
 {
 
-    const HOME_PAGE_SIZE = 6;
-    const BICYCLES_PAGE_SIZE = 6;
-    const ROLE_AUTHORITY = 'Authority';
+    const PAGE_SIZE = 6;
 
     protected function getUserHomePage()
     {
@@ -31,5 +29,73 @@ class BaseController extends Controller
     public function hasPermission($role)
     {
         return Yii::app()->user->checkAccess($role);
+    }
+
+    public function hasMultiplePermission(Array $roles = array())
+    {
+        foreach ($roles as $role)
+        {
+            if (Yii::app()->user->checkAccess($role))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function readSafeName($getParam)
+    {
+        return StringManager::readSafeName($getParam);
+    }
+
+    public function readProductId()
+    {
+        $makerAndProduct = Yii::app()->request->getQuery('makerAndProduct');
+
+        $paramArgs = explode('-', $makerAndProduct);
+        return end($paramArgs);
+    }
+
+    public function getMenuHeader()
+    {
+        $controller = $this->getId();
+        $acceptedControllers = array(ControllerPagePartial::CONTROLLER_BICYCLE => ControllerPagePartial::CONTROLLER_BICYCLE,
+            ControllerPagePartial::CONTOLLER_ACCESORY => ControllerPagePartial::CONTOLLER_ACCESORY,
+            ControllerPagePartial::CONTROLLER_EQUIPMENT => ControllerPagePartial::CONTROLLER_EQUIPMENT,
+            ControllerPagePartial::CONTROLLER_COMPONENTE => ControllerPagePartial::CONTROLLER_COMPONENTE,
+        );
+
+        $category = (isset($acceptedControllers[$controller])) ? $controller : ControllerPagePartial::CONTROLLER_BICYCLE;
+
+        return ucfirst($category);
+    }
+
+    public function getLeftMenuContent()
+    {
+        $controller = $this->getId();
+        $itemTypeId = ItemType::getIdByLabel($controller);
+        $makerName = Yii::app()->request->getQuery('makerName');
+
+
+        switch ($itemTypeId)
+        {
+            case ItemType::ACCESORII:
+                AccessoryType::getMenu();
+                break;
+
+            case ItemType::COMPONENTE:
+                ComponentType::getMenu();
+                break;
+
+            case ItemType::ECHIPAMENTE:
+                EquipmentType::getMenu();
+                break;
+
+            default:
+                ItemType::getMenu($makerName);
+                break;
+        }
+
     }
 }

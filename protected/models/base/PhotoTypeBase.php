@@ -6,9 +6,11 @@
  * The followings are the available columns in table 'photo_type':
  * @property integer $id
  * @property string $photo_type
+ * @property integer $photo_width
+ * @property integer $photo_height
  *
  * The followings are the available model relations:
- * @property Photo[] $photos
+ * @property PhotoSource[] $photoSources
  */
 class PhotoTypeBase extends CActiveRecord
 {
@@ -38,10 +40,12 @@ class PhotoTypeBase extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('photo_width, photo_height', 'required'),
+			array('photo_width, photo_height', 'numerical', 'integerOnly'=>true),
 			array('photo_type', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, photo_type', 'safe', 'on'=>'search'),
+			array('id, photo_type, photo_width, photo_height', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +57,7 @@ class PhotoTypeBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'photos' => array(self::HAS_MANY, 'Photo', 'photo_type_id'),
+			'photoSources' => array(self::HAS_MANY, 'PhotoSource', 'photo_type_id'),
 		);
 	}
 
@@ -65,6 +69,8 @@ class PhotoTypeBase extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'photo_type' => 'Photo Type',
+			'photo_width' => 'Photo Width',
+			'photo_height' => 'Photo Height',
 		);
 	}
 
@@ -81,6 +87,8 @@ class PhotoTypeBase extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('photo_type',$this->photo_type,true);
+		$criteria->compare('photo_width',$this->photo_width);
+		$criteria->compare('photo_height',$this->photo_height);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

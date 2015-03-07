@@ -3,7 +3,7 @@
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
-// This is the main Web application configuration. Any writable
+// This is the main Web app0 lication configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -21,6 +21,8 @@ return array(
 		'application.controllers.*',
         'application.modules.srbac.controllers.SBaseController',
         'application.extensions.chosen.*',
+        'application.extensions.YiiMail.YiiMailMessage',
+        'application.extensions.shoppingCart.*',
         'system.base',
         'application.helpers.*',
 	),
@@ -71,6 +73,22 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		
+		'mail' => array(
+ 			'class' => 'application.extensions.YiiMail.YiiMail',
+            'transportType' => 'smtp',
+            'transportOptions' => array(
+                'host' => 'mail.boneshaker.ro',
+                'username' => 'info@boneshaker.ro',
+                'password' => 'b0n3_2013',
+                'port' => '465',
+                'encryption'=>'ssl',
+            ),
+ 			'viewPath' => 'application.views.mail',
+			'logging' => true,
+ 			'dryRun' => false
+     		),
+		
         'authManager' => array(
             // Path to SDbAuthManager in srbac module if you want to use case insensitive
             //access checking (or CDbAuthManager for case sensitive access checking)
@@ -90,10 +108,16 @@ return array(
             'showScriptName'=>false,
             'caseSensitive'=>false,
             'rules'=>array(
+                '' => 'site/index',
                 'pages/<view:.*>'=>'site/page',
+                'cauta/<keywords:.*>'=>'site/cauta',
                 '<action>/<id:\d+>' => 'site/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>/<subItem:.*>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerName:\w+>/<subProduct:.*>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerName:\w+>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<makerAndProduct:.*>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
             ),
         ),
@@ -122,6 +146,8 @@ return array(
 			'username' => 'boneshaker',
 			'password' => 'bone2012',
 			'charset' => 'utf8',
+			'enableProfiling' =>true,
+            'queryCacheID' => 'apcCache',
 		),		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
@@ -139,18 +165,30 @@ return array(
 				array(
 					'class'=>'CWebLogRoute',
 				),
-				*/
+				//*/
 			),
 		),
+
+
+        'shoppingCart' =>
+            array(
+                'class' => 'application.extensions.shoppingCart.EShoppingCart',
+            ),
 	),
+
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'info@boneshaker.ro',
+		'webmasterEmail' => 'laci22002@gmail.com',
         'buyAvailable' => true,
         'biciclesDir' =>'images/products/bicycle',
-        'webShopAvailable' => false,
+        'accessoryDir' =>'images/products/accessory',
+        'componentDir' =>'images/products/component',
+        'equipmentsDir' =>'images/products/equipment',
+        'defaultDir' =>'images/products/default',
+        'webShopAvailable' => true,
 	),
 );

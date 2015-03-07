@@ -42,7 +42,6 @@ class RimBase extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('maker_id', 'required'),
 			array('maker_id, valid', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>200),
 			// The following rule is used by search().
@@ -59,8 +58,8 @@ class RimBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'bicycleDescriptions' => array(self::HAS_MANY, 'BicycleDescription', 'rear_rim_id'),
-			'bicycleDescriptions1' => array(self::HAS_MANY, 'BicycleDescription', 'front_rim_id'),
+			'bicycleDescriptions' => array(self::HAS_MANY, 'BicycleDescription', 'front_rim_id'),
+			'bicycleDescriptions1' => array(self::HAS_MANY, 'BicycleDescription', 'rear_rim_id'),
 			'maker' => array(self::BELONGS_TO, 'Maker', 'maker_id'),
 		);
 	}

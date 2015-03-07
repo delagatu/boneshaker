@@ -47,6 +47,16 @@ $this->layout = '//layouts/management';
         </div>
     </div>
 
+    <div class='grid_9 padding-5'>
+
+        <div class="grid_2">
+            <?php echo $form->labelEx($addMakerForm, 'valid'); ?>
+        </div>
+        <div class="grid_4">
+            <?php echo $form->checkBox($addMakerForm, 'valid', array('checked' => 'checked')); ?>
+        </div>
+    </div>
+
     <div class="grid_6 prepend-top-10 padding-5 center_content">
         <?php echo Chtml::submitButton('Adauga', array('class' => 'styled-button')); ?>
     </div>

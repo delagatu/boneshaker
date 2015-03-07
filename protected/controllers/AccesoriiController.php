@@ -1,46 +1,55 @@
 <?php
 
-class AccesoriiController extends Controller
+class AccesoriiController extends BaseController
 {
 	public function actionError()
 	{
 		$this->render('error');
 	}
 
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
+    public function actionIndex()
+    {
+
+        $makerName = $this->readSafeName(Yii::app()->request->getQuery('makerName', null));
+        $subProduct = $this->readSafeName(Yii::app()->request->getQuery('subProduct', null));
+        $subItem = $this->readSafeName(Yii::app()->request->getQuery('subItem', null));
+
+        if (Maker::validMaker($subItem) && Maker::validMaker($subProduct))
+        {
+            $params = array('makerName' => $makerName, 'subProduct' => str_replace(' ', '_', $subItem));
+            $url = Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTOLLER_ACCESORY . '/index/', $params);
+            Yii::app()->controller->redirect($url);
+        }
+
+        $indexParams = array(
+            'makerName' => $makerName,
+            'subProduct' => $subProduct,
+            'subItem' => $subItem,
+        );
+
+        $this->render(ControllerPagePartial::PAGE_ACCESSORY_INDEX, $indexParams);
+    }
 
 	public function actionProducator()
 	{
 		$this->render('producator');
 	}
 
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
+    public function actionDetalii()
+    {
+        $id = $this->readProductId();
+        $product = Product::getProductById($id);
 
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
+        if (is_null($product) || !$product->isAccessory())
+        {
+            $this->redirect(Yii::app()->request->getUrlReferrer());
+        }
+
+        $params = array(
+            'product' => $product,
+        );
+
+        $this->render(ControllerPagePartial::PARTIAL_BICYCLE_DETAIL, $params);
+    }
+
 }

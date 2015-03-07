@@ -18,6 +18,14 @@ class BicycleSize extends BicycleSizeBase
         return parent::model($className);
     }
 
+    public function saveThrowEx()
+    {
+        if (!$this->save())
+        {
+            Throw new Exception('Can not save size: ' . var_export($this->getErrors(), 1));
+        }
+    }
+
     public static function getSize()
     {
         return self::model()->findAll(
@@ -28,5 +36,15 @@ class BicycleSize extends BicycleSizeBase
                 ),
             )
         );
+    }
+
+    public static function getById($id)
+    {
+        return self::model()->findByPk($id);
+    }
+
+    public function getName()
+    {
+        return $this->size;
     }
 }

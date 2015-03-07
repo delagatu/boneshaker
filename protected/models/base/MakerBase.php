@@ -11,8 +11,19 @@
  * @property integer $available
  *
  * The followings are the available model relations:
+ * @property BbSet[] $bbSets
+ * @property BrakeLever[] $brakeLevers
+ * @property BrakeSystem[] $brakeSystems
+ * @property Chain[] $chains
+ * @property ChainWheel[] $chainWheels
+ * @property Derailleur[] $derailleurs
+ * @property Fork[] $forks
+ * @property Frame[] $frames
+ * @property Hub[] $hubs
  * @property ItemType $itemType
  * @property Product[] $products
+ * @property Rim[] $rims
+ * @property Shifter[] $shifters
  */
 class MakerBase extends CActiveRecord
 {
@@ -60,8 +71,19 @@ class MakerBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'bbSets' => array(self::HAS_MANY, 'BbSet', 'maker_id'),
+			'brakeLevers' => array(self::HAS_MANY, 'BrakeLever', 'maker_id'),
+			'brakeSystems' => array(self::HAS_MANY, 'BrakeSystem', 'maker_id'),
+			'chains' => array(self::HAS_MANY, 'Chain', 'maker_id'),
+			'chainWheels' => array(self::HAS_MANY, 'ChainWheel', 'maker_id'),
+			'derailleurs' => array(self::HAS_MANY, 'Derailleur', 'maker_id'),
+			'forks' => array(self::HAS_MANY, 'Fork', 'maker_id'),
+			'frames' => array(self::HAS_MANY, 'Frame', 'maker_id'),
+			'hubs' => array(self::HAS_MANY, 'Hub', 'maker_id'),
 			'itemType' => array(self::BELONGS_TO, 'ItemType', 'item_type_id'),
 			'products' => array(self::HAS_MANY, 'Product', 'maker_id'),
+			'rims' => array(self::HAS_MANY, 'Rim', 'maker_id'),
+			'shifters' => array(self::HAS_MANY, 'Shifter', 'maker_id'),
 		);
 	}
 

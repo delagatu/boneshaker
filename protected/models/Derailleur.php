@@ -31,9 +31,31 @@ class Derailleur extends DerailleurBase
         );
     }
 
-    public function getMakerAndProduct()
+    public function saveThrowEx()
     {
-        return $this->maker->name . ' ' . $this->name;
+        if (!$this->save())
+        {
+            Throw new Exception('Can not save derailleur: ' . var_export($this->getErrors(), 1));
+        }
     }
 
+    public function getMakerAndProduct()
+    {
+        if ($this->maker instanceof Maker)
+        {
+            return $this->maker->name . ' ' . $this->name;
+        }
+
+        return $this->name;
+    }
+
+    public static function getById($id)
+    {
+        return self::model()->findByPk($id);
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
 }

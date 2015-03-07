@@ -10,16 +10,16 @@ class PhotoUpload extends Photo
 {
 
     const THUMB_HEIGHT = 63;
-    const THUMB_WIDTH = 105;
+    const THUMB_WIDTH = 90;
 
-    const GENERAL_DISPLAY_WIDTH = 250;
-    const GENERAL_DISPLAY_HEIGHT = 150;
+    const GENERAL_DISPLAY_WIDTH = 120;
+    const GENERAL_DISPLAY_HEIGHT = 75;
 
-    const MEDIUM_WIDTH =  500;
-    const MEDIUM_HEIGHT =  300;
+    const MEDIUM_WIDTH =  300;
+    const MEDIUM_HEIGHT =  200;
 
-    const BIG_WIDTH =  600;
-    const BIG_HEIGHT =  800;
+    const BIG_WIDTH =  800;
+    const BIG_HEIGHT =  600;
 
     public $productId;
     public $photo;
@@ -29,39 +29,77 @@ class PhotoUpload extends Photo
         return parent::model($className);
     }
 
-    public function saveFiles($productId, Array $files = array())
+    public function saveFiles($productId, $uploadDir, Array $files = array())
     {
         $this->productId = $productId;
+
+        if (empty($files))
+        {
+            return;
+        }
+
+        $transaction = Yii::app()->db->beginTransaction();
+
+        try {
 
         $order = PhotoOrder::PHOTO_ORDER_PRIMARY_ID;
         foreach ($files as $file)
         {
             if ($file instanceof CUploadedFile)
             {
-                $this->saveFile($file, $order);
+                $this->saveFile($file, $uploadDir, $order);
                 $order = PhotoOrder::PHOTO_ORDER_SECONDARY_ID;
             }
         }
+
+        $transaction->commit();
+
+        } catch (Exception $e)
+        {
+            Yii::log('Image resize error: ' . var_export($e->getMessage()));
+            $transaction->rollback();
+        }
+
     }
 
-    private function saveFile(CUploadedFile $image, $order = PhotoOrder::PHOTO_ORDER_SECONDARY_ID)
+    public function saveMissingFile($file, $uploadDir, $width,$height, $type)
     {
-        $saveImage = Yii::app()->params['biciclesDir'] . '/' . $this->productId . time() . '.' . $image->getExtensionName();
+        PhotoSource::deleteByType($this->photo->id, $type);
+        if ($file instanceof CUploadedFile){
+
+                $saveImage =  $uploadDir . '/' . $this->productId . time() . '.' . $file->getExtensionName();
+
+                if ($file->saveAs($saveImage, true))
+                {
+                    $this->createBySize($saveImage, $uploadDir, $width,$height, $file->getExtensionName(), $type, $master = null);
+                    unlink($saveImage);
+                }
+           }
+    }
+
+    private function saveFile(CUploadedFile $image, $uploadDir, $order = PhotoOrder::PHOTO_ORDER_SECONDARY_ID)
+    {
+
+        $saveImage =  $uploadDir . '/' . $this->productId . time() . '.' . $image->getExtensionName();
         if ($image->saveAs($saveImage, true))
         {
             $this->photo = $this->newPhoto($order);
-            $this->createBySize($saveImage, self::THUMB_HEIGHT, self::THUMB_WIDTH, $image->getExtensionName(), PhotoType::PHOTO_TYPE_THUMB_ID);
-            $this->createBySize($saveImage, self::GENERAL_DISPLAY_HEIGHT, self::GENERAL_DISPLAY_WIDTH, $image->getExtensionName(), PhotoType::PHOTO_TYPE_GENERAL_DISPLAY_ID);
-            $this->createBySize($saveImage, self::MEDIUM_HEIGHT, self::MEDIUM_WIDTH, $image->getExtensionName(), PhotoType::PHOTO_TYPE_MEDIUM_ID);
+            $this->createBySize($saveImage, $uploadDir, self::THUMB_WIDTH, self::THUMB_HEIGHT, $image->getExtensionName(), PhotoType::PHOTO_TYPE_THUMB_ID);
+            $this->createBySize($saveImage, $uploadDir, self::GENERAL_DISPLAY_WIDTH, self::GENERAL_DISPLAY_HEIGHT, $image->getExtensionName(), PhotoType::PHOTO_TYPE_GENERAL_DISPLAY_ID, Image::HEIGHT);
+            $this->createBySize($saveImage, $uploadDir, self::MEDIUM_WIDTH, self::MEDIUM_HEIGHT, $image->getExtensionName(), PhotoType::PHOTO_TYPE_MEDIUM_ID);
+            $this->createBySize($saveImage, $uploadDir, self::BIG_WIDTH, self::BIG_HEIGHT, $image->getExtensionName(), PhotoType::PHOTO_TYPE_BIG_ID);
         }
+
+        unlink($saveImage);
+
     }
 //
-    private function createBySize($image, $width,$height, $ext, $type)
+    private function createBySize($image, $uploadDir, $width,$height, $ext, $type, $master = null)
     {
         $imageResize = Yii::app()->image->load($image);
-        $imageResize->resize($width, $height, Image::AUTO);
-        $resize = Yii::app()->params['biciclesDir'] . '/' . md5(microtime()) . '.' . $ext;
-        if ($imageResize->save($resize)) // or $image->save('images/small.jpg');
+        $imageResize->resize($width, $height, $master);
+        $resize = $uploadDir . '/' . md5(microtime()) . '.' . $ext;
+        if ($imageResize->save($resize))
         {
             $photoSource = new PhotoSource();
             $photoSource->photo_id = $this->photo->id;
@@ -69,7 +107,6 @@ class PhotoUpload extends Photo
             $photoSource->photo_type_id = $type;
             $photoSource->saveThrowEx();
         }
-
 
     }
 
@@ -80,9 +117,10 @@ class PhotoUpload extends Photo
      */
     private function newPhoto($order = PhotoOrder::PHOTO_ORDER_SECONDARY_ID)
     {
-        $this->product_id = $this->productId;
-        $this->order_id = $order;
-        $this->saveThrowEx();
-        return $this;
+        $photo = new Photo();
+        $photo->product_id = $this->productId;
+        $photo->order_id = $order;
+        $photo->saveThrowEx();
+        return $photo;
     }
 }

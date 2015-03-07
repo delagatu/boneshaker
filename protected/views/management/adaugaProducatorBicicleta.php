@@ -29,9 +29,19 @@ $form = $this->beginWidget('CActiveForm',
     <?php endforeach; ?>
 </div>
 
-<div class="grid_9 form">
+<div class="grid_9 form" id = "addBicicleForm">
 
-    <h2 class="center_content">Adauga bicicleta noua</h2>
+    <h2 class="center_content">Biciclete</h2>
+
+    <?php
+    $createUpdate = $addProductForm->getCreationUpdateTime();
+    if (is_array($createUpdate)):
+        foreach ($createUpdate as $key => $value):
+            ?>
+
+            <div class='grid_9'><span class = 'boldText'><?php echo $key ?>: </span><?php echo $value; ?></div>
+
+        <?php endforeach; endif; ?>
 
     <div class = "row">
         Campurile marcate cu <span class ='redText'>*</span> sunt obligatorii.
@@ -45,7 +55,15 @@ $form = $this->beginWidget('CActiveForm',
 
     <div class="row">
         <?php echo $form->labelEx($addProductForm, 'sub_product_id'); ?>
-        <?php echo Chosen::activeDropDownList($addProductForm, 'sub_product_id', $addProductForm->subProductList(), array('class' => 'long-input', 'empty' => 'Selecteaza')); ?>
+        <?php echo Chosen::activeDropDownList($addProductForm, 'sub_product_id', $addProductForm->subProductList(),
+        array('class' => 'addBicicleDropDown long-input',
+            'id' => 'addSubProduct',
+            'empty' => 'Selecteaza',
+            'data-add-url' => $this->createUrl(ControllerPagePartial::PAGE_MANAGEMENT_SUB_PRODUCT),
+            'data-dialog-id' => 'addsubProductDialog',
+            'data-title' =>'Categorie'
+        ));
+        ?>
         <?php echo $form->error($addProductForm, 'sub_product_id'); ?>
     </div>
 
@@ -70,15 +88,15 @@ $form = $this->beginWidget('CActiveForm',
 
     <div class='row padding-5'>
         <div class="grid_2">
-            <?php echo CHtml::label('Poze (max 4)', 'addBicycle'); ?>
+            <?php echo CHtml::label('Poze:', 'addBicycle'); ?>
         </div>
         <?php
         $this->widget('CMultiFileUpload', array(
             'model' => $addProductForm->photoUpload,
             'name' => 'uploadFile',
             'attribute' => 'files',
-            'accept' => 'jpg|gif',
-            'max' => 4,
+            'accept' => 'jpg|gif|jpeg',
+//            'max' => 4,
             'denied' => 'Format nesuportat.',
             'duplicate' => 'Atentie! Duplicat.',
             'remove' => 'X',
@@ -94,13 +112,45 @@ $form = $this->beginWidget('CActiveForm',
         ?>
     </div>
 
+    <div class="row">
+        <?php
+        $upPath = Yii::app()->getBaseUrl(true) . '/images/design/toggle_up.png';
+        $downPath = Yii::app()->getBaseUrl(true) . '/images/design/toggle_down.png';
+
+        $up = Chtml::image($upPath, '', array('class' => 'middle-align'));
+        $down = Chtml::image($downPath, '', array('class' => 'middle-align'));
+        $pozeDisp  = 'Poze disponibile';
+
+        echo Chtml::link($pozeDisp . $down, 'javascript:',
+            array('class' => 'action-link',
+                'id' => 'show-photos',
+                'data-down' => $pozeDisp . $down,
+                'data-up' => $pozeDisp . $up
+            )
+        ); ?>
+        <div id = 'display-photos'>
+        <?php
+            $addProductForm->getPhotos();
+        ?>
+        </div>
+    </div>
+
 </div>
 
+<?php
+$createUpdate = $addProductForm->getCreationUpdateTime();
+if (is_array($createUpdate)):
+    foreach ($createUpdate as $key => $value):
+        ?>
+
+        <div class='grid_9'><span class = 'boldText'><?php echo $key ?>: </span><?php echo $value; ?></div>
+
+    <?php endforeach; endif; ?>
 
 <div class='grid_6 padding-5 center_content'>
-    <?php echo CHtml::submitButton('Adauga', array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
+    <?php echo CHtml::submitButton($addProductForm->getButtonLabel(), array('id' => 'addNewBicycle', 'class' => 'styled-button')); ?>
 </div>
-
 
 <?php $this->endWidget(); ?>
 
+<div id = 'addDetailsDialog'></div>

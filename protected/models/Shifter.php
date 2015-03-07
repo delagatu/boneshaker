@@ -32,9 +32,32 @@ class Shifter extends ShifterBase
         );
     }
 
+    public function saveThrowEx()
+    {
+        if (!$this->save())
+        {
+            Throw new Exception('Can not save shifter: ' . var_export($this->getErros(), 1));
+        }
+    }
+
     public function getMakerAndProduct()
     {
-        return $this->maker->name . ' ' . $this->name;
+        if ($this->maker instanceof Maker)
+        {
+            return $this->maker->name . ' ' . $this->name;
+        }
+
+        return $this->name;
+    }
+
+    public static function getById($id)
+    {
+        return self::model()->findByPk($id);
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
 }

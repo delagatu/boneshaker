@@ -31,4 +31,22 @@ class Color extends ColorBase
         );
     }
 
+    public function saveThrowEx()
+    {
+        if (!$this->save())
+        {
+            Throw new Exception('Can not save the color: ' . var_export($this->getErrors(), 1));
+        }
+    }
+
+    public static function getById($id)
+    {
+        return self::model()->findByPk($id);
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

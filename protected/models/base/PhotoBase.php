@@ -9,8 +9,8 @@
  * @property integer $order_id
  *
  * The followings are the available model relations:
- * @property Product $product
  * @property PhotoOrder $order
+ * @property Product $product
  * @property PhotoSource[] $photoSources
  */
 class PhotoBase extends CActiveRecord
@@ -57,8 +57,8 @@ class PhotoBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
 			'order' => array(self::BELONGS_TO, 'PhotoOrder', 'order_id'),
+			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
 			'photoSources' => array(self::HAS_MANY, 'PhotoSource', 'photo_id'),
 		);
 	}
