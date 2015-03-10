@@ -31,6 +31,19 @@ $(
 //            toolbar: ["bold", "italic", "underline", "|", "h1", "h2", "h3", "h4", "h5", "h6", "|", "link", "unlink"]
             toolbar: ["bold"]
         });
+
+        $('.main-slider').slick({
+            autoplay: true,
+//            prevArrow : '<div class="grid_1"><button type="button" class="slick-prev"><</button></div>',
+//            nextArrow : '<div class="grid_1"><button type="button" class="slick-next">></button></div>',
+            arrows: false,
+//            appendArrows: $('.append-arrows'),
+            appendDots: $('.append-dots'),
+            dots: true,
+            pauseOnDotsHover: true
+//            adaptiveHeight: true
+        });
+
     }
 );
 

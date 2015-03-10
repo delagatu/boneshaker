@@ -359,6 +359,11 @@
   padding-top: 30px;
 }
 
+.padding-top-5
+{
+  padding-top: 5px;
+}
+
 .slider
 {
   background-color: #ffffff;
@@ -372,7 +377,7 @@
   padding: 5px;
 }
 
-#navcontainer ul
+#navcontainer ul, slider ul
 {
   margin: 0;
   padding: 0;
@@ -380,7 +385,7 @@
   text-align: center;
 }
 
-#navcontainer ul li { display: inline; }
+#navcontainer ul li, .slider ul li { display: inline; }
 
 #navcontainer ul li a
 {
@@ -397,4 +402,23 @@
 {
   color: #fff;
 //  background-color: #369;
+}
+
+.slick-dots button
+{
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.slick-active button
+{
+  font-weight: bold;
+  color: #0e509e;
+  font-size: 16px;
+}
+
+.slick-next
+{
+  float: right;
 }

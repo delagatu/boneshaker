@@ -7,7 +7,7 @@ $this->renderPartial('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . Contro
     <?php
 
     $this->widget('zii.widgets.CListView', array(
-        'dataProvider'=>Product::model()->getByMaker(null, null, true),
+        'dataProvider'=>Product::model()->getByMaker(null, null, false),
         'itemView'=>ControllerPagePartial::PARTIAL_PRODUCT,
         'summaryText' => '<span class = "boldText">{start}</span> - <span class = "boldText">{end}</span> rezultate din totalul de <span class = "boldText">{count}</span>',
         'pagerCssClass' => 'grid_10 push_2 prepend-top-10',

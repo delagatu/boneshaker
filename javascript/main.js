@@ -12,9 +12,14 @@ $(function()
 
         $('.main-slider').slick({
             autoplay: true,
-//            prevArrow : '<button type="button" class="slick-prev"><</button>',
-//            nextArrow : '<button type="button" class="slick-prev">></button>',
-            arrows: false
+//            prevArrow : '<div class="grid_1"><button type="button" class="slick-prev"><</button></div>',
+//            nextArrow : '<div class="grid_1"><button type="button" class="slick-next">></button></div>',
+            arrows: false,
+//            appendArrows: $('.append-arrows'),
+            appendDots: $('.append-dots'),
+            dots: true,
+            pauseOnDotsHover: true
+//            adaptiveHeight: true
             });
 
     }

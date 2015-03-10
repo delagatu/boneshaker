@@ -58,9 +58,13 @@
 .transparentTable-odd-row{background-color:#c99660}
 .transparentTable-even-row{background-color:#a96a3a}
 .padding-top-30{padding-top:30px}
+.padding-top-5{padding-top:5px}
 .slider{background-color:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px}
 #navcontainer{padding:5px}
-#navcontainer ul{margin:0;padding:0;list-style-type:none;text-align:center}
-#navcontainer ul li{display:inline}
+#navcontainer ul,slider ul{margin:0;padding:0;list-style-type:none;text-align:center}
+#navcontainer ul li,.slider ul li{display:inline}
 #navcontainer ul li a{text-decoration:none;padding-top:.2em;padding-right:3em;padding-left:1em;padding-bottom:.2em;color:#fff}
 #navcontainer ul li a:hover{color:#fff}
+.slick-dots button{border:none;background:none;cursor:pointer}
+.slick-active button{font-weight:bold;color:#0e509e;font-size:16px}
+.slick-next{float:right}

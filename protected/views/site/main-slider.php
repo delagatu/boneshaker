@@ -1,3 +1,19 @@
+<div>
+
+    <div class="grid_6 push_6 padding-top-5">
+
+        <?php
+
+        $photoSource = Yii::app()->getBaseUrl(true) . '/' . 'images/design/logo_merida_lg.png';
+
+        $generalImage = CHtml::image($photoSource);
+        echo CHtml::link($generalImage, 'http://www.bikefun.eu');
+        ?>
+
+    </div>
+
+</div>
+
 <?php $homePageProd = HomePageProduct::getAllForSlider(); ?>
 
 <?php foreach ($homePageProd as $hpp): ?>
@@ -6,7 +22,7 @@
 
     <div>
 
-        <div class="grid_6 push_3">
+        <div class="grid_6 push_3 padding-top-5">
 
             <?php
 
@@ -23,7 +39,7 @@
 
         </div>
 
-        <div class="grid_6 push_3">
+        <div class="grid_6 push_3 padding-top-5">
 
             <span class="bigNameGrey"><?php echo $hpp->product->getDisplayName(); ?></span>
 

@@ -52,7 +52,10 @@
 <!--                    class="grid_1 menu-padding padding-right-5">--><?php //echo CHtml::link('Contact', $this->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_SITE_CONTACT));?><!--</div>-->
 
             <div id = "navcontainer">
-            <?php  $this->widget('zii.widgets.CMenu', array(
+            <?php
+            $image = CHtml::image(Yii::app()->request->baseUrl . '/images/design/logo.jpg','',  array('height' => '40px'));
+            $this->widget('zii.widgets.CMenu', array(
+                'encodeLabel' => false,
                 'items'=>array(
                     // Important: you need to specify url as 'controller/action',
                     // not just as 'controller' even if default action is used.
@@ -80,6 +83,7 @@
                 Yii::app()->controller->renderPartial('/site/main-slider');
             ?>
         </div>
+            <div class="grid_16 push_1 center_content append-dots"></div>
     </div>
 
 </div>
