@@ -59,4 +59,34 @@ class Frame extends FrameBase
         return $this->name;
     }
 
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $frame = self::getByName($name);
+        if (!$frame instanceof Frame)
+        {
+            $frame = new Frame();
+            $frame->name = $name;
+            $frame->valid = 1;
+            $frame->saveThrowEx();
+        }
+
+        return $frame;
+    }
+
+    public static function getIdByName($name)
+    {
+        $frame = self::saveIfNotExists($name);
+        return $frame->id;
+    }
+
 }

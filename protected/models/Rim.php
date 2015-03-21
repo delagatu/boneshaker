@@ -58,4 +58,34 @@ class Rim extends RimBase
     {
         return $this->name;
     }
+
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $rim = self::getByName($name);
+        if (!$rim instanceof Rim)
+        {
+            $rim = new Rim();
+            $rim->name = $name;
+            $rim->valid = 1;
+            $rim->saveThrowEx();
+        }
+
+        return $rim;
+    }
+
+    public static function getIdByName($name)
+    {
+        $rim = self::saveIfNotExists($name);
+        return $rim->id;
+    }
 }

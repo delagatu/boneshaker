@@ -1048,4 +1048,40 @@ class Product extends ProductBase implements IECartPosition
     {
         return '<span id = "'.$this->id.'">' . $this->getSumPrice() . '</span>';
     }
+
+    //specific to bikefun csv
+    public function createBFByArray(Array $input = array())
+    {
+        if (!empty($input))
+        {
+//            foreach ($input as $key => $value)
+//            {
+//                echo $key . ':' . $value . "</br>";
+//            }
+            $now = new CDbExpression('NOW()');
+
+            $this->maker_id = Maker::getIdByName('Merida');
+            $this->item_type_id = ItemType::BICICLETE;
+            $this->sub_product_id = null;
+            $this->name = '2015 ' . $input['2015'] . ' ' . $input['Models'];
+            $this->price = 0;
+            $this->available = 0;
+            $this->created_at = $now;
+            $this->updated_at= $now;
+            $this->saveThrowEx();
+
+            $productImport = new ProductImport();
+            $productImport->product_id = $this->id;
+            $productImport->import_source_id = ImportSource::getIdByName(ImportSource::BikeFun);
+            $productImport->import_date = $now;
+            $productImport->user_id = Yii::app()->user->id;
+            $productImport->saveThrowEx();
+
+            $bicycleDescription = new BicycleDescription();
+            $bicycleDescription->saveBFDescription($this->id, $input);
+
+            ProductKeywords::addBicycleDetails($this->id);
+
+        }
+    }
 }

@@ -22,6 +22,7 @@
  *
  * The followings are the available model relations:
  * @property BicycleDescription[] $bicycleDescriptions
+ * @property CartDetail[] $cartDetails
  * @property HomePageProduct[] $homePageProducts
  * @property Offer[] $offers
  * @property Photo[] $photos
@@ -33,10 +34,21 @@
  * @property ItemType $itemType
  * @property SubProduct $subProduct
  * @property AccessoryType $accessoryType
+ * @property ProductImport[] $productImports
  * @property ProductKeywords[] $productKeywords
  */
 class ProductBase extends CActiveRecord
 {
+	/**
+	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
+	 * @return ProductBase the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -59,7 +71,7 @@ class ProductBase extends CActiveRecord
 			array('price', 'length', 'max'=>10),
 			array('description, updated_at', 'safe'),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
+			// Please remove those attributes that should not be searched.
 			array('id, maker_id, item_type_id, sub_product_id, name, description, price, available, created_at, updated_at, accessory_type_id, equipment_type_id, component_type_id, accessory_sub_type_id, component_sub_type_id', 'safe', 'on'=>'search'),
 		);
 	}
@@ -73,6 +85,7 @@ class ProductBase extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'bicycleDescriptions' => array(self::HAS_MANY, 'BicycleDescription', 'product_id'),
+			'cartDetails' => array(self::HAS_MANY, 'CartDetail', 'product_id'),
 			'homePageProducts' => array(self::HAS_MANY, 'HomePageProduct', 'product_id'),
 			'offers' => array(self::HAS_MANY, 'Offer', 'product_id'),
 			'photos' => array(self::HAS_MANY, 'Photo', 'product_id'),
@@ -84,6 +97,7 @@ class ProductBase extends CActiveRecord
 			'itemType' => array(self::BELONGS_TO, 'ItemType', 'item_type_id'),
 			'subProduct' => array(self::BELONGS_TO, 'SubProduct', 'sub_product_id'),
 			'accessoryType' => array(self::BELONGS_TO, 'AccessoryType', 'accessory_type_id'),
+			'productImports' => array(self::HAS_MANY, 'ProductImport', 'product_id'),
 			'productKeywords' => array(self::HAS_MANY, 'ProductKeywords', 'product_id'),
 		);
 	}
@@ -114,19 +128,12 @@ class ProductBase extends CActiveRecord
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
 
 		$criteria=new CDbCriteria;
 
@@ -149,16 +156,5 @@ class ProductBase extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return ProductBase the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
 	}
 }

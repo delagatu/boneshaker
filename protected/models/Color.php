@@ -49,4 +49,33 @@ class Color extends ColorBase
         return $this->name;
     }
 
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $color = self::getByName($name);
+        if (!$color instanceof Color)
+        {
+            $color = new Color();
+            $color->name = $name;
+            $color->valid = 1;
+            $color->saveThrowEx();
+        }
+
+        return $color;
+    }
+
+    public static function getIdByName($name)
+    {
+        $color = self::saveIfNotExists($name);
+        return $color->id;
+    }
 }

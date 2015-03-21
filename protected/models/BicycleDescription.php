@@ -593,4 +593,31 @@ class BicycleDescription extends BicycleDescriptionBase
         return $bikeData;
     }
 
+    public function saveBFDescription($product_id, Array $bfInput = array())
+    {
+        $this->product_id = $product_id;
+        $this->frame_id = Frame::getIdByName($bfInput['Frame']);
+        $this->size_id = BicycleSize::getIdByName($bfInput['Size']);
+
+        if (!empty($bfInput['Color']))
+        {
+            $this->color_id = Color::getIdByName($bfInput['Color']);
+        }
+
+        $this->rear_shock_id = RearShock::getIdByName($bfInput['Shock']);
+        $this->fork_id = Fork::getIdByName($bfInput['Fork']);
+        //$this->break_f = //todo: break_f && break_b
+        //$this->break_b = //todo: break_f && break_b
+        $this->chain_id = Chain::getIdByName($bfInput['Chain']);
+//        $this->chain_guard_id = //todo: chain guard id;
+        $this->chain_wheel_id = ChainWheel::getIdByName($bfInput['Chainwheel']);
+        $this->derailleur_front_id = Derailleur::getIdByName($bfInput['DERA-F']);
+        $this->derailleur_rear_id = Derailleur::getIdByName($bfInput['DERA-R']);
+//        $this->freewheel_id = //todo: frewweheel
+        $this->front_rear_rim_id = Rim::getIdByName($bfInput['Rim']);
+//        $this->saddle_id = //todo: saddle
+
+        $this->saveThrowEx();
+    }
+
 }

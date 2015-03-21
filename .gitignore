@@ -2,4 +2,7 @@ assets/*
 .idea/deployment.xml
 .idea/frameworkRootSettings.xml
 .idea/workspace.xml
-
+dbcommands/*
+images/products/*
+.idea/*
+import/*

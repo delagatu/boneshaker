@@ -47,4 +47,34 @@ class BicycleSize extends BicycleSizeBase
     {
         return $this->size;
     }
+
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'size =:size',
+            'params' => array(
+                ':size' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $size = self::getByName($name);
+        if (!$size instanceof BicycleSize)
+        {
+            $size = new BicycleSize();
+            $size->size = $name;
+            $size->valid = 1;
+            $size->saveThrowEx();
+        }
+
+        return $size;
+    }
+
+    public static function getIdByName($name)
+    {
+        $size = self::saveIfNotExists($name);
+        return $size->id;
+    }
 }

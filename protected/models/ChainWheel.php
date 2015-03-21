@@ -57,4 +57,34 @@ class ChainWheel extends ChainWheelBase
     {
         return $this->name;
     }
+
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $chainWheel = self::getByName($name);
+        if (!$chainWheel instanceof ChainWheel)
+        {
+            $chainWheel = new ChainWheel();
+            $chainWheel->name = $name;
+            $chainWheel->valid = 1;
+            $chainWheel->saveThrowEx();
+        }
+
+        return $chainWheel;
+    }
+
+    public static function getIdByName($name)
+    {
+        $chainWheel = self::saveIfNotExists($name);
+        return $chainWheel->id;
+    }
 }

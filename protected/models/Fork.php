@@ -60,4 +60,34 @@ class Fork extends ForkBase
         return $this->name;
     }
 
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $fork = self::getByName($name);
+        if (!$fork instanceof Fork)
+        {
+            $fork = new Fork();
+            $fork->name = $name;
+            $fork->valid = 1;
+            $fork->saveThrowEx();
+        }
+
+        return $fork;
+    }
+
+    public static function getIdByName($name)
+    {
+        $fork = self::saveIfNotExists($name);
+        return $fork->id;
+    }
+
 }

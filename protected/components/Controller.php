@@ -20,4 +20,20 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+//    public function beforeAction()
+//    {
+//
+//        $detect = Yii::app()->mobileDetect;
+//        // call methods
+//        if ($detect->isMobile() || $detect->isTablet() || $detect->isIphone())
+//        {
+//            $this->layout = 'mobile';
+//            return true;
+//        }
+//
+//        $this->layout = 'main';
+//        return true;
+//    }
+
 }

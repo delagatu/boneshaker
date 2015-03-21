@@ -58,4 +58,34 @@ class RearShock extends RearShockBase{
         return $this->name;
     }
 
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $shock = self::getByName($name);
+        if (!$shock instanceof RearShock)
+        {
+            $shock = new RearShock();
+            $shock->name = $name;
+            $shock->valid = 1;
+            $shock->saveThrowEx();
+        }
+
+        return $shock;
+    }
+
+    public static function getIdByName($name)
+    {
+        $shock = self::saveIfNotExists($name);
+        return $shock->id;
+    }
+
 }

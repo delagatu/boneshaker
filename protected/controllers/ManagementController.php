@@ -1386,4 +1386,44 @@ class ManagementController extends BaseController
         echo CHtml::link('Back', Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_MANAGEMENT));
     }
 
+    public function actionImportList()
+    {
+        $maker = Yii::app()->request->getQuery('maker_name_sort', null);
+        $this->render('_importList');
+    }
+
+    public function actionImportFromCSV()
+    {
+
+        if (!Yii::app()->user->checkAccess(Items::ROLE_AUTHORITY))
+        {
+            if (Yii::app()->request->getIsAjaxRequest())
+            {
+                json::writeJSON('No-no!', false);
+            }
+
+            $this->leave();
+        }
+
+        $fp = fopen('import/exportMainLineUpTranspose.csv', 'r');
+
+        // get the first (header) line
+        $header = fgetcsv($fp);
+
+        // get the rest of the rows
+//        $data = array();
+        while ($row = fgetcsv($fp)) {
+            $arr = array();
+            foreach ($header as $i => $col)
+                $arr[$col] = $row[$i];
+            $product = new Product();
+            $product->createBFByArray($arr);
+//            $data[] = $arr;
+
+        }
+
+        $this->render('_importList');
+
+    }
+
 }

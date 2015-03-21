@@ -58,4 +58,34 @@ class Derailleur extends DerailleurBase
     {
         return $this->name;
     }
+
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $derailleur = self::getByName($name);
+        if (!$derailleur instanceof Derailleur)
+        {
+            $derailleur = new Derailleur();
+            $derailleur->name = $name;
+            $derailleur->valid = 1;
+            $derailleur->saveThrowEx();
+        }
+
+        return $derailleur;
+    }
+
+    public static function getIdByName($name)
+    {
+        $derailleur = self::saveIfNotExists($name);
+        return $derailleur->id;
+    }
 }

@@ -58,4 +58,34 @@ class Chain extends ChainBase
     {
         return $this->name;
     }
+
+    public static function getByName($name)
+    {
+        return self::model()->find(array(
+            'condition' => 'name =:name',
+            'params' => array(
+                ':name' => $name,
+            ),
+        ));
+    }
+
+    public static function saveIfNotExists($name)
+    {
+        $chain = self::getByName($name);
+        if (!$chain instanceof Chain)
+        {
+            $chain = new Chain();
+            $chain->name = $name;
+            $chain->valid = 1;
+            $chain->saveThrowEx();
+        }
+
+        return $chain;
+    }
+
+    public static function getIdByName($name)
+    {
+        $chain = self::saveIfNotExists($name);
+        return $chain->id;
+    }
 }

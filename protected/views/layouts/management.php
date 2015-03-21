@@ -154,6 +154,8 @@
                         </li>
                         <li>
                             <?php echo CHtml::link('Categorii', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_VIEW_SUB_PRODUCT));?>
+                        </li> <li>
+                            <?php echo CHtml::link('Import', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/importList' ));?>
                         </li>
                     </ul>
                 </div>
@@ -254,6 +256,7 @@
 
                             <li><?php echo CHtml::link('Up Last', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_MIGRATE, array('dir' => 'up')));?></li>
                             <li><?php echo CHtml::link('Down Last', $this->createUrl(ControllerPagePartial::CONTROLLER_MANAGEMENT . '/' . ControllerPagePartial::PAGE_MANAGEMENT_MIGRATE, array('dir' => 'down', 'mc' => 1)));?></li>
+                            <li><?php echo CHtml::link('Import', $this->createUrl('management/importFromCSV'));?></li>
 
                         <?php endif;?>
 
