@@ -5,12 +5,13 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h2>Error <?php echo $code; ?></h2>
+
+<h2>Error <?php echo $error['code']; ?></h2>
 
 <div class="error">
 <?php
 
-    echo $message;
+    echo $error['message'];
 
 ?>
 </div>

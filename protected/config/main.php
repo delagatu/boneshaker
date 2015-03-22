@@ -111,6 +111,7 @@ return array(
                 '' => 'site/index',
                 'pages/<view:.*>'=>'site/page',
                 'cauta/<keywords:.*>'=>'site/cauta',
+                'cauta' => 'site/cauta',
                 '<action>/<id:\d+>' => 'site/<action>',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

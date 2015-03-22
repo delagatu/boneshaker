@@ -10,6 +10,15 @@ class GeneralSearchForm extends CFormModel
 {
 
     public $keywords;
+    public $itemType;
+    public $maker;
+    public $sub_product_id;
+    public $price;
+    public $accessory_type_id;
+    public $equipment_type_id;
+    public $component_type_id;
+//    public $accessory_sub_type_id; //todo: implement when accessory_sub_type_id usage is implemented
+
 
     public function rules()
     {
@@ -25,9 +34,9 @@ class GeneralSearchForm extends CFormModel
 
     public function generateDataProvider()
     {
-//        $this->prepareKeywords();
-        $dataProvider = SearchProduct::model()->searchByKeyWord($this->keywords);
-        return $dataProvider;
+       $this->prepareKeywords();
+       return  SearchProduct::model()->searchByKeyWord($this->keywords);
+
     }
 
 }

@@ -36,7 +36,9 @@ class SiteController extends BaseController
 	 */
 	public function actionError()
 	{
-        $error = Yii::app()->errorHandler->error;
+        $error = Yii::app()->errorHandler->getError();
+
+        $this->render('error', array('error' => $error));
 
         try {
             $message = new YiiMailMessage();
@@ -54,30 +56,6 @@ class SiteController extends BaseController
         {
             Yii::log('Can not send register email: ' . var_export($e->getMessage(), 1));
         }
-
-        if (!$this->hasPermission(Items::ROLE_ADMINISTRATOR))
-        {
-            $this->redirect($this->createUrl(ControllerPagePartial::PAGE_SITE_INDEX));
-        }
-
-
-//	    if($error=Yii::app()->errorHandler->error)
-//	    {
-//
-//            $to      = 'laci22002@gmail.com';
-//            $subject = 'Boneshaker';
-//            $message = 'Error: ' . var_export($error, 1);
-//            $headers = 'From: info@boneshaker.ro' . "\r\n" .
-//                'Reply-To: no-reply@boneshaker.ro' . "\r\n" .
-//                'X-Mailer: PHP/' . phpversion();
-//
-//            mail($to, $subject, $message, $headers);
-//
-//	    	if(Yii::app()->request->isAjaxRequest)
-//	    		echo $error['message'];
-//	    	else
-//	        	$this->render('error', $error);
-//	    }
 	}
 
 	/**

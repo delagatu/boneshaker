@@ -71,17 +71,37 @@ function searchKeyWords() {
         }
     );
 
+    if (keywords != undefined && keywords.toString().length == 0)
+    {
+        return false;
+    }
+
     $('#search-keywords').on('blur', function () {
             var caller = $(this);
 
             if (keywords != caller.val())
             {
                 $('.progressbar').show();
-                $('#generalSearchForm').trigger('submit');
+                triggerSearch(caller.val());
 
             }
         }
     );
+
+    $("#search-keywords").enterKey(function () {
+        var caller = $(this);
+
+        if (keywords != caller.val())
+        {
+            $('.progressbar').show();
+            triggerSearch(caller.val());
+        }
+    })
+}
+
+function triggerSearch(param)
+{
+    $(location).attr('href','/cauta/' + param);
 }
 
 function addNewsletter()
@@ -192,4 +212,15 @@ function updateQuantity()
             }
         }
     );
+}
+
+$.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
 }
