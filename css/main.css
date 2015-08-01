@@ -59,6 +59,7 @@
 .transparentTable-even-row{background-color:#a96a3a}
 .padding-top-30{padding-top:30px}
 .padding-top-5{padding-top:5px}
+.padding-top-15{padding-top:15px}
 .slider{background-color:#fff;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px}
 #navcontainer{padding:5px}
 #navcontainer ul,slider ul{margin:0;padding:0;list-style-type:none;text-align:center}
@@ -68,3 +69,4 @@
 .slick-dots button{border:none;background:none;cursor:pointer}
 .slick-active button{font-weight:bold;color:#0e509e;font-size:16px}
 .slick-next{float:right}
+.display-inline-important{display:inline !important}

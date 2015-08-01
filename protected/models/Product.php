@@ -525,9 +525,6 @@ class Product extends ProductBase implements IECartPosition
 
         return substr_replace($substr, '', strrpos($substr, '<div>'), strlen($substr)) . '...';
 
-
-
-
     }
 
     private function getBicycleComponents()
@@ -989,7 +986,7 @@ class Product extends ProductBase implements IECartPosition
     public function getLabelByCart()
     {
         $count = $this->getItemCountInCart();
-        return $this->getIsInCart() ? 'In Cos ('.$count.')' : 'Adauga in cos';
+        return $this->getIsInCart() ? 'In Cos ('.$count.')' : 'Cumpara';
     }
 
     public function getThumbPic()
@@ -1010,8 +1007,8 @@ class Product extends ProductBase implements IECartPosition
     {
         $thumb = $this->getThumbPic();
 
-        $text = $this->id;
-        if (!empty($thumb))
+        $text = CHtml::image(Yii::app()->getBaseUrl(true) . '/' . 'images/design/image-not-available-hi.png','', array('width' => 50));
+        if (file_exists($thumb))
         {
             $text = CHtml::image(Yii::app()->getBaseUrl(true) . '/' . $thumb);
         }
@@ -1030,18 +1027,30 @@ class Product extends ProductBase implements IECartPosition
         return $this->getUrlWithPic() . $this->getDisplayName();
     }
 
-    public function getQuantityInput()
+    public function getQuantityInput($currentPage = 1)
     {
         $quantity = $this->getQuantity();
         $htmlOptions = array(
             'class' => 'styled-input small-input center_content update-quantity',
-            'maxlength' => 2,
-            'data-update-quantity' => Yii::app()->controller->createUrl('/' . ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::PAGE_UPDATE_QUANTITY, array('id' => $this->id)),
+            'maxlength' => 3,
+            'data-update-quantity' => Yii::app()->controller->createUrl('/site/updateQuantity'),
+            'id_page' => $currentPage,
         );
 
-        $input = CHtml::textField($this->id, $quantity, $htmlOptions);
+        return CHtml::textField($this->id, $quantity, $htmlOptions);
+    }
 
-        return $input;
+    public function getRemoveButton($currentPage = 1)
+    {
+        $htmlOptions = array(
+            'data-remove-item' => Yii::app()->controller->createUrl('/site/removeItemFromCart'),
+            'id_page' => $currentPage,
+            'class' => 'remove_item',
+            'id' => $this->id,
+            'data-confirm-message' => $this->getDisplayName(),
+        );
+
+        return CHtml::link('X', 'javascript::void(0)', $htmlOptions);
     }
 
     public function getSumPriceForCart()

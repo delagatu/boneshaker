@@ -37,8 +37,14 @@ class SiteController extends BaseController
 	public function actionError()
 	{
         $error = Yii::app()->errorHandler->getError();
+        $errorPage = 'error';
 
-        $this->render('error', array('error' => $error));
+        if (is_array($error) && $error['code'] == 404)
+        {
+            $errorPage = '_error404';
+        }
+
+        $this->render($errorPage, array('error' => $error));
 
         try {
             $message = new YiiMailMessage();
@@ -333,7 +339,8 @@ class SiteController extends BaseController
         //getQuantity()
 
         $params = array(
-            'positions' => $positions
+            'positions' => $positions,
+            'page_id' => Yii::app()->request->getQuery('id_page', 1),
         );
 
        $this->render(ControllerPagePartial::PARTIAL_SITE_MY_CART, $params);
@@ -347,13 +354,112 @@ class SiteController extends BaseController
             $product = Product::model()->findByPk($id);
 
             Yii::app()->shoppingCart->put($product);
-            json::writeJSON('Produs adaugat.');
+            json::writeJSON(array('message' => 'Produs adaugat.', 'id' => $id, 'prdCount' => $product->getItemCountInCart()));
         }
     }
 
     public function actionUpdateQuantity()
     {
-        json::writeJSON('OK');
+        if (Yii::app()->request->getIsAjaxRequest())
+        {
+            $id = Yii::app()->request->getPost('id');
+            $qty = Yii::app()->request->getPost('qty');
+            $id_page = Yii::app()->request->getPost('id_page');
+
+            $product = Product::model()->findByPk($id);
+            Yii::app()->shoppingCart->update($product,$qty);
+
+            json::writeJSON(array('id' => $id, 'id_page' => $id_page));
+        }
+    }
+
+    public function actionRemoveItemFromCart()
+    {
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $id = Yii::app()->request->getPost('id');
+            $id_page = Yii::app()->request->getPost('id_page');
+
+            if (!empty($id))
+            {
+                $product = Product::model()->findByPk($id);
+
+                if ($product instanceof Product)
+                {
+                    Yii::app()->shoppingCart->remove($id);
+                }
+
+                json::writeJSON(array('id' => $id, 'id_page' => $id_page));
+            }
+
+        }
+    }
+
+    public function actionPlaseazaComanda()
+    {
+        $positions = Yii::app()->shoppingCart->getPositions();
+
+        $placeOrder = new PlaceOrderForm();
+        if (Yii::app()->request->getIsPostRequest())
+        {
+            $postData = Yii::app()->request->getPost('PlaceOrderForm');
+
+            $placeOrder->attributes = $postData;
+
+            if ($placeOrder->validate())
+            {
+                if (!$placeOrder->saveOrder())
+                {
+                    Yii::app()->user->setFlash('error', 'Eroare interna. Referinta: ' . $placeOrder->getReference());
+                }
+            }
+
+        }
+
+        $params = array(
+            'positions' => $positions,
+            'page_id' => Yii::app()->request->getQuery('id_page', 1),
+            'placeOrder' => $placeOrder
+        );
+
+        $this->render('_cosulMeu', $params);
+    }
+
+    public function actionTestEmailSending()
+    {
+//        $user = User::getByEmail('laci22002@gmail.com');
+//
+//        $message = new YiiMailMessage();
+//        $message->view = ControllerPagePartial::MAIL_REGISTER_USER;
+//
+//        //userModel is passed to the view
+//        $message->setBody(array('user'=>$user), 'text/html');
+//        $message->setSubject('boneshaker.ro - cont nou');
+//
+//        $message->addTo('laci22002@gmail.com');
+//        $message->from = Yii::app()->params['adminEmail'];
+//        Yii::app()->mail->send($message);
+
+        $message = new YiiMailMessage();
+        $message->view = ControllerPagePartial::MAIL_SITE_ERROR;
+
+        //userModel is passed to the view
+        $message->setBody(array('error'=>'Error'), 'text/html');
+        $message->setSubject('boneshaker.ro - error');
+
+        $message->addTo(Yii::app()->params['webmasterEmail']);
+        $message->from = Yii::app()->params['adminEmail'];
+        Yii::app()->mail->send($message);
+
+    }
+
+    public function actionTestProfileSave()
+    {
+        $userProfile = UserProfile::saveProfile(19, array('cnp' => time()));
+
+        $placeOrderForm = new PlaceOrderForm();
+        $placeOrderForm->saveOrder();
+        var_dump($placeOrderForm->getReference());
     }
 
 }

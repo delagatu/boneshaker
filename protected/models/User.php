@@ -69,4 +69,24 @@ class User extends UserBase
         return self::model()->find('username =:username', array(':username' => $username));
     }
 
+    public static function getByEmail($email)
+    {
+        return self::model()->find('email =:email', array(':email' => $email));
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
 }

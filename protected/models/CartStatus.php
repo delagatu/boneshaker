@@ -31,4 +31,15 @@ CONST PRELUARE_REFUZATA = 'Preluare refuzata';
     {
         return self::model()->find('status =:status', array(':status' => $status));
     }
+
+    public static function getIdByStatus($status)
+    {
+        $cartStatus = self::getByStatus($status);
+
+        if ($cartStatus instanceof CartStatus)
+        {
+            return $cartStatus->id;
+        }
+
+    }
 }

@@ -54,6 +54,15 @@ echo $backLink;
     ?>
 </div>
 
+<div class = 'grid_2 prepend-top-10'>
+    <?php
+    $link = $this->createUrl('site/adaugaInCos', array('id' => $product->id)) ?>
+    <?php
+    $htmlOptions = array('class' => 'fancy_black_link add-to-cart', 'data-add-url' => $link, 'id' => $product->id);
+    echo CHtml::link($product->getLabelByCart(), 'javascript::void(0)', $htmlOptions);
+    ?>
+</div>
+
     <div class = 'grid_13 prepend-top-10'>
         <?php
         echo $backLink;

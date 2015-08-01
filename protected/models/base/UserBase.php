@@ -17,8 +17,10 @@
  * @property string $confirmation_code
  *
  * The followings are the available model relations:
- * @property NewsletterUser[] $newsletterUsers
+ * @property AddressUser[] $addressUsers
+ * @property Cart[] $carts
  * @property UserStatus $status
+ * @property UserProfile[] $userProfiles
  */
 class UserBase extends CActiveRecord
 {
@@ -69,8 +71,10 @@ class UserBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'newsletterUsers' => array(self::HAS_MANY, 'NewsletterUser', 'user_id'),
+			'addressUsers' => array(self::HAS_MANY, 'AddressUser', 'user_id'),
+			'carts' => array(self::HAS_MANY, 'Cart', 'user_id'),
 			'status' => array(self::BELONGS_TO, 'UserStatus', 'status_id'),
+			'userProfiles' => array(self::HAS_MANY, 'UserProfile', 'user_id'),
 		);
 	}
 

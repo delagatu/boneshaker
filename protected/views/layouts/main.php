@@ -175,7 +175,7 @@
 
 <div class="container_20">
     <div class="grid_18 prepend-top-10" id="footer">
-        <?php $login = CHtml::link('Login', $this->createUrl('/site/login'));
+        <?php $login = CHtml::link('Autentificare', $this->createUrl('/site/login'));
         $logout = CHtml::link('Logout', $this->createUrl('/site/logout'));
 
         $userData = (Yii::app()->user->isGuest) ? '' : Yii::app()->user->getState('userData', '') . ' | ';

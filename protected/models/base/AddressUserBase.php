@@ -1,26 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "cart_detail".
+ * This is the model class for table "address_user".
  *
- * The followings are the available columns in table 'cart_detail':
+ * The followings are the available columns in table 'address_user':
  * @property integer $id
- * @property integer $cart_id
- * @property integer $product_id
- * @property integer $qty
- * @property string $total_price
- * @property string $item_price
+ * @property integer $address_id
+ * @property integer $user_id
  *
  * The followings are the available model relations:
- * @property Cart $cart
- * @property Product $product
+ * @property User $user
+ * @property Address $address
  */
-class CartDetailBase extends CActiveRecord
+class AddressUserBase extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return CartDetailBase the static model class
+	 * @return AddressUserBase the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -32,7 +29,7 @@ class CartDetailBase extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'cart_detail';
+		return 'address_user';
 	}
 
 	/**
@@ -43,12 +40,11 @@ class CartDetailBase extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cart_id, product_id, qty, total_price, item_price', 'required'),
-			array('cart_id, product_id, qty', 'numerical', 'integerOnly'=>true),
-			array('total_price, item_price', 'length', 'max'=>10),
+			array('address_id, user_id', 'required'),
+			array('address_id, user_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, cart_id, product_id, qty, total_price, item_price', 'safe', 'on'=>'search'),
+			array('id, address_id, user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,8 +56,8 @@ class CartDetailBase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cart' => array(self::BELONGS_TO, 'Cart', 'cart_id'),
-			'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'address' => array(self::BELONGS_TO, 'Address', 'address_id'),
 		);
 	}
 
@@ -72,11 +68,8 @@ class CartDetailBase extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'cart_id' => 'Cart',
-			'product_id' => 'Product',
-			'qty' => 'Qty',
-			'total_price' => 'Total Price',
-			'item_price' => 'Item Price',
+			'address_id' => 'Address',
+			'user_id' => 'User',
 		);
 	}
 
@@ -92,11 +85,8 @@ class CartDetailBase extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('cart_id',$this->cart_id);
-		$criteria->compare('product_id',$this->product_id);
-		$criteria->compare('qty',$this->qty);
-		$criteria->compare('total_price',$this->total_price,true);
-		$criteria->compare('item_price',$this->item_price,true);
+		$criteria->compare('address_id',$this->address_id);
+		$criteria->compare('user_id',$this->user_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

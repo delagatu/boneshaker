@@ -11,7 +11,13 @@
         <?php
         $photoSource = Yii::app()->getBaseUrl(true) . '/' . $data->getPrimaryPhotoByType(PhotoType::PHOTO_TYPE_GENERAL_DISPLAY_ID);
         $normalizeImage = Photo::normalizePhoto($data->getPrimaryPhotoByType(PhotoType::PHOTO_TYPE_GENERAL_DISPLAY_ID));
+
         $generalImage = CHtml::image($photoSource, $data->name, $normalizeImage);
+        if (!file_exists($generalImage))
+        {
+            $generalImage = CHtml::image(Yii::app()->getBaseUrl(true) . '/' . 'images/design/image-not-available-hi.png','', array('width' => 50));
+        }
+
         echo CHtml::link($generalImage, $link);
         ?>
     </div>
@@ -28,7 +34,7 @@
     </div>
     <?php if (Yii::app()->params['webShopAvailable']): ?>
     <div class = 'grid_2 prepend-top-10'>
-        <?php $link = $this->createUrl(ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::ADD_TO_CART, array('id' => $data->id)) ?>
+        <?php $link = Yii::app()->controller->createUrl(ControllerPagePartial::CONTROLLER_SITE . '/' . ControllerPagePartial::ADD_TO_CART, array('id' => $data->id)) ?>
         <?php
             $htmlOptions = array('class' => 'fancy_black_link add-to-cart', 'data-add-url' => $link, 'id' => $data->id);
             echo CHtml::link($data->getLabelByCart(), 'javascript::void(0)', $htmlOptions);

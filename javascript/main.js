@@ -2,7 +2,8 @@ $(function()
     {
         setLeftSpacerHeight();
         searchKeyWords();
-        updateQuantity();
+
+        cartActions();
 
         $( document ).tooltip();
 
@@ -25,6 +26,12 @@ $(function()
     }
 
 );
+
+function cartActions()
+{
+    updateQuantity();
+    removeItem();
+}
 
 function isCharacterNeeded(str, char)
 {
@@ -146,7 +153,8 @@ function addToCart()
             addUrl,
             function(resp){
                 //OK
-                alert(resp);
+                $('#' + resp.id).text('In cos (' + resp.prdCount + ')');
+//                alert(resp.message);
             },
             function(){
                 //error
@@ -204,12 +212,77 @@ function updateQuantity()
         function () {
             var caller = $(this);
             var newQuantity = caller.val()
-            alert(quantity + ' - ' + newQuantity);
 
             if (newQuantity != oldQuantity)
             {
+                var updateUrl = caller.attr('data-update-quantity');
 
+                if ( updateUrl != 'undefined')
+                {
+                    postData = {id: caller.attr('id'), qty: newQuantity, id_page: caller.attr('id_page')};
+                    ajaxPost(
+                        updateUrl,
+                        postData,
+                        function(resp){
+                            $.fn.yiiGridView.update("cosul_meu", {data:{"id_page":resp.id_page}});
+                        },
+                        function(){
+                            //error
+                        }
+                    );
+                }
             }
+        }
+    );
+}
+
+function removeItem()
+{
+    $('.remove_item').on('click',
+        function()
+        {
+            var caller = $(this);
+            var confirmMessage = caller.attr('data-confirm-message');
+
+            if ((caller.attr('data-remove-item') == undefined) || ( confirmMessage == undefined))
+            {
+                return false;
+            }
+
+            var confirmDialog = $("#dialog-confirm");
+            var confirmText = "Renuntati la " + confirmMessage+"?";
+            confirmDialog.attr('title', caller.attr('data-confirm-message')).text(confirmText);
+
+            confirmDialog.dialog({
+                resizable: true,
+                modal: true,
+                buttons: {
+                    "Da": function() {
+                        canRemoveItem(caller);
+                        $( this ).dialog( "close" );
+                    },
+                    "Nu": function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            });
+
+
+        }
+    );
+}
+
+function canRemoveItem(caller)
+{
+    postData = {id: caller.attr('id'), id_page: caller.attr('id_page')};
+    ajaxPost(
+        caller.attr('data-remove-item'),
+        postData,
+        function(resp){
+            $.fn.yiiGridView.update("cosul_meu", {data:{"id_page":resp.id_page}});
+        },
+        function(){
+            //error
         }
     );
 }

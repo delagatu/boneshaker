@@ -17,4 +17,12 @@ class CartDetail extends CartDetailBase{
         return parent::model($className);
     }
 
+    public function saveThrowEx()
+    {
+        if (!$this->save())
+        {
+            throw new Exception('Imposibil de salvat: ' . var_export($this->getErrors(), 1));
+        }
+    }
+
 } 
